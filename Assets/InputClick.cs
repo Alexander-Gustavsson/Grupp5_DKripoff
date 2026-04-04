@@ -32,7 +32,7 @@ public class InputClick : MonoBehaviour
 
         if (hit != null)
         {
-
+/*
             if (hit.CompareTag("Grid"))
             {
                 print("GRID");
@@ -41,6 +41,19 @@ public class InputClick : MonoBehaviour
             else if (hit.gameObject == gameObject)
             {
                 Destroy(gameObject);
+            }*/
+
+            DragDrop ship = hit.GetComponent<DragDrop>();
+
+            if (ship != null) 
+            {
+                ship.StartDragging();
+            
+            }
+
+            else if (hit.CompareTag("Grid"))
+            {
+                gridScipt.pressed(new Vector2(worldPoint.x, worldPoint.y));
             }
         }
     }
