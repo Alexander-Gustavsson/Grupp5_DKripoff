@@ -5,6 +5,7 @@ public class InputClick : MonoBehaviour
 {
 
     [SerializeField] private InputAction press, screenPos;
+    [SerializeField] private Grid gridScipt;
 
     private void OnEnable()
     {
@@ -31,7 +32,13 @@ public class InputClick : MonoBehaviour
 
         if (hit != null)
         {
-            if (hit.gameObject == gameObject)
+
+            if (hit.CompareTag("Grid"))
+            {
+                print("GRID");
+                gridScipt.pressed(new Vector2(worldPoint.x, worldPoint.y));
+            }
+            else if (hit.gameObject == gameObject)
             {
                 Destroy(gameObject);
             }
