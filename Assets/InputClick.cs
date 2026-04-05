@@ -5,7 +5,10 @@ public class InputClick : MonoBehaviour
 {
 
     [SerializeField] private InputAction press, screenPos;
-    [SerializeField] private Grid gridScipt;
+    [SerializeField] private GamePlay gamePlay;
+
+    public bool canDrag = false;
+    public bool canClick = false;
 
     private void OnEnable()
     {
@@ -45,15 +48,15 @@ public class InputClick : MonoBehaviour
 
             DragDrop ship = hit.GetComponent<DragDrop>();
 
-            if (ship != null) 
+            if (ship != null && canDrag) 
             {
                 ship.StartDragging();
             
             }
 
-            else if (hit.CompareTag("Grid"))
+            else if (hit.CompareTag("AIGrid") && canClick)
             {
-                gridScipt.pressed(new Vector2(worldPoint.x, worldPoint.y));
+                gamePlay.AIGridPressed(new Vector2(worldPoint.x, worldPoint.y));
             }
         }
     }
