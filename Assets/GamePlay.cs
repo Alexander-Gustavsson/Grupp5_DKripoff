@@ -1,6 +1,7 @@
 using JetBrains.Annotations;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class GamePlay : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class GamePlay : MonoBehaviour
 
     [SerializeField] private GameObject[] ships;
     [SerializeField] private GameObject missSprite;
+    [SerializeField] private GameObject startButton;
 
     List<Vector2> missedPos = new List<Vector2>();
 
@@ -68,8 +70,6 @@ public class GamePlay : MonoBehaviour
 
     private void PlaceShips()
     {
-        MakePlayerMove();
-
         clickScript.canDrag = true;
         AI.PlaceShips();
     }
@@ -77,7 +77,9 @@ public class GamePlay : MonoBehaviour
     // Körs efter man har placerat ut alla skepp, måste kallas på med ex en knapp
     public void StartGamePlay()
     {
+        startButton.SetActive(false);
         clickScript.canDrag = false;
+        MakePlayerMove();
     }
 
     private void SpawnMissSprite(Vector2 pos)

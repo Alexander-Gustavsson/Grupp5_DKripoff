@@ -78,12 +78,13 @@ public class DragDrop : MonoBehaviour
         bool insideOfGrid =
             transform.position.x >= -0.5f && transform.position.x <= 8.5f
             && transform.position.y >= -0.5f && transform.position.y <= 8.5f;
-
+        /*
         if (distanceMove < 0.1f)
         {
             Destroy(gameObject);
             return;
         }
+        */
 
         if (insideOfGrid)
         {
