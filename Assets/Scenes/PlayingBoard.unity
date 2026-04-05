@@ -1307,9 +1307,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GamePlay
   AI: {fileID: 1994102720}
   ships:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 126517831}
+  - {fileID: 971308824}
+  - {fileID: 555647243}
   missSprite: {fileID: 5428745536694032167, guid: 4ccd0aa1c8addbf41993c0b85f7adfb5, type: 3}
   startButton: {fileID: 1989277272}
 --- !u!4 &713795677
