@@ -49,6 +49,7 @@ public class GamePlay : MonoBehaviour
         {
             if (ship.transform.position == (Vector3)hitPos)
             {
+                ship.SetActive(false);
                 if (AllPlayerShipFound())
                 {
                     Lose();
@@ -96,7 +97,7 @@ public class GamePlay : MonoBehaviour
     {
         foreach (GameObject ship in ships)
         {
-            if (!ship.activeSelf)
+            if (ship.activeSelf)
             {
                 return false;
             }
