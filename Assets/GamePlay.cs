@@ -2,6 +2,8 @@ using JetBrains.Annotations;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEditor.SceneManagement;
+using UnityEngine.SceneManagement;
 
 public class GamePlay : MonoBehaviour
 {
@@ -10,6 +12,7 @@ public class GamePlay : MonoBehaviour
     [SerializeField] private GameObject[] ships;
     [SerializeField] private GameObject missSprite;
     [SerializeField] private GameObject startButton;
+    [SerializeField] private GameObject menuButton;
 
     List<Vector2> missedPos = new List<Vector2>();
 
@@ -25,6 +28,8 @@ public class GamePlay : MonoBehaviour
     public void AIGridPressed(Vector2 pressPos)
     {
         Vector2 gridPos = new Vector2(Mathf.Round(pressPos.x), Mathf.Round(pressPos.y));
+
+        // Handle reclick
 
         if (!AI.TakeHit(gridPos))
         {
@@ -115,5 +120,10 @@ public class GamePlay : MonoBehaviour
     public void Win()
     {
         //Tillbaka till meny
+    }
+
+    public void ReturnToMainMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 }
