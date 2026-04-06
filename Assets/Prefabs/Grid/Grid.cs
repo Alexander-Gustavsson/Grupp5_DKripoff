@@ -49,6 +49,12 @@ public class Grid : MonoBehaviour
         
     }
 
+    /*
+     * Båtarnas och missade / träffade skottens locations ska sparas som koordinater
+     * Allt som placeras på grid ska vara ett childobject till dens transform
+     
+     */
+
     private Vector2 findInputPos(Vector2 pressPos)
     {
         print(offset);
@@ -57,16 +63,16 @@ public class Grid : MonoBehaviour
 
         return new Vector2((float) Math.Floor(normalized.x), (float) Math.Floor(normalized.y));
 
-        for (int i = 0; i <= 8; i++)
-        {
-            for (int j = 0; j <= 8; j++)
-            {
-                if (pressPos.x > i - 0.5 && pressPos.x < i + 1.5 && pressPos.y > j - 0.5 && pressPos.y < j + 1.5)
-                {
-                    inputPos = new Vector2(i, j);
-                }
-            }
-        }
+        //for (int i = 0; i <= 8; i++)
+        //{
+        //    for (int j = 0; j <= 8; j++)
+        //    {
+        //        if (pressPos.x > i - 0.5 && pressPos.x < i + 1.5 && pressPos.y > j - 0.5 && pressPos.y < j + 1.5)
+        //        {
+        //            inputPos = new Vector2(i, j);
+        //        }
+        //    }
+        //}
     }
 
     private void spawnMissSprite (Vector2 gridPosition)
