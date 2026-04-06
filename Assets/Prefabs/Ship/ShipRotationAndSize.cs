@@ -1,11 +1,11 @@
 using UnityEngine;
 
-public class Playermovement : MonoBehaviour
+public class ShipRotation : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        // code
+        
     }
 
     // Update is called once per frame
@@ -13,7 +13,4 @@ public class Playermovement : MonoBehaviour
     {
         
     }
-
-    // Some function
-
 }

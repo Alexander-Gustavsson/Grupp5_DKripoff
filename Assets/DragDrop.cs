@@ -6,7 +6,6 @@ public class DragDrop : MonoBehaviour
 {
     [SerializeField] private InputAction press, screenPos;
 
-    
     private Vector3 startPos;
     private Camera mainCamera;
     private bool dragging;
@@ -31,10 +30,10 @@ public class DragDrop : MonoBehaviour
     }*/
     private void Awake()
     {
-     mainCamera = Camera.main;
-     screenPos.Enable();
-     press.Enable();
-     press.canceled += Active;
+        mainCamera = Camera.main;
+        screenPos.Enable();
+        press.Enable();
+        press.canceled += Active;
     }
 
     private void Active(InputAction.CallbackContext context)
@@ -64,32 +63,33 @@ public class DragDrop : MonoBehaviour
         //grabbing the game object
         while (dragging)
         {
-            //dragging the game objekt
+            //dragging the game object
             transform.position = WorldPos + offset;
             yield return null;
         }
        
     }
 
-
     private void CheckIfDestroy() { 
-    float distanceMove = Vector3.Distance(startPos, transform.position);
+        float distanceMove = Vector3.Distance(startPos, transform.position);
 
         bool insideOfGrid =
             transform.position.x >= -0.5f && transform.position.x <= 8.5f
             && transform.position.y >= -0.5f && transform.position.y <= 8.5f;
 
-        if (distanceMove < 0.1f)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
         if (insideOfGrid)
         {
             transform.position = Snap(transform.position);
+        } else
+        {
+            transform.position = startPos;
         }
 
+        if (distanceMove < 0.5f)
+        {
+            TriggerRotation();
+            return;
+        }
         // om vi vill att den ska tas sönder om den släpps utanför griden
        /* else
         {
@@ -98,7 +98,6 @@ public class DragDrop : MonoBehaviour
        */
     }
 
-
     //snapping
     private Vector3 Snap(Vector3 pos)
     {
@@ -106,5 +105,11 @@ public class DragDrop : MonoBehaviour
         float y = Mathf.Round(pos.y);
 
         return new Vector3(x, y, pos.z);
+    }
+
+
+    private void TriggerRotation()
+    {
+
     }
 }

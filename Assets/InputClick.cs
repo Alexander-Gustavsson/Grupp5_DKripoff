@@ -3,6 +3,7 @@ using UnityEngine.InputSystem;
 
 public class InputClick : MonoBehaviour
 {
+    [SerializeField] public LayerMask layerTarget;
 
     [SerializeField] private InputAction press, screenPos;
     [SerializeField] private Grid gridScipt;
@@ -28,11 +29,11 @@ public class InputClick : MonoBehaviour
         Vector3 worldPoint = Camera.main.ScreenToWorldPoint(mousePosition);
         worldPoint.z = 0;
 
-        Collider2D hit = Physics2D.OverlapPoint(worldPoint);
+        Collider2D hit = Physics2D.OverlapPoint(worldPoint, layerTarget);
 
         if (hit != null)
         {
-/*
+/*  
             if (hit.CompareTag("Grid"))
             {
                 print("GRID");
@@ -45,10 +46,9 @@ public class InputClick : MonoBehaviour
 
             DragDrop ship = hit.GetComponent<DragDrop>();
 
-            if (ship != null) 
+            if (ship?.enabled == true)
             {
                 ship.StartDragging();
-            
             }
 
             else if (hit.CompareTag("Grid"))
