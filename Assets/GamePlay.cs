@@ -2,7 +2,6 @@ using JetBrains.Annotations;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
-using UnityEditor.SceneManagement;
 using UnityEngine.SceneManagement;
 
 public class GamePlay : MonoBehaviour
