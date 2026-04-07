@@ -124,6 +124,8 @@ public class GamePlay : MonoBehaviour
 
     public void ReturnToMainMenu()
     {
+        GameObject.Find("AudioManager").GetComponent<Music>().SmoothSound(0.6f, 2f);
+
         SceneManager.LoadScene(0);
     }
 }
