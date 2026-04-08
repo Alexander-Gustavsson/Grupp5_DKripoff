@@ -6,6 +6,9 @@ public class DragDrop : MonoBehaviour
 {
     [SerializeField] private InputAction press, screenPos;
 
+    [SerializeField] private ArrayList shape;
+    // * * *
+    // *   *
     
     private Vector3 startPos;
     private Camera mainCamera;

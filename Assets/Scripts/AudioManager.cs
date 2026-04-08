@@ -8,6 +8,8 @@ using System;
 public enum SoundType
 {
     // Lägg till ljud här:
+    AMBIANCE,
+    EXPLOSION
 }
 
 [RequireComponent(typeof(AudioSource)), ExecuteInEditMode]
