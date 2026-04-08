@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 2cfdbea15890828469d7bf9c453ce9db
+guid: fb62944c86f7a8046bd7515ae12d194a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7622511499851825061
-    second: Ship B 1 by 1_0
+      213: 4778125281656140813
+    second: Ship 1 by 1 red_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -75,7 +75,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -113,7 +113,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Ship B 1 by 1_0
+      name: Ship 1 by 1 red_0
       rect:
         serializedVersion: 2
         x: 0
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b50800b3d26673690800000000000000
-      internalID: -7622511499851825061
+      spriteID: d047d69c0af4f4240800000000000000
+      internalID: 4778125281656140813
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Ship B 1 by 1_0: -7622511499851825061
+      Ship 1 by 1 red_0: 4778125281656140813
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

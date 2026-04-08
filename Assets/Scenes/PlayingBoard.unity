@@ -185,7 +185,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: 2cfdbea15890828469d7bf9c453ce9db, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0f9a6f7a2bc5c0a4f924de13ebe32d34, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -370,7 +370,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: d6b2815110234b448954ac8fbd89f9fb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fb62944c86f7a8046bd7515ae12d194a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -463,7 +463,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -2
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -58188308302936050, guid: 33754a769528ce54e86b14acc3345795, type: 3}
+  m_Sprite: {fileID: 1763014460331064234, guid: ce84517a39a9f144d91c9a39b12b6c26, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -613,7 +613,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: 2cfdbea15890828469d7bf9c453ce9db, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0f9a6f7a2bc5c0a4f924de13ebe32d34, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1088,7 +1088,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: d6b2815110234b448954ac8fbd89f9fb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fb62944c86f7a8046bd7515ae12d194a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1714,7 +1714,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: 2cfdbea15890828469d7bf9c453ce9db, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0f9a6f7a2bc5c0a4f924de13ebe32d34, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1899,7 +1899,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: d6b2815110234b448954ac8fbd89f9fb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fb62944c86f7a8046bd7515ae12d194a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2322,7 +2322,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -2
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -58188308302936050, guid: 33754a769528ce54e86b14acc3345795, type: 3}
+  m_Sprite: {fileID: 1763014460331064234, guid: ce84517a39a9f144d91c9a39b12b6c26, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
