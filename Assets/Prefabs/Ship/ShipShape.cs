@@ -1,0 +1,17 @@
+using UnityEngine;
+
+public class ShipShape : MonoBehaviour
+{
+    [SerializeField] private Vector2[] shapePoints;
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+}
