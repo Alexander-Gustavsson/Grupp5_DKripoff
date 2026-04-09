@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 // using static UnityEditor.PlayerSettings;
 
+
 public class AI : MonoBehaviour
 {
     [SerializeField] private GameObject[] ships;
@@ -10,7 +11,7 @@ public class AI : MonoBehaviour
     List<Vector2> guessed = new List<Vector2>();
 
 
-    // Kan lägga till om skeppen ska kunna roteras senare
+    // Kan lï¿½gga till om skeppen ska kunna roteras senare
     public void PlaceShips()
     {
         foreach (GameObject ship in ships)
