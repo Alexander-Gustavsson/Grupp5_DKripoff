@@ -13,6 +13,7 @@ public class DragDrop : MonoBehaviour
     private Vector3 startPos;
     private Camera mainCamera;
     private bool dragging;
+ 
 
     private Vector3 WorldPos
     {
@@ -38,6 +39,8 @@ public class DragDrop : MonoBehaviour
      screenPos.Enable();
      press.Enable();
      press.canceled += Active;
+
+      
     }
 
     private void Active(InputAction.CallbackContext context)
@@ -57,6 +60,8 @@ public class DragDrop : MonoBehaviour
     public void StartDragging()
     {
         startPos = transform.position;
+
+
         StartCoroutine(Drag());
     }
 
@@ -69,6 +74,8 @@ public class DragDrop : MonoBehaviour
         {
             //dragging the game objekt
             transform.position = WorldPos + offset;
+
+    
             yield return null;
         }
        
@@ -94,12 +101,14 @@ public class DragDrop : MonoBehaviour
             transform.position = Snap(transform.position);
         }
 
-        // om vi vill att den ska tas sönder om den släpps utanför griden
-       /* else
-        {
-            Destroy(gameObject);
-        }
-       */
+        // om vi vill att den ska tas sï¿½nder om den slï¿½pps utanfï¿½r griden
+        /* else
+         {
+             Destroy(gameObject);
+         }
+        */
+
+
     }
 
 
