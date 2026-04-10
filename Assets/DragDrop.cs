@@ -13,8 +13,7 @@ public class DragDrop : MonoBehaviour
     private Vector3 startPos;
     private Camera mainCamera;
     private bool dragging;
-    // //Animation additions:
-    // private ShipPlacementFeedback feedback;
+ 
 
     private Vector3 WorldPos
     {
@@ -41,8 +40,7 @@ public class DragDrop : MonoBehaviour
      press.Enable();
      press.canceled += Active;
 
-        // //Animation additions:
-        // feedback = GetComponent<ShipPlacementFeedback>();
+      
     }
 
     private void Active(InputAction.CallbackContext context)
@@ -63,9 +61,6 @@ public class DragDrop : MonoBehaviour
     {
         startPos = transform.position;
 
-        //Animation additions:
-        //if (feedback != null)
-        //    feedback.ShowSelected();
 
         StartCoroutine(Drag());
     }
@@ -80,19 +75,7 @@ public class DragDrop : MonoBehaviour
             //dragging the game objekt
             transform.position = WorldPos + offset;
 
-            // //animation additions:
-            // bool insideOfGrid =
-            // transform.position.x >= -0.5f && transform.position.x <= 8.5f
-            // && transform.position.y >= -0.5f && transform.position.y <= 8.5f;
-
-            // if (feedback != null)
-            // {
-            //     if (insideOfGrid)
-            //         feedback.ShowValid();
-            //     else
-            //         feedback.ShowInvalid();
-            // }
-
+    
             yield return null;
         }
        
@@ -126,9 +109,6 @@ public class DragDrop : MonoBehaviour
         */
 
 
-        // //animation additions:
-        // if (feedback != null)
-        //     feedback.ResetFeedback();
     }
 
 
