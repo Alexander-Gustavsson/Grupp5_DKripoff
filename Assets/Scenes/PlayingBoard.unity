@@ -419,6 +419,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dfcac484d9b0f2c4186cdafefcbc3d4f, type: 3}
+--- !u!1 &364353869 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 848280922992137714, guid: dfcac484d9b0f2c4186cdafefcbc3d4f, type: 3}
+  m_PrefabInstance: {fileID: 364353868}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &448223742
 GameObject:
   m_ObjectHideFlags: 0
@@ -670,6 +675,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dfcac484d9b0f2c4186cdafefcbc3d4f, type: 3}
+--- !u!1 &463366441 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 848280922992137714, guid: dfcac484d9b0f2c4186cdafefcbc3d4f, type: 3}
+  m_PrefabInstance: {fileID: 463366440}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1052,9 +1062,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GamePlay
   AI: {fileID: 1994102720}
   ships:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 1475792750}
+  - {fileID: 364353869}
+  - {fileID: 463366441}
   missSprite: {fileID: 5428745536694032167, guid: 4ccd0aa1c8addbf41993c0b85f7adfb5, type: 3}
   startButton: {fileID: 1989277272}
   menuButton: {fileID: 0}
@@ -1677,6 +1687,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dfcac484d9b0f2c4186cdafefcbc3d4f, type: 3}
+--- !u!1 &1475792750 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 848280922992137714, guid: dfcac484d9b0f2c4186cdafefcbc3d4f, type: 3}
+  m_PrefabInstance: {fileID: 1475792749}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1989277272
 GameObject:
   m_ObjectHideFlags: 0
