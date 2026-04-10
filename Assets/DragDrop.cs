@@ -13,8 +13,8 @@ public class DragDrop : MonoBehaviour
     private Vector3 startPos;
     private Camera mainCamera;
     private bool dragging;
-    //Animation additions:
-    private ShipPlacementFeedback feedback;
+    // //Animation additions:
+    // private ShipPlacementFeedback feedback;
 
     private Vector3 WorldPos
     {
@@ -41,8 +41,8 @@ public class DragDrop : MonoBehaviour
      press.Enable();
      press.canceled += Active;
 
-        //Animation additions:
-        feedback = GetComponent<ShipPlacementFeedback>();
+        // //Animation additions:
+        // feedback = GetComponent<ShipPlacementFeedback>();
     }
 
     private void Active(InputAction.CallbackContext context)
@@ -80,18 +80,18 @@ public class DragDrop : MonoBehaviour
             //dragging the game objekt
             transform.position = WorldPos + offset;
 
-            //animation additions:
-            bool insideOfGrid =
-            transform.position.x >= -0.5f && transform.position.x <= 8.5f
-            && transform.position.y >= -0.5f && transform.position.y <= 8.5f;
+            // //animation additions:
+            // bool insideOfGrid =
+            // transform.position.x >= -0.5f && transform.position.x <= 8.5f
+            // && transform.position.y >= -0.5f && transform.position.y <= 8.5f;
 
-            if (feedback != null)
-            {
-                if (insideOfGrid)
-                    feedback.ShowValid();
-                else
-                    feedback.ShowInvalid();
-            }
+            // if (feedback != null)
+            // {
+            //     if (insideOfGrid)
+            //         feedback.ShowValid();
+            //     else
+            //         feedback.ShowInvalid();
+            // }
 
             yield return null;
         }
@@ -118,7 +118,7 @@ public class DragDrop : MonoBehaviour
             transform.position = Snap(transform.position);
         }
 
-        // om vi vill att den ska tas sönder om den släpps utanför griden
+        // om vi vill att den ska tas sï¿½nder om den slï¿½pps utanfï¿½r griden
         /* else
          {
              Destroy(gameObject);
@@ -126,9 +126,9 @@ public class DragDrop : MonoBehaviour
         */
 
 
-        //animation additions:
-        if (feedback != null)
-            feedback.ResetFeedback();
+        // //animation additions:
+        // if (feedback != null)
+        //     feedback.ResetFeedback();
     }
 
 
