@@ -103,7 +103,7 @@ public class DragDrop : MonoBehaviour
 
             yield return null;
         }
-        if (timer - begin < 0.5f)
+        if (timer - begin < 0.3f)
         {
             RotateShip();
         }
