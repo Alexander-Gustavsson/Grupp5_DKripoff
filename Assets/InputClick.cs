@@ -51,7 +51,6 @@ public class InputClick : MonoBehaviour
             if (ship != null && canDrag) 
             {
                 ship.StartDragging();
-            
             }
 
             else if (hit.CompareTag("AIGrid") && canClick)

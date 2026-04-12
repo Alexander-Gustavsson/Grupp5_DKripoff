@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,7 +13,9 @@ public class DragDrop : MonoBehaviour
     private ShipShape ship;
     private Vector3 startPos;
     private Camera mainCamera;
-    private bool dragging;
+    public bool dragging;
+    private float timer;
+    private float begin;
 
     //Animation additions:
     private ShipPlacementFeedback feedback;
@@ -44,7 +47,9 @@ public class DragDrop : MonoBehaviour
      press.Enable();
      press.canceled += Active;
 
-      
+        ship = GetComponent<ShipShape>();
+
+        //anim
         feedback = GetComponent<ShipPlacementFeedback>();
     }
 
@@ -65,7 +70,8 @@ public class DragDrop : MonoBehaviour
     public void StartDragging()
     {
         startPos = transform.position;
-
+        timer = 0;
+        begin = Time.time;
         //Animation additions:
         //if (feedback != null)
         //    feedback.ShowSelected();
@@ -79,14 +85,13 @@ public class DragDrop : MonoBehaviour
         //grabbing the game object
         while (dragging)
         {
+            timer = Time.time;
             //dragging the game objekt
             transform.position = WorldPos + offset;
 
 
             //animation additions:
-            bool insideOfGrid =
-            transform.position.x >= -0.5f && transform.position.x <= 8.5f
-            && transform.position.y >= -0.5f && transform.position.y <= 8.5f;
+            bool insideOfGrid = isValid();
 
             if (feedback != null)
             {
@@ -98,35 +103,49 @@ public class DragDrop : MonoBehaviour
 
             yield return null;
         }
-       
+        if (timer - begin < 0.3f)
+        {
+            RotateShip();
+        }
     }
 
+    public void RotateShip()
+    {
+        Vector3 pos = transform.position;
+        transform.Rotate(0, 0, 90);
+        if (!isValid())
+        {
+            transform.Rotate(0, 0, -90);
+            transform.position = pos;
+        }
+    }
+
+    private bool isValid() //ny metod för att true false om ship är i grid
+    {
+        for (int i = 0; i < ship.shapePoints; i++)
+        {
+            Vector3 pos = transform.GetChild(i).position;
+            if (pos.x < 0.5f || pos.x > 8.5f || pos.y < 0.5f || pos.y > 8.5f)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
 
     private void CheckIfDestroy() { 
-    float distanceMove = Vector3.Distance(startPos, transform.position);
-
-        bool insideOfGrid =
-            transform.position.x >= -0.5f && transform.position.x <= 8.5f
-            && transform.position.y >= -0.5f && transform.position.y <= 8.5f;
-        /*
-        if (distanceMove < 0.1f)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        */
-
-        if (insideOfGrid)
+  
+        if (isValid())
         {
             transform.position = Snap(transform.position);
         }
 
-        // om vi vill att den ska tas s�nder om den sl�pps utanf�r griden
-        /* else
-         {
-             Destroy(gameObject);
-         }
-        */
+        else
+        {
+            transform.position = startPos;
+        }
+
+
 
         //animation additions:
         if (feedback != null)
