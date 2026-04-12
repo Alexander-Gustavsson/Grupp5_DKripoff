@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,7 +13,9 @@ public class DragDrop : MonoBehaviour
     private ShipShape ship;
     private Vector3 startPos;
     private Camera mainCamera;
-    private bool dragging;
+    public bool dragging;
+    private float timer;
+    private float begin;
 
     //Animation additions:
     private ShipPlacementFeedback feedback;
@@ -67,7 +70,8 @@ public class DragDrop : MonoBehaviour
     public void StartDragging()
     {
         startPos = transform.position;
-
+        timer = 0;
+        begin = Time.time;
         //Animation additions:
         //if (feedback != null)
         //    feedback.ShowSelected();
@@ -81,6 +85,7 @@ public class DragDrop : MonoBehaviour
         //grabbing the game object
         while (dragging)
         {
+            timer = Time.time;
             //dragging the game objekt
             transform.position = WorldPos + offset;
 
@@ -98,7 +103,21 @@ public class DragDrop : MonoBehaviour
 
             yield return null;
         }
-       
+        if (timer - begin < 0.5f)
+        {
+            RotateShip();
+        }
+    }
+
+    public void RotateShip()
+    {
+        Vector3 pos = transform.position;
+        transform.Rotate(0, 0, 90);
+        if (!isValid())
+        {
+            transform.Rotate(0, 0, -90);
+            transform.position = pos;
+        }
     }
 
     private bool isValid() //ny metod för att true false om ship är i grid
