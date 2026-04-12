@@ -103,10 +103,10 @@ public class DragDrop : MonoBehaviour
 
     private bool isValid() //ny metod för att true false om ship är i grid
     {
-        foreach (var eachShip in ship.shapePoints)
+        for (int i = 0; i < ship.shapePoints; i++)
         {
-            Vector3 pos = transform.position + (Vector3) eachShip;
-            if (pos.x < -0.5f || pos.x > 8.5f || pos.y < -0.5f || pos.y > 8.5f)
+            Vector3 pos = transform.GetChild(i).position;
+            if (pos.x < 0.5f || pos.x > 8.5f || pos.y < 0.5f || pos.y > 8.5f)
             {
                 return false;
             }
