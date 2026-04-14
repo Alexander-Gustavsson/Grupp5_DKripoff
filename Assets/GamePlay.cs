@@ -13,6 +13,9 @@ public class GamePlay : MonoBehaviour
     [SerializeField] private GameObject startButton;
     [SerializeField] private GameObject menuButton;
 
+    //Animations:
+    [SerializeField] private TileHighlight tileHighlight;
+
     List<Vector2> missedPos = new List<Vector2>();
 
     private InputClick clickScript;
@@ -27,6 +30,11 @@ public class GamePlay : MonoBehaviour
     public void AIGridPressed(Vector2 pressPos)
     {
         Vector2 gridPos = new Vector2(Mathf.Round(pressPos.x), Mathf.Round(pressPos.y));
+        //Animations:
+        if (tileHighlight != null)
+        {
+            tileHighlight.ShowHighlight(gridPos);
+        }
 
         // Handle reclick
 
