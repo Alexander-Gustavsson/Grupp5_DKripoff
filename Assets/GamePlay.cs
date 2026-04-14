@@ -17,7 +17,7 @@ public class GamePlay : MonoBehaviour
 
     private InputClick clickScript;
 
-    public AbilityHolder abilityHolder; // assign in inspector
+    public AbilityHolder abilityHolder; // Ändring för abilities. //Ludvig 
     public bool inputLocked = false;
 
     void Start()
@@ -29,7 +29,7 @@ public class GamePlay : MonoBehaviour
     public void AIGridPressed(Vector2 pressPos)
     {
         
-        if (inputLocked)
+        if (inputLocked) //ändring för abilities. OBS! Fungerar inte riktigt som det ska atm //Ludvig
         {
             abilityHolder.HandleGridClick(pressPos);
             return;
@@ -39,7 +39,7 @@ public class GamePlay : MonoBehaviour
 
         // Handle reclick
 
-        if (abilityHolder != null && abilityHolder.isActive)
+        if (abilityHolder != null && abilityHolder.isActive)//ändring för abilities. OBS! Fungerar inte riktigt som det ska atm //Ludvig
         {
             abilityHolder.HandleGridClick(gridPos);
             return;
