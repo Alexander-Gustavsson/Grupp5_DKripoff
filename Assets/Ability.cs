@@ -1,13 +1,11 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
-public class Ability : ScriptableObject
+public abstract class Ability : ScriptableObject
 {
-    public new string name;
+    public string abilityName;
     public float cooldown;
     public bool isActive = false;
-    public  virtual void Activate()
-    {
-       
-    }
+    public abstract void Activate(); //abstrakt metod som måste implementeras i alla klasser som ärver från Ability.
+
 }

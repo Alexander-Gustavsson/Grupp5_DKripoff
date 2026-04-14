@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
 
-[CreateAssetMenu] //Tillåter oss att skapa instanser av denna klass i Unitys editor
+[CreateAssetMenu(menuName = "Abilities/Multiple Targets")] //Tillåter oss att skapa instanser av denna klass i Unitys editor
 public class AbilityMultipleTargets : Ability
 {
     public int numberOfTargets;
