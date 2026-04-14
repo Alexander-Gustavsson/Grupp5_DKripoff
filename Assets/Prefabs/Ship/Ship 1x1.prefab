@@ -24,6 +24,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ship 1x1
       objectReference: {fileID: 0}
+    - target: {fileID: 6835592125746227892, guid: 2c0b7a04b803673418b38450affcd16e, type: 3}
+      propertyPath: m_Size.x
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 6835592125746227892, guid: 2c0b7a04b803673418b38450affcd16e, type: 3}
+      propertyPath: m_Size.y
+      value: 0.9
+      objectReference: {fileID: 0}
     - target: {fileID: 7011144235120894139, guid: 2c0b7a04b803673418b38450affcd16e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
