@@ -17,6 +17,8 @@ public class GamePlay : MonoBehaviour
 
     private InputClick clickScript;
 
+    public AbilityHolder abilityHolder; // assign in inspector
+    public bool inputLocked = false;
 
     void Start()
     {
@@ -26,9 +28,22 @@ public class GamePlay : MonoBehaviour
 
     public void AIGridPressed(Vector2 pressPos)
     {
+        
+        if (inputLocked)
+        {
+            abilityHolder.HandleGridClick(pressPos);
+            return;
+        }
+
         Vector2 gridPos = new Vector2(Mathf.Round(pressPos.x), Mathf.Round(pressPos.y));
 
         // Handle reclick
+
+        if (abilityHolder != null && abilityHolder.isActive)
+        {
+            abilityHolder.HandleGridClick(gridPos);
+            return;
+        }
 
         if (!AI.TakeHit(gridPos))
         {
@@ -47,6 +62,8 @@ public class GamePlay : MonoBehaviour
 
     private void MakeAIMove()
     {
+
+
         Vector2 hitPos = AI.MakeMove();
 
         foreach (GameObject ship in ships)

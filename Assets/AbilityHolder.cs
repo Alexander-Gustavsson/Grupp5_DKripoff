@@ -11,11 +11,16 @@ public class AbilityHolder : MonoBehaviour
     public Button CancelButton; //Avbrytknapp
     bool cancelButtonPressed = false;
 
+    [SerializeField] private GamePlay gamePlay;
+
     InputClick inputClick;
     void Start()
     {
         AbilityButton.onClick.AddListener(OnButtonClicked);
         CancelButton.onClick.AddListener(OnCancelButtonClicked);
+        ability.SetGamePlay(gamePlay);
+        ability.SetAbilityHolder(this);
+        CancelButton.gameObject.SetActive(false);
     }
 
     enum AbilityState
@@ -38,6 +43,23 @@ public class AbilityHolder : MonoBehaviour
         cancelButtonPressed = true;
     }
 
+    public void HandleGridClick(Vector2 pos)
+    {
+        ability.HandleClick(pos);
+    }
+
+    public void AbilityFinished()
+    {
+        gamePlay.inputLocked = false;
+
+        state = AbilityState.ready;
+
+        AbilityButton.gameObject.SetActive(true);
+        CancelButton.gameObject.SetActive(false);
+
+        isActive = false;
+    }
+
     void Update()
     {
         switch (state)
@@ -50,19 +72,28 @@ public class AbilityHolder : MonoBehaviour
                     state = AbilityState.active;
                     isActive = true;
 
+                    gamePlay.inputLocked = true;
+
+                    AbilityButton.gameObject.SetActive(false);
+                    CancelButton.gameObject.SetActive(true);
                     buttonPressed = false;
                 }
 
                 if (cancelButtonPressed) //If-statement som kollar om spelaren avbryter abilityn. 
                 {
                     state = AbilityState.canceled;
-
-                    cancelButtonPressed = false;
                 }
                 break;
             case AbilityState.canceled:
-                
-                    state = AbilityState.ready; //skickar tillbaka till case ready så att abilityn kan användas igen.
+
+                gamePlay.inputLocked = false;
+                state = AbilityState.ready; //skickar tillbaka till case ready så att abilityn kan användas igen.
+
+
+                AbilityButton.gameObject.SetActive(true);
+                CancelButton.gameObject.SetActive(false);
+
+                cancelButtonPressed = false;
 
                 break;
             case AbilityState.active:
