@@ -16,6 +16,8 @@ public class DragDrop : MonoBehaviour
     public bool dragging;
     private float timer;
     private float begin;
+    private BoxCollider2D collider;
+    private ContactFilter2D shipFilter = new ContactFilter2D();
 
     //Animation additions:
     private ShipPlacementFeedback feedback;
@@ -42,10 +44,12 @@ public class DragDrop : MonoBehaviour
     }*/
     private void Awake()
     {
-     mainCamera = Camera.main;
-     screenPos.Enable();
-     press.Enable();
-     press.canceled += Active;
+        collider = GetComponent<BoxCollider2D>();
+        shipFilter.SetLayerMask(LayerMask.GetMask("Ship", "GridBorder"));
+        mainCamera = Camera.main;
+        screenPos.Enable();
+        press.Enable();
+        press.canceled += Active;
 
         ship = GetComponent<ShipShape>();
 
@@ -91,15 +95,17 @@ public class DragDrop : MonoBehaviour
 
 
             //animation additions:
-            bool insideOfGrid = isValid();
+            if (isValid()) feedback?.ShowValid();
 
-            if (feedback != null)
-            {
-                if (insideOfGrid)
-                    feedback.ShowValid();
-                else
-                    feedback.ShowInvalid();
-            }
+            else feedback?.ShowInvalid();
+
+            //if (feedback != null)
+            //{
+            //    if (validPosition)
+            //        feedback.ShowValid();
+            //    else
+            //        feedback.ShowInvalid();
+            //}
 
             yield return null;
         }
@@ -113,8 +119,11 @@ public class DragDrop : MonoBehaviour
     {
         Vector3 pos = transform.position;
         transform.Rotate(0, 0, 90);
+        Physics2D.SyncTransforms(); // Utan denna rad använder isValid nedan den tidigare rotationen.
+
         if (!isValid())
         {
+            print("Not valid");
             transform.Rotate(0, 0, -90);
             transform.position = pos;
         }
@@ -122,15 +131,24 @@ public class DragDrop : MonoBehaviour
 
     private bool isValid() //ny metod för att true false om ship är i grid
     {
-        for (int i = 0; i < ship.shapePoints; i++)
+
+
+        if (collider.Overlap(shipFilter, new Collider2D[1]) == 0)
         {
-            Vector3 pos = transform.GetChild(i).position;
-            if (pos.x < 0.5f || pos.x > 8.5f || pos.y < 0.5f || pos.y > 8.5f)
-            {
-                return false;
-            }
+            return true;
         }
-        return true;
+            
+
+        //for (int i = 0; i < ship.shapePoints; i++)
+        //{
+        //    Vector3 pos = transform.GetChild(i).position;
+        //    if (pos.x < 0.5f || pos.x > 8.5f || pos.y < 0.5f || pos.y > 8.5f)
+        //    { 
+        //        return false;
+        //    }
+        //}
+
+        return false;
     }
 
     private void CheckIfDestroy() { 

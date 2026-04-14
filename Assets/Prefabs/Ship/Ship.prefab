@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 5917881916036187576}
   - component: {fileID: 6835592125746227892}
   - component: {fileID: -1320666689616189599}
-  m_Layer: 0
+  - component: {fileID: 5022464876539748007}
+  m_Layer: 7
   m_Name: Ship
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -140,6 +141,7 @@ MonoBehaviour:
       m_Action: Screen Pos
       m_Flags: 0
     m_Flags: 0
+  dragging: 0
 --- !u!61 &6835592125746227892
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -178,8 +180,8 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
+    oldSize: {x: 8, y: 8}
+    newSize: {x: 8, y: 8}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -198,4 +200,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51d8e99e4c9a232489f7b3fb65132610, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  shapePoints: []
+  shapePoints: 0
+--- !u!114 &5022464876539748007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1090326819170271570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8adf716135ca3934d882dc311f56204f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShipPlacementFeedback
+  validColor: {r: 0, g: 1, b: 0, a: 1}
+  invalidColor: {r: 1, g: 0, b: 0, a: 1}
