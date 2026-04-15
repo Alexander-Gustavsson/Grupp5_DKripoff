@@ -9,38 +9,62 @@ public class AI : MonoBehaviour
     [SerializeField] private GameObject[] ships;
 
     List<Vector2> guessed = new List<Vector2>();
+    List<GameObject> activeShips = new List<GameObject>();
+
+    private void Awake()
+    {
+        activeShips.AddRange(ships);
+    }
 
 
     // Kan l�gga till om skeppen ska kunna roteras senare
     public void PlaceShips()
     {
-        foreach (GameObject ship in ships)
+        foreach (GameObject ship in activeShips)
         {
             Vector2 pos = RandomPosition();
-
-            if (ShipOnPosition(pos) == null)
+            bool placed = false;
+            while (!placed)
             {
-                ship.transform.position = pos;
+                if (ShipOnPosition(pos) == null)
+                {
+                    ship.transform.position = pos;
+                    placed = true;
+                }
             }
 
-            ship.SetActive(false);
+            ship.GetComponent<ShipShape>().ShipPlaced();
+            ship.GetComponent<SpriteRenderer>().enabled = false;
         }
+
     }
 
-    public bool TakeHit(Vector2 hitPosition)
+    public GameObject TakeHit(Vector2 hitPos)
     {
-        GameObject ship = ShipOnPosition(hitPosition);
-
-        if (ship != null)
+        foreach (GameObject ship in activeShips)
         {
-            ship.transform.position = hitPosition;            
-            ship.SetActive(true);
+
+            var shape = ship.GetComponent<ShipShape>();
+
+            if (ship.GetComponent<ShipShape>().IsShipHit(hitPos))
+            {
+
+                return ship;
+                
+            }
+        }
+        return null;
+    }
+
+    public bool IsShipGone(GameObject ship, Vector2 hitPos) {
+        if (ship.GetComponent<ShipShape>().IsShipGone())
+        {
+            ship.GetComponent<SpriteRenderer>().enabled = true;
+            activeShips.Remove(ship);
             return true;
         }
-
         return false;
     }
-
 
     public Vector2 MakeMove()
     {
@@ -68,7 +92,7 @@ public class AI : MonoBehaviour
 
     private GameObject ShipOnPosition(Vector2 pos)
     {
-        foreach (GameObject ship in ships)
+        foreach (GameObject ship in activeShips)
         {
             if (ship.transform.position == (Vector3)pos)
             {
@@ -80,14 +104,7 @@ public class AI : MonoBehaviour
 
     public bool AllShipsFound()
     {
-        foreach (GameObject ship in ships)
-        {
-            if (!ship.activeSelf)
-            {
-                return false;
-            }
-        }
-        return true;
+        return activeShips.Count == 0 ? true : false;
     }
 }
 

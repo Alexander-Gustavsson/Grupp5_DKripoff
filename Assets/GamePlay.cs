@@ -10,10 +10,12 @@ public class GamePlay : MonoBehaviour
 
     [SerializeField] private GameObject[] ships;
     [SerializeField] private GameObject missSprite;
+    [SerializeField] private GameObject hitShipSprite;
     [SerializeField] private GameObject startButton;
     [SerializeField] private GameObject menuButton;
 
-    List<Vector2> missedPos = new List<Vector2>();
+    List<Vector2> guessedPos = new List<Vector2>();
+    List<GameObject> activeShips = new List<GameObject>();
 
     private InputClick clickScript;
 
@@ -21,6 +23,7 @@ public class GamePlay : MonoBehaviour
     void Start()
     {
         clickScript = GetComponent<InputClick>();
+        activeShips.AddRange(ships);
         PlaceShips();
     }
 
@@ -29,14 +32,29 @@ public class GamePlay : MonoBehaviour
         Vector2 gridPos = new Vector2(Mathf.Round(pressPos.x), Mathf.Round(pressPos.y));
 
         // Handle reclick
-
-        if (!AI.TakeHit(gridPos))
+        if (guessedPos.Contains(gridPos))
         {
-            SpawnMissSprite(gridPos);
-            clickScript.canClick = false;
-
-            Invoke("MakeAIMove", 0.5f);
+            return;
         }
+        GameObject ship = AI.TakeHit(gridPos);
+
+        if (ship != null)
+        {
+            SpawnHitShipSprite(gridPos);
+            if (AI.IsShipGone(ship, gridPos))
+            {
+                if (AI.AllShipsFound())
+                {
+                    Win();
+                }
+            }
+            return;
+        }
+        SpawnMissSprite(gridPos);
+        clickScript.canClick = false;
+
+        Invoke("MakeAIMove", 0.5f);
+
 
         if (AI.AllShipsFound())
         {
@@ -49,17 +67,24 @@ public class GamePlay : MonoBehaviour
     {
         Vector2 hitPos = AI.MakeMove();
 
-        foreach (GameObject ship in ships)
+        foreach (GameObject ship in activeShips)
         {
-            if (ship.transform.position == (Vector3)hitPos)
+            if (ship.GetComponent<ShipShape>().IsShipHit(hitPos))
             {
-                ship.SetActive(false);
+                if (ship.GetComponent<ShipShape>().IsShipGone())
+                {
+                    //code here if entire ship is hit
+                    activeShips.Remove(ship);
+                }
+                SpawnHitShipSprite(hitPos);
+
                 if (AllPlayerShipFound())
                 {
                     Lose();
                     return;
                 }
-                MakeAIMove();
+
+                Invoke("MakeAIMove", 0.5f);
                 return;
             }
         }
@@ -79,34 +104,42 @@ public class GamePlay : MonoBehaviour
         AI.PlaceShips();
     }
 
+
     // Körs efter man har placerat ut alla skepp, måste kallas på med ex en knapp
     public void StartGamePlay()
     {
         startButton.SetActive(false);
         clickScript.canDrag = false;
+        foreach (GameObject ship in activeShips)
+        {
+            ship.GetComponent<ShipShape>().ShipPlaced();
+        }
         MakePlayerMove();
     }
 
     private void SpawnMissSprite(Vector2 pos)
     {
-        if (missedPos.Contains(pos))
+        if (guessedPos.Contains(pos))
         {
             return;
         }
-        missedPos.Add(pos);
+        guessedPos.Add(pos);
         Instantiate(missSprite, pos, Quaternion.identity);
+    }
+
+    private void SpawnHitShipSprite(Vector2 pos)
+    {
+        if (guessedPos.Contains(pos))
+        {
+            return;
+        }
+        guessedPos.Add(pos);
+        Instantiate(hitShipSprite, pos, Quaternion.identity);
     }
 
     private bool AllPlayerShipFound()
     {
-        foreach (GameObject ship in ships)
-        {
-            if (ship.activeSelf)
-            {
-                return false;
-            }
-        }
-        return true;
+        return activeShips.Count == 0 ? true : false;
     }
 
     // Kan lägga till saker här om spelaren förlorar
