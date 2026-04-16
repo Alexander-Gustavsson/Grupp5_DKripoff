@@ -12,9 +12,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject imagePanelRank1, imagePanelRank2, imagePanelRank3, imageRank1, imageRank2, imageRank3;
     [SerializeField] private Slider sliderRank;
 
-    public int rank; 
-    private int prevRank; 
-    private int increaseRankPoints; 
+    public int rank;
+    private int prevRank;
+    private int increaseRankPoints;
     private int decreaseRankPoints;
 
     private void Awake()
