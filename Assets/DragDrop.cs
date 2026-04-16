@@ -18,7 +18,11 @@ public class DragDrop : MonoBehaviour
     private float begin;
 
     //Animation additions:
+    [SerializeField] private int shipLength = 1;
+    public int ShipLength => shipLength;
+
     private ShipPlacementFeedback feedback;
+    
 
     
 
@@ -51,6 +55,8 @@ public class DragDrop : MonoBehaviour
 
         //anim
         feedback = GetComponent<ShipPlacementFeedback>();
+        
+     
     }
 
     private void Active(InputAction.CallbackContext context)
@@ -73,8 +79,7 @@ public class DragDrop : MonoBehaviour
         timer = 0;
         begin = Time.time;
         //Animation additions:
-        //if (feedback != null)
-        //    feedback.ShowSelected();
+     
         StartCoroutine(Drag());
     }
 
@@ -92,6 +97,9 @@ public class DragDrop : MonoBehaviour
 
             //animation additions:
             bool insideOfGrid = isValid();
+
+            transform.position = WorldPos + offset;
+         
 
             if (feedback != null)
             {
@@ -150,6 +158,7 @@ public class DragDrop : MonoBehaviour
         //animation additions:
         if (feedback != null)
             feedback.ResetFeedback();
+        
     }
 
 
