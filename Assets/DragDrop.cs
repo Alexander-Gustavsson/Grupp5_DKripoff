@@ -103,8 +103,8 @@ public class DragDrop : MonoBehaviour
             if (isValid()) feedback?.ShowValid();
 
             transform.position = WorldPos + offset;
-         
 
+            bool insideOfGrid = isValid();
             if (feedback != null)
             {
                 if (insideOfGrid)
