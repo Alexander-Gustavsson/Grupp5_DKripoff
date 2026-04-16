@@ -20,7 +20,11 @@ public class DragDrop : MonoBehaviour
     private ContactFilter2D shipFilter = new ContactFilter2D();
 
     //Animation additions:
+    [SerializeField] private int shipLength = 1;
+    public int ShipLength => shipLength;
+
     private ShipPlacementFeedback feedback;
+    
 
     
 
@@ -55,6 +59,8 @@ public class DragDrop : MonoBehaviour
 
         //anim
         feedback = GetComponent<ShipPlacementFeedback>();
+        
+     
     }
 
     private void Active(InputAction.CallbackContext context)
@@ -77,8 +83,7 @@ public class DragDrop : MonoBehaviour
         timer = 0;
         begin = Time.time;
         //Animation additions:
-        //if (feedback != null)
-        //    feedback.ShowSelected();
+     
         StartCoroutine(Drag());
     }
 
@@ -97,15 +102,16 @@ public class DragDrop : MonoBehaviour
             //animation additions:
             if (isValid()) feedback?.ShowValid();
 
-            else feedback?.ShowInvalid();
+            transform.position = WorldPos + offset;
+         
 
-            //if (feedback != null)
-            //{
-            //    if (validPosition)
-            //        feedback.ShowValid();
-            //    else
-            //        feedback.ShowInvalid();
-            //}
+            if (feedback != null)
+            {
+                if (insideOfGrid)
+                    feedback.ShowValid();
+                else
+                    feedback.ShowInvalid();
+            }
 
             yield return null;
         }
@@ -168,6 +174,7 @@ public class DragDrop : MonoBehaviour
         //animation additions:
         if (feedback != null)
             feedback.ResetFeedback();
+        
     }
 
 
