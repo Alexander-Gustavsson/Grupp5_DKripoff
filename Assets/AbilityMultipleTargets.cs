@@ -21,7 +21,7 @@ public class AbilityMultipleTargets : Ability
         selectedTargets.Clear();
         isActive = false;
     }
-
+    //hmm
     public override void HandleClick(Vector2 pos)
     {
         if (selectedTargets.Contains(pos))
