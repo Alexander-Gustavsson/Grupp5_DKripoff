@@ -14,16 +14,12 @@ public class GamePlay : MonoBehaviour
     [SerializeField] private GameObject startButton;
     [SerializeField] private GameObject menuButton;
 
-<<<<<<< HEAD
+
     //Animations:
     [SerializeField] private TileHighlight tileHighlight;
-
     List<Vector2> missedPos = new List<Vector2>();
-=======
     List<Vector2> guessedPos = new List<Vector2>();
     List<GameObject> activeShips = new List<GameObject>();
->>>>>>> Programmering-experiment
-
     private InputClick clickScript;
 
 
