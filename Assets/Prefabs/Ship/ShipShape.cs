@@ -4,28 +4,24 @@ using static UnityEditor.PlayerSettings;
 
 public class ShipShape : MonoBehaviour
 {
-    //[SerializeField] private int shipPoints;
+    [SerializeField] private int shipPoints;
 
     List<Vector2> shipPos = new List<Vector2>();
 
     public void ShipPlaced()
     {
+        shipPos.Clear();
+        Vector3 direction = transform.up == Vector3.up ? Vector3.up : transform.up == Vector3.down ? Vector3.down : transform.up == Vector3.right ? Vector3.right : Vector3.left;
 
-        Bounds shipBounds = GetComponent<Collider2D>().bounds;
-
-
-        int minX = Mathf.RoundToInt(shipBounds.min.x);
-        int maxX = Mathf.RoundToInt(shipBounds.max.x);
-        int minY = Mathf.RoundToInt(shipBounds.min.y);
-        int maxY = Mathf.RoundToInt(shipBounds.max.y);
-
-        for (int x = minX; x <= maxX; x++)
+        for (int i = 0; i < shipPoints; i++)
         {
-            for (int y = minY; y <= maxY; y++)
-            {
-                shipPos.Add(new Vector2(x, y));
-            }
+            shipPos.Add(transform.position + direction * i);
         }
+    }
+
+    public List<Vector2> GetShipPositions()
+    {
+        return shipPos;
     }
 
     public bool IsShipGone()

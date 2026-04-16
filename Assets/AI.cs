@@ -22,19 +22,23 @@ public class AI : MonoBehaviour
     {
         foreach (GameObject ship in activeShips)
         {
-            Vector2 pos = RandomPosition();
             bool placed = false;
             while (!placed)
             {
-                if (ShipOnPosition(pos) == null)
+                ship.transform.position = RandomPosition();
+                int rotation = RandomShipRotation(ship);
+                ship.GetComponent<ShipShape>().ShipPlaced();
+
+                if (ValidPosition(ship))
                 {
-                    ship.transform.position = pos;
                     placed = true;
+                    break;
                 }
+                ship.transform.Rotate(0, 0, -rotation);
             }
 
-            ship.GetComponent<ShipShape>().ShipPlaced();
-            ship.GetComponent<SpriteRenderer>().enabled = false;
+            //ship.GetComponent<ShipShape>().ShipPlaced();
+            ship.SetActive(false);
         }
 
     }
@@ -43,14 +47,9 @@ public class AI : MonoBehaviour
     {
         foreach (GameObject ship in activeShips)
         {
-
-            var shape = ship.GetComponent<ShipShape>();
-
             if (ship.GetComponent<ShipShape>().IsShipHit(hitPos))
             {
-
                 return ship;
-                
             }
         }
         return null;
@@ -59,7 +58,7 @@ public class AI : MonoBehaviour
     public bool IsShipGone(GameObject ship, Vector2 hitPos) {
         if (ship.GetComponent<ShipShape>().IsShipGone())
         {
-            ship.GetComponent<SpriteRenderer>().enabled = true;
+            ship.SetActive(true);
             activeShips.Remove(ship);
             return true;
         }
@@ -90,16 +89,31 @@ public class AI : MonoBehaviour
     }
 
 
-    private GameObject ShipOnPosition(Vector2 pos)
+    private bool ValidPosition(GameObject ship)
     {
-        foreach (GameObject ship in activeShips)
+        foreach (GameObject checkShip in activeShips)
         {
-            if (ship.transform.position == (Vector3)pos)
+            if (checkShip == ship)
             {
-                return ship;
+                continue;
+            }
+
+            foreach (Vector2 pos in ship.GetComponent<ShipShape>().GetShipPositions())
+            {
+                if (checkShip.GetComponent<ShipShape>().GetShipPositions().Contains(pos) || pos.x < -8 || pos.x > -1 || pos.y < 1 || pos.y > 8)
+                {
+                    return false;
+                }
             }
         }
-        return null;
+        return true;
+    }
+
+    private int RandomShipRotation(GameObject ship)
+    {
+        int rotation = Random.Range(0, 4) * 90;
+        ship.transform.Rotate(0, 0, rotation);
+        return rotation;
     }
 
     public bool AllShipsFound()
