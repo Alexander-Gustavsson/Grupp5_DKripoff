@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
         UpdateRank();
     }
 
-    private void UpdateRank()
+    public void UpdateRank()
     {
         rank = rankPoints < 300 ? 1 : rankPoints < 1000 ? 2 : 3;
 
