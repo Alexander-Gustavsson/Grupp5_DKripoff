@@ -79,6 +79,9 @@ public class GamePlay : MonoBehaviour
         {
             if (ship.GetComponent<ShipShape>().IsShipHit(hitPos))
             {
+                //ain lägger till rutorna nära skeppet om det finns (första prioritet)
+                AI.AddNextTargets(hitPos);
+
                 if (ship.GetComponent<ShipShape>().IsShipGone())
                 {
                     //code here if entire ship is hit

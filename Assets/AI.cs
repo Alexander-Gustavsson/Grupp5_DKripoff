@@ -11,6 +11,9 @@ public class AI : MonoBehaviour
     List<Vector2> guessed = new List<Vector2>();
     List<GameObject> activeShips = new List<GameObject>();
 
+    //lista för ai:n att fortsätta jaga skepp
+    List<Vector2> nextAIMove = new List<Vector2>();
+
     private void Awake()
     {
         activeShips.AddRange(ships);
@@ -67,7 +70,19 @@ public class AI : MonoBehaviour
 
     public Vector2 MakeMove()
     {
-        Vector2 pos = RandomPositionPlayer();
+
+        //ta första i listan sen fortsätt
+        Vector2 pos;
+        if (nextAIMove.Count > 0)
+        {
+            pos = nextAIMove[0];
+            nextAIMove.RemoveAt(0); //removeat tar bort från listan
+        }
+        else
+        {
+             pos = RandomPositionPlayer();// ANNARS skjut slump
+        }
+
         if (guessed.Contains(pos))
         {
             return MakeMove();
@@ -75,6 +90,32 @@ public class AI : MonoBehaviour
 
         guessed.Add(pos);
         return pos;
+    }
+
+
+    //metod för att samla på nya attacker
+    public void AddNextTargets(Vector2 hitPos)
+    {
+        Vector2[] nextDirection =
+    {
+            Vector2.up, Vector2.down, Vector2.left, Vector2.right //kordinaterna nära skeppet
+    };
+
+        foreach (Vector2 dir in nextDirection)
+        {
+            Vector2 nextTarget = hitPos + dir;
+
+
+            if (nextTarget.x >= 1 && nextTarget.x <= 8 && nextTarget.y >= 1 && nextTarget.y <= 8)
+            {
+                if (!guessed.Contains(nextTarget) && !nextAIMove.Contains(nextTarget))//kollar så inte skjuten eller inte är dubbletter
+                {
+                    nextAIMove.Add(nextTarget);
+                }
+            }
+
+        }
+       
     }
 
 
