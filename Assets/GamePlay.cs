@@ -10,6 +10,7 @@ public class GamePlay : MonoBehaviour
 
     [SerializeField] private GameObject[] ships;
     [SerializeField] private GameObject missSprite;
+    [SerializeField] private GameObject hitShipSprite;
     [SerializeField] private GameObject startButton;
     [SerializeField] private GameObject menuButton;
 
@@ -116,6 +117,16 @@ public class GamePlay : MonoBehaviour
         }
         missedPos.Add(pos);
         Instantiate(missSprite, pos, Quaternion.identity);
+    }
+
+    private void SpawnHitShipSprite(Vector2 pos)
+    {
+        if (guessedPos.Contains(pos))
+        {
+            return;
+        }
+        guessedPos.Add(pos);
+        Instantiate(hitShipSprite, pos, Quaternion.identity);
     }
 
     private bool AllPlayerShipFound()
