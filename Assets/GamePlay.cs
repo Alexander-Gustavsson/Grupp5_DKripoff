@@ -13,10 +13,13 @@ public class GamePlay : MonoBehaviour
     [SerializeField] private GameObject startButton;
     [SerializeField] private GameObject menuButton;
 
+
     //Animations:
     [SerializeField] private TileHighlight tileHighlight;
-
     List<Vector2> missedPos = new List<Vector2>();
+
+    List<Vector2> guessedPos = new List<Vector2>();
+    List<GameObject> activeShips = new List<GameObject>();
 
     private InputClick clickScript;
 
@@ -61,7 +64,17 @@ public class GamePlay : MonoBehaviour
         {
             if (ship.transform.position == (Vector3)hitPos)
             {
-                ship.SetActive(false);
+
+                //ain lï¿½gger till rutorna nï¿½ra skeppet om det finns (fï¿½rsta prioritet)
+                AI.AddNextTargets(hitPos);
+
+                if (ship.GetComponent<ShipShape>().IsShipGone())
+                {
+                    //code here if entire ship is hit
+                    activeShips.Remove(ship);
+                }
+                SpawnHitShipSprite(hitPos);
+
                 if (AllPlayerShipFound())
                 {
                     Lose();
@@ -87,7 +100,7 @@ public class GamePlay : MonoBehaviour
         AI.PlaceShips();
     }
 
-    // Körs efter man har placerat ut alla skepp, måste kallas på med ex en knapp
+    // Kï¿½rs efter man har placerat ut alla skepp, mï¿½ste kallas pï¿½ med ex en knapp
     public void StartGamePlay()
     {
         startButton.SetActive(false);
@@ -117,13 +130,13 @@ public class GamePlay : MonoBehaviour
         return true;
     }
 
-    // Kan lägga till saker här om spelaren förlorar
+    // Kan lï¿½gga till saker hï¿½r om spelaren fï¿½rlorar
     public void Lose()
     {
         //Tillbaka till meny
     }
 
-    // Kan lägga till saker här om spelaren vinner
+    // Kan lï¿½gga till saker hï¿½r om spelaren vinner
     public void Win()
     {
         //Tillbaka till meny
