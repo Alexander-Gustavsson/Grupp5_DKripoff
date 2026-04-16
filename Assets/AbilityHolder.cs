@@ -84,6 +84,12 @@ public class AbilityHolder : MonoBehaviour
                     state = AbilityState.canceled;
                 }
                 break;
+            case AbilityState.active:
+                if (cancelButtonPressed)
+                {
+                    state = AbilityState.canceled;
+                }
+                break;
             case AbilityState.canceled:
 
                 gamePlay.inputLocked = false;
@@ -96,8 +102,7 @@ public class AbilityHolder : MonoBehaviour
                 cancelButtonPressed = false;
 
                 break;
-            case AbilityState.active:
-                break;
+          
             case AbilityState.cooldown:
                 break;
 
