@@ -1,9 +1,8 @@
 using JetBrains.Annotations;
 using System.Collections.Generic;
 using UnityEngine;
-//using UnityEngine.UIElements;
+using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class GamePlay : MonoBehaviour
 {
@@ -13,6 +12,7 @@ public class GamePlay : MonoBehaviour
     [SerializeField] private GameObject missSprite;
     [SerializeField] private GameObject hitShipSprite;
     [SerializeField] private GameObject startButton;
+    [SerializeField] private GameObject menuButton;
 
 
     //Animations:
@@ -81,13 +81,12 @@ public class GamePlay : MonoBehaviour
             {
                 //ain lägger till rutorna nära skeppet om det finns (första prioritet)
                 AI.AddNextTargets(hitPos);
+
                 if (ship.GetComponent<ShipShape>().IsShipGone())
                 {
                     //code here if entire ship is hit
                     activeShips.Remove(ship);
-                    AI.ClearTargets();
                 }
-
                 SpawnHitShipSprite(hitPos);
 
                 if (AllPlayerShipFound())
@@ -114,25 +113,6 @@ public class GamePlay : MonoBehaviour
     {
         clickScript.canDrag = true;
         AI.PlaceShips();
-        List<GameObject> placedShips = new List<GameObject>();
-
-        placedShips.AddRange(activeShips);
-
-        while (true)
-        {
-            foreach (GameObject ship in placedShips)
-            {
-                if (ship.GetComponent<ShipShape>().GetShipPositions().Count != 0)
-                {
-                    placedShips.Remove(ship);
-                }
-            }
-            if (placedShips.Count == 0)
-            {
-                break;
-            }
-        }
-        startButton.GetComponent<Button>().interactable = true;
     }
 
 
