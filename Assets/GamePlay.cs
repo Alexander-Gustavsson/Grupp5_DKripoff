@@ -22,11 +22,14 @@ public class GamePlay : MonoBehaviour
     List<GameObject> activeShips = new List<GameObject>();
     private InputClick clickScript;
 
+    List<GameObject> placedShips = new List<GameObject>();
+
 
     void Start()
     {
         clickScript = GetComponent<InputClick>();
         activeShips.AddRange(ships);
+        placedShips.AddRange(activeShips);
         PlaceShips();
     }
 
@@ -86,6 +89,7 @@ public class GamePlay : MonoBehaviour
                 {
                     //code here if entire ship is hit
                     activeShips.Remove(ship);
+                    AI.ClearTargets();
                 }
                 SpawnHitShipSprite(hitPos);
 

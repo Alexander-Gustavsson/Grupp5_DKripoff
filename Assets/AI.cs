@@ -13,6 +13,7 @@ public class AI : MonoBehaviour
 
     //lista för ai:n att fortsätta jaga skepp
     List<Vector2> nextAIMove = new List<Vector2>();
+    private Vector2 continueDir;
 
     private void Awake()
     {
@@ -95,14 +96,15 @@ public class AI : MonoBehaviour
     public void AddNextTargets(Vector2 hitPos)
     {
         Vector2[] nextDirection =
-    {
-            Vector2.up, Vector2.down, Vector2.left, Vector2.right //kordinaterna nära skeppet
-    };
-
-        foreach (Vector2 dir in nextDirection)
         {
-            Vector2 nextTarget = hitPos + dir;
+            Vector2.up, Vector2.down, Vector2.left, Vector2.right //kordinaterna nära skeppet
+        };
 
+        for (int i = 0; i < nextDirection.Length; i++)
+        {
+               
+            Vector2 dir = nextDirection[Random.Range(0, nextDirection.Length - 1)];
+            Vector2 nextTarget = hitPos + dir;
 
             if (nextTarget.x >= 1 && nextTarget.x <= 8 && nextTarget.y >= 1 && nextTarget.y <= 8)
             {
@@ -116,6 +118,10 @@ public class AI : MonoBehaviour
        
     }
 
+    public void ClearTargets()
+    {
+        nextAIMove.Clear();
+    }
 
     private Vector2 RandomPositionPlayer()
     {
