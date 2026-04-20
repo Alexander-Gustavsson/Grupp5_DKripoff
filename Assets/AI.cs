@@ -25,8 +25,7 @@ public class AI : MonoBehaviour
     {
         foreach (GameObject ship in activeShips)
         {
-            bool placed = false;
-            while (!placed)
+            while (true)
             {
                 ship.transform.position = RandomPosition();
                 int rotation = RandomShipRotation(ship);
@@ -34,7 +33,6 @@ public class AI : MonoBehaviour
 
                 if (ValidPosition(ship))
                 {
-                    placed = true;
                     break;
                 }
                 ship.transform.Rotate(0, 0, -rotation);
