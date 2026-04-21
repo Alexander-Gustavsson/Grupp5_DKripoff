@@ -13,7 +13,7 @@ public class InputClick : MonoBehaviour
 
     private void OnEnable()
     {
-        clickable.SetLayerMask(LayerMask.GetMask("Ship", "Grid")); // Om du behöver skapa ett nytt layer måste det ligga här för att vara klickbart. 
+        clickable.SetLayerMask(LayerMask.GetMask("Ship", "Grid", "Guide")); // Om du behöver skapa ett nytt layer måste det ligga här för att vara klickbart. 
         press.Enable();        
         screenPos.Enable();
         press.performed += IsClicked;

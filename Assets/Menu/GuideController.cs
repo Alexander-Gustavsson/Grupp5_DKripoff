@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class GuideController : MonoBehaviour
 {
+    public static bool firstRun = true;
+
+    public static event Action<GuideName> OnGuideActive;
+
     public enum GuideName
     {
         PLACE_SHIPS,
@@ -16,7 +20,19 @@ public class GuideController : MonoBehaviour
 
     private void Start()
     {
-        AddGuides();
+        if (firstRun)
+        {
+            AddGuides();
+            firstRun = false;
+        }
+    }
+
+    public void TriggerGuide(GuideName guide)
+    {
+        if (activeGuides.Contains(guide))
+        {
+            OnGuideActive.Invoke(guide);
+        }
     }
 
     public void AddGuides()
