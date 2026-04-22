@@ -17,6 +17,7 @@ public class GamePlay : MonoBehaviour
 
     //Animations:
     [SerializeField] private TileHighlight tileHighlight;
+    [SerializeField] private ShotFeedbackManager shotFeedback;
     List<Vector2> missedPos = new List<Vector2>();
 
     List<Vector2> guessedPos = new List<Vector2>();
@@ -45,9 +46,16 @@ public class GamePlay : MonoBehaviour
         if (!AI.TakeHit(gridPos))
         {
             SpawnMissSprite(gridPos);
+            //anim:
+            if (shotFeedback != null) shotFeedback.PlayMiss(gridPos);
             clickScript.canClick = false;
 
             Invoke("MakeAIMove", 0.5f);
+        }
+        else
+        {
+            SpawnHitShipSprite(gridPos);
+            if (shotFeedback != null) shotFeedback.PlayHit(gridPos);
         }
 
         if (AI.AllShipsFound())
@@ -63,7 +71,7 @@ public class GamePlay : MonoBehaviour
 
         foreach (GameObject ship in ships)
         {
-            if (ship.transform.position == (Vector3)hitPos)
+            if (ship.transform.position == (Vector3)hitPos) 
             {
 
                 //ain l�gger till rutorna n�ra skeppet om det finns (f�rsta prioritet)
@@ -73,8 +81,16 @@ public class GamePlay : MonoBehaviour
                 {
                     //code here if entire ship is hit
                     activeShips.Remove(ship);
+                    //anim:
+                    SpawnHitShipSprite(hitPos);
+                    if (shotFeedback != null) shotFeedback.PlaySink(hitPos);
                 }
-                SpawnHitShipSprite(hitPos);
+                //SpawnHitShipSprite(hitPos);
+                else
+                {
+                    SpawnHitShipSprite(hitPos);
+                    if (shotFeedback != null) shotFeedback.PlayHit(hitPos);
+                }
 
                 if (AllPlayerShipFound())
                 {
@@ -87,6 +103,7 @@ public class GamePlay : MonoBehaviour
         }
 
         SpawnMissSprite(hitPos);
+        if (shotFeedback != null) shotFeedback.PlayMiss(hitPos);
         MakePlayerMove();
     }
 
