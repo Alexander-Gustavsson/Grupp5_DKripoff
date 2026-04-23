@@ -1,8 +1,9 @@
 using JetBrains.Annotations;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
+//using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GamePlay : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class GamePlay : MonoBehaviour
     [SerializeField] private GameObject hitShipSprite;
     [SerializeField] private GameObject startButton;
     [SerializeField] private GameObject menuButton;
+    //[SerializeField] private GameManager gameManager;
 
 
     //Animations:
@@ -160,13 +162,13 @@ public class GamePlay : MonoBehaviour
     // Kan lägga till saker här om spelaren förlorar
     public void Lose()
     {
-        //Tillbaka till meny
+        GameObject.Find("GameManager").GetComponent<GameManager>().PlayerLost();
     }
 
     // Kan lägga till saker här om spelaren vinner
     public void Win()
     {
-        //Tillbaka till meny
+        GameObject.Find("GameManager").GetComponent<GameManager>().PlayerWon();
     }
 
     public void ReturnToMainMenu()
