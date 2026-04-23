@@ -17,6 +17,7 @@ public class GamePlay : MonoBehaviour
 
     //Animations:
     [SerializeField] private TileHighlight tileHighlight;
+    [SerializeField] private ShotFeedbackManager shotFeedback;
     List<Vector2> missedPos = new List<Vector2>();
 
     List<Vector2> guessedPos = new List<Vector2>();
@@ -35,19 +36,29 @@ public class GamePlay : MonoBehaviour
     {
         Vector2 gridPos = new Vector2(Mathf.Round(pressPos.x), Mathf.Round(pressPos.y));
         //Animations:
+
         if (tileHighlight != null)
         {
             tileHighlight.ShowHighlight(gridPos);
         }
+        if (shotFeedback != null) shotFeedback.PlayFire(gridPos);
 
         // Handle reclick
 
         if (!AI.TakeHit(gridPos))
         {
             SpawnMissSprite(gridPos);
+            //anim:
+            if (shotFeedback != null) shotFeedback.PlayMiss(gridPos);
+
             clickScript.canClick = false;
 
             Invoke("MakeAIMove", 0.5f);
+        }
+        else
+        {
+            SpawnHitShipSprite(gridPos);
+            if (shotFeedback != null) shotFeedback.PlayHit(gridPos);
         }
 
         if (AI.AllShipsFound())
@@ -60,6 +71,7 @@ public class GamePlay : MonoBehaviour
     private void MakeAIMove()
     {
         Vector2 hitPos = AI.MakeMove();
+        if (shotFeedback != null) shotFeedback.PlayFire(hitPos);
 
         foreach (GameObject ship in ships)
         {
@@ -73,8 +85,22 @@ public class GamePlay : MonoBehaviour
                 {
                     //code here if entire ship is hit
                     activeShips.Remove(ship);
+                    //anim:
+                    ShipSunkVisual sunkVisual = ship.GetComponent<ShipSunkVisual>();
+                    if (sunkVisual != null)
+                    {
+                        sunkVisual.MarkAsSunk();
+                    }
+                    SpawnHitShipSprite(hitPos);
+                    //anim:
+                    if (shotFeedback != null) shotFeedback.PlaySink(hitPos);
                 }
-                SpawnHitShipSprite(hitPos);
+               
+                else
+                {
+                    SpawnHitShipSprite(hitPos);
+                    if (shotFeedback != null) shotFeedback.PlayHit(hitPos);
+                }
 
                 if (AllPlayerShipFound())
                 {
@@ -87,6 +113,8 @@ public class GamePlay : MonoBehaviour
         }
 
         SpawnMissSprite(hitPos);
+        //anim:
+        if (shotFeedback != null) shotFeedback.PlayMiss(hitPos);
         MakePlayerMove();
     }
 

@@ -45,6 +45,12 @@ public class AI : MonoBehaviour
         {
             ship.transform.position = hitPosition;            
             ship.SetActive(true);
+            //anim:
+            ShipSunkVisual sunkVisual = ship.GetComponent<ShipSunkVisual>();
+            if (sunkVisual != null)
+            {
+                sunkVisual.MarkAsSunk();
+            }
             return true;
         }
 
