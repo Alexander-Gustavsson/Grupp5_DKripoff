@@ -76,7 +76,11 @@ public class GamePlay : MonoBehaviour
 
     private void MakeAIMove()
     {
-        Vector2 hitPos = AI.MakeMove();
+       
+        Vector2 hitPos = AI.HardAIMakeMove();
+    //tester ai strategier
+
+        
 
         foreach (GameObject ship in activeShips)
         {

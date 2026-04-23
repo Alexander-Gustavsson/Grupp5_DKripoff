@@ -15,6 +15,8 @@ public class AI : MonoBehaviour
     List<Vector2> nextAIMove = new List<Vector2>();
     private Vector2 continueDir;
 
+    private Vector2 lastPos; 
+
     private void Awake()
     {
         activeShips.AddRange(ships);
@@ -92,6 +94,50 @@ public class AI : MonoBehaviour
         guessed.Add(pos);
         return pos;
     }
+
+
+    public Vector2 HardAIMakeMove()
+    {
+
+        //ta första i listan sen fortsätt
+        Vector2 pos;
+        if (nextAIMove.Count > 0)
+        {
+            pos = nextAIMove[0];
+            nextAIMove.RemoveAt(0); //removeat tar bort från listan
+        }
+
+
+        //ny ai
+        //ny logik för svår ai, först lägger ut random sen fortsätter diagonalt tills utanför grid, ny random
+
+        else if (lastPos.x < 0.5f || lastPos.y < 0.5f)
+        {
+            pos = RandomPositionPlayer();
+        }
+        else if (lastPos.x + 1 <= 8.5f && lastPos.y + 1 <= 8.5f && lastPos.x + 1 >= 0.5f && lastPos.y + 1 >= 0.5f)
+        {
+            pos = new Vector2(lastPos.x + 1, lastPos.y + 1);
+        }
+        
+        else
+        {
+            pos = RandomPositionPlayer();
+        }
+
+        lastPos = pos;
+        //ny ai
+
+        if (guessed.Contains(pos))
+        {
+            return MakeMove();
+        }
+
+        guessed.Add(pos);
+        return pos;
+    }
+
+  
 
 
     //metod för att samla på nya attacker
