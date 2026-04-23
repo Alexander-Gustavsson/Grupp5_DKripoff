@@ -16,6 +16,7 @@ public class DragDrop : MonoBehaviour
     public bool dragging;
     private float timer;
     private float begin;
+    private int rotateDir = 1;
     private BoxCollider2D collider;
     private ContactFilter2D shipFilter = new ContactFilter2D();
 
@@ -124,18 +125,27 @@ public class DragDrop : MonoBehaviour
     public void RotateShip()
     {
         Vector3 pos = transform.position;
-        transform.Rotate(0, 0, 90);
+        transform.Rotate(0, 0, 90 * rotateDir);
         Physics2D.SyncTransforms(); // Utan denna rad använder isValid nedan den tidigare rotationen.
 
         if (!isValid())
         {
-            print("Not valid");
-            transform.Rotate(0, 0, -90);
-            transform.position = pos;
+            // Testar att rotera till vänster eftersom höger inte fungerade
+            transform.Rotate(0, 0, -180);
+            Physics2D.SyncTransforms();
+            if (!isValid())
+            {
+                transform.Rotate(0, 0, 90);
+                transform.position = pos;
+            }
+            else
+            {
+                rotateDir = -rotateDir;
+            }
         }
     }
 
-    private bool isValid() //ny metod för att true false om ship är i grid
+    public bool isValid() //ny metod för att true false om ship är i grid
     {
 
 
@@ -143,7 +153,7 @@ public class DragDrop : MonoBehaviour
         {
             return true;
         }
-            
+        
 
         //for (int i = 0; i < ship.shapePoints; i++)
         //{
@@ -162,6 +172,7 @@ public class DragDrop : MonoBehaviour
         if (isValid())
         {
             transform.position = Snap(transform.position);
+            GameObject.Find("GameplaySystem").GetComponent<GamePlay>().CheckAllShipsPlaced();
         }
 
         else

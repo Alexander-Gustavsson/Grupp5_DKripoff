@@ -121,6 +121,17 @@ public class GamePlay : MonoBehaviour
         AI.PlaceShips();
     }
 
+    public void CheckAllShipsPlaced()
+    {
+        foreach (GameObject ship in activeShips)
+        {
+            if (!ship.GetComponent<DragDrop>().isValid())
+            {
+                return;
+            }
+        }
+        startButton.GetComponent<Button>().interactable = true;
+    }
 
     // Körs efter man har placerat ut alla skepp, måste kallas på med ex en knapp
     public void StartGamePlay()
