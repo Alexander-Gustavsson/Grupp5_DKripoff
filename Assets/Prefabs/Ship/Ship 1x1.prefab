@@ -100,6 +100,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1090326819170271570, guid: 2c0b7a04b803673418b38450affcd16e, type: 3}
       insertIndex: 4
       addedObject: {fileID: -1560961602219006461}
+    - targetCorrespondingSourceObject: {fileID: 1090326819170271570, guid: 2c0b7a04b803673418b38450affcd16e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -2270622824818972658}
   m_SourcePrefab: {fileID: 100100000, guid: 2c0b7a04b803673418b38450affcd16e, type: 3}
 --- !u!1 &848280922992137714 stripped
 GameObject:
@@ -120,3 +123,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ShipPlacementFeedback
   validColor: {r: 0, g: 1, b: 0, a: 1}
   invalidColor: {r: 1, g: 0, b: 0, a: 1}
+--- !u!114 &-2270622824818972658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 848280922992137714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dde426533384a44ab3c1b40ba2bbac3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShipSunkVisual
+  sunkColor: {r: 0.4433962, g: 0.16941082, b: 0.16941082, a: 1}
+  spriteRenderers: []
