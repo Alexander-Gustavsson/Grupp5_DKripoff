@@ -175,23 +175,68 @@ PrefabInstance:
     - {fileID: 769952238167827370, guid: 7a02c7ad08f75714299e92e31c3bb04d, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6318127187483486016, guid: 7a02c7ad08f75714299e92e31c3bb04d, type: 3}
+      insertIndex: 3
+      addedObject: {fileID: 783075082}
   m_SourcePrefab: {fileID: 100100000, guid: 7a02c7ad08f75714299e92e31c3bb04d, type: 3}
 --- !u!1 &206163040 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1263829521692743536, guid: 8ab4686ee715fb34bab587e53f4389a4, type: 3}
   m_PrefabInstance: {fileID: 2052404882}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &206163041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 206163040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25ccc6622fac07a43ab0bf07ac25571c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShipSunkVisual
+  sunkColor: {r: 0.282353, g: 0.2392157, b: 0.5450981, a: 0.78431374}
+  spriteRenderers: []
 --- !u!1 &235283097 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 427064935715513441, guid: 0cc63977f4aa99646b759784df7ff838, type: 3}
   m_PrefabInstance: {fileID: 1202827041}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &235283098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 235283097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25ccc6622fac07a43ab0bf07ac25571c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShipSunkVisual
+  sunkColor: {r: 0.282353, g: 0.2392157, b: 0.5450981, a: 0.78431374}
+  spriteRenderers: []
 --- !u!1 &350013127 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 848280922992137714, guid: dfcac484d9b0f2c4186cdafefcbc3d4f, type: 3}
   m_PrefabInstance: {fileID: 1390752321}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &350013128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 350013127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25ccc6622fac07a43ab0bf07ac25571c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShipSunkVisual
+  sunkColor: {r: 0.282353, g: 0.2392157, b: 0.5450981, a: 0.78431374}
+  spriteRenderers: []
 --- !u!1 &427656931
 GameObject:
   m_ObjectHideFlags: 0
@@ -809,6 +854,20 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1263829521692743536, guid: 8ab4686ee715fb34bab587e53f4389a4, type: 3}
   m_PrefabInstance: {fileID: 1960386573}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &575830004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 575830003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25ccc6622fac07a43ab0bf07ac25571c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShipSunkVisual
+  sunkColor: {r: 0.282353, g: 0.2392157, b: 0.5450981, a: 0.78431374}
+  spriteRenderers: []
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -898,6 +957,20 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6318127187483486016, guid: 7a02c7ad08f75714299e92e31c3bb04d, type: 3}
   m_PrefabInstance: {fileID: 1809960544}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &629200449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 629200448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25ccc6622fac07a43ab0bf07ac25571c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShipSunkVisual
+  sunkColor: {r: 0.282353, g: 0.2392157, b: 0.5450981, a: 0.78431374}
+  spriteRenderers: []
 --- !u!1 &713795675
 GameObject:
   m_ObjectHideFlags: 0
@@ -939,6 +1012,7 @@ MonoBehaviour:
   startButton: {fileID: 1989277272}
   menuButton: {fileID: 0}
   tileHighlight: {fileID: 2146644454}
+  shotFeedback: {fileID: 2146644456}
 --- !u!4 &713795677
 Transform:
   m_ObjectHideFlags: 0
@@ -1008,6 +1082,20 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6318127187483486016, guid: 7a02c7ad08f75714299e92e31c3bb04d, type: 3}
   m_PrefabInstance: {fileID: 31028387}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &783075082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 783075081}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25ccc6622fac07a43ab0bf07ac25571c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShipSunkVisual
+  sunkColor: {r: 0.282353, g: 0.2392157, b: 0.5450981, a: 0.78431374}
+  spriteRenderers: []
 --- !u!1 &873264557
 GameObject:
   m_ObjectHideFlags: 0
@@ -1471,7 +1559,10 @@ PrefabInstance:
     - {fileID: 6407541464060616843, guid: 0cc63977f4aa99646b759784df7ff838, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 427064935715513441, guid: 0cc63977f4aa99646b759784df7ff838, type: 3}
+      insertIndex: 3
+      addedObject: {fileID: 235283098}
   m_SourcePrefab: {fileID: 100100000, guid: 0cc63977f4aa99646b759784df7ff838, type: 3}
 --- !u!1001 &1203599405
 PrefabInstance:
@@ -1484,6 +1575,10 @@ PrefabInstance:
     - target: {fileID: 427064935715513441, guid: 0cc63977f4aa99646b759784df7ff838, type: 3}
       propertyPath: m_Name
       value: Ship 3x1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6407541464060616843, guid: 0cc63977f4aa99646b759784df7ff838, type: 3}
+      propertyPath: shipLength
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7746250413930202504, guid: 0cc63977f4aa99646b759784df7ff838, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1528,7 +1623,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 427064935715513441, guid: 0cc63977f4aa99646b759784df7ff838, type: 3}
+      insertIndex: 4
+      addedObject: {fileID: 1680750647}
   m_SourcePrefab: {fileID: 100100000, guid: 0cc63977f4aa99646b759784df7ff838, type: 3}
 --- !u!1 &1289383894
 GameObject:
@@ -1676,7 +1774,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 848280922992137714, guid: dfcac484d9b0f2c4186cdafefcbc3d4f, type: 3}
+      insertIndex: 4
+      addedObject: {fileID: 350013128}
   m_SourcePrefab: {fileID: 100100000, guid: dfcac484d9b0f2c4186cdafefcbc3d4f, type: 3}
 --- !u!1 &1490518236
 GameObject:
@@ -1774,6 +1875,20 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 427064935715513441, guid: 0cc63977f4aa99646b759784df7ff838, type: 3}
   m_PrefabInstance: {fileID: 1203599405}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1680750647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1680750646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25ccc6622fac07a43ab0bf07ac25571c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShipSunkVisual
+  sunkColor: {r: 0.282353, g: 0.2392157, b: 0.5450981, a: 0.78431374}
+  spriteRenderers: []
 --- !u!1001 &1809960544
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1782,6 +1897,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 769952238167827370, guid: 7a02c7ad08f75714299e92e31c3bb04d, type: 3}
+      propertyPath: shipLength
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 4162302205747103401, guid: 7a02c7ad08f75714299e92e31c3bb04d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.1
@@ -1829,7 +1948,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6318127187483486016, guid: 7a02c7ad08f75714299e92e31c3bb04d, type: 3}
+      insertIndex: 4
+      addedObject: {fileID: 629200449}
   m_SourcePrefab: {fileID: 100100000, guid: 7a02c7ad08f75714299e92e31c3bb04d, type: 3}
 --- !u!1 &1906720048
 GameObject:
@@ -1934,6 +2056,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ship 2x1
       objectReference: {fileID: 0}
+    - target: {fileID: 5515522000868053914, guid: 8ab4686ee715fb34bab587e53f4389a4, type: 3}
+      propertyPath: shipLength
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 9216351376407574169, guid: 8ab4686ee715fb34bab587e53f4389a4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6.72
@@ -1977,7 +2103,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1263829521692743536, guid: 8ab4686ee715fb34bab587e53f4389a4, type: 3}
+      insertIndex: 4
+      addedObject: {fileID: 575830004}
   m_SourcePrefab: {fileID: 100100000, guid: 8ab4686ee715fb34bab587e53f4389a4, type: 3}
 --- !u!1 &1989277272
 GameObject:
@@ -2179,7 +2308,10 @@ PrefabInstance:
     - {fileID: 5515522000868053914, guid: 8ab4686ee715fb34bab587e53f4389a4, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1263829521692743536, guid: 8ab4686ee715fb34bab587e53f4389a4, type: 3}
+      insertIndex: 3
+      addedObject: {fileID: 206163041}
   m_SourcePrefab: {fileID: 100100000, guid: 8ab4686ee715fb34bab587e53f4389a4, type: 3}
 --- !u!1 &2062290015
 GameObject:
@@ -2221,6 +2353,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2146644455}
+  - component: {fileID: 2146644457}
+  - component: {fileID: 2146644456}
   - component: {fileID: 2146644454}
   - component: {fileID: 2146644453}
   m_Layer: 0
@@ -2278,6 +2412,42 @@ Transform:
   - {fileID: 1906720050}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2146644456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2146644452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2880ae84a9f70d9479015e549025b0e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShotFeedbackManager
+  fireEffectPrefab: {fileID: 0}
+  missEffectPrefab: {fileID: 5428745536694032167, guid: 4ccd0aa1c8addbf41993c0b85f7adfb5, type: 3}
+  hitEffectPrefab: {fileID: 5428745536694032167, guid: cf9e5bf8083f4554ab96bba3eca480cf, type: 3}
+  sinkEffectPrefab: {fileID: 6473849874441552144, guid: b8a21826a85210e42b874e67cf87cd8a, type: 3}
+  boardShake: {fileID: 2146644457}
+  hitShakeDuration: 0.12
+  hitShakeMagnitude: 0.08
+  sinkShakeDuration: 0.2
+  sinkShakeMagnitude: 0.14
+--- !u!114 &2146644457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2146644452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1be8db58028cfa4caa894ee970809ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BoardShake
+  shakeTarget: {fileID: 519420032}
+  defaultDuration: 0.12
+  defaultMagnitude: 0.08
 --- !u!1001 &5108529714992156398
 PrefabInstance:
   m_ObjectHideFlags: 0

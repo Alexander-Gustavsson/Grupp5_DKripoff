@@ -2,17 +2,24 @@ using UnityEngine;
 
 public class ShotFeedbackManager : MonoBehaviour
 {
-
+    [SerializeField] private GameObject fireEffectPrefab;
     [SerializeField] private GameObject missEffectPrefab;
     [SerializeField] private GameObject hitEffectPrefab;
     [SerializeField] private GameObject sinkEffectPrefab;
-
 
     [SerializeField] private BoardShake boardShake;
     [SerializeField] private float hitShakeDuration = 0.12f;
     [SerializeField] private float hitShakeMagnitude = 0.08f;
     [SerializeField] private float sinkShakeDuration = 0.2f;
     [SerializeField] private float sinkShakeMagnitude = 0.14f;
+
+    public void PlayFire(Vector2 position)
+    {
+        if (fireEffectPrefab != null)
+        {
+            Instantiate(fireEffectPrefab, position, Quaternion.identity);
+        }
+    }
 
     public void PlayMiss(Vector2 position)
     {

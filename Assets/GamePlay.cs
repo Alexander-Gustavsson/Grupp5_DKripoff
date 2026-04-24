@@ -23,6 +23,7 @@ public class GamePlay : MonoBehaviour
     List<Vector2> guessedPos = new List<Vector2>();
     List<GameObject> activeShips = new List<GameObject>();
     private InputClick clickScript;
+    [SerializeField] private ShotFeedbackManager shotFeedback;
 
     List<GameObject> placedShips = new List<GameObject>();
 
@@ -49,21 +50,38 @@ public class GamePlay : MonoBehaviour
         {
             return;
         }
+        //anim:
+        if (shotFeedback != null) shotFeedback.PlayFire(gridPos);
         GameObject ship = AI.TakeHit(gridPos);
-
+       
         if (ship != null)
         {
             SpawnHitShipSprite(gridPos);
             if (AI.IsShipGone(ship, gridPos))
             {
+                //anim:
+                ShipSunkVisual sunkVisual = ship.GetComponent<ShipSunkVisual>();
+                if (sunkVisual != null)
+                {
+                    sunkVisual.MarkAsSunk();
+                }
+
+                if (shotFeedback != null) shotFeedback.PlaySink(gridPos);
+
                 if (AI.AllShipsFound())
                 {
                     Win();
                 }
             }
+            else
+            {
+                if (shotFeedback != null) shotFeedback.PlayHit(gridPos);
+            }
+
             return;
         }
         SpawnMissSprite(gridPos);
+        if (shotFeedback != null) shotFeedback.PlayMiss(gridPos);
         clickScript.canClick = false;
 
         Invoke("MakeAIMove", 0.5f);
@@ -80,6 +98,7 @@ public class GamePlay : MonoBehaviour
     {
         Vector2 hitPos = AI.MakeMove();
 
+        if (shotFeedback != null) shotFeedback.PlayFire(hitPos);
         foreach (GameObject ship in activeShips)
         {
             if (ship.GetComponent<ShipShape>().IsShipHit(hitPos))
@@ -92,8 +111,22 @@ public class GamePlay : MonoBehaviour
                     //code here if entire ship is hit
                     activeShips.Remove(ship);
                     AI.ClearTargets();
+
+                    //anim:
+                    ShipSunkVisual sunkVisual = ship.GetComponent<ShipSunkVisual>();
+                    if (sunkVisual != null)
+                    {
+                        sunkVisual.MarkAsSunk();
+                    }
+
+                    SpawnHitShipSprite(hitPos);
+                    if (shotFeedback != null) shotFeedback.PlaySink(hitPos);
                 }
-                SpawnHitShipSprite(hitPos);
+                else
+                {
+                    SpawnHitShipSprite(hitPos);
+                    if (shotFeedback != null) shotFeedback.PlayHit(hitPos);
+                }
 
                 if (AllPlayerShipFound())
                 {
@@ -107,6 +140,8 @@ public class GamePlay : MonoBehaviour
         }
 
         SpawnMissSprite(hitPos);
+        if (shotFeedback != null) shotFeedback.PlayMiss(hitPos);
+
         MakePlayerMove();
     }
 
