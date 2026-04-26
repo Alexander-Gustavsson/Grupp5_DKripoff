@@ -24,6 +24,7 @@ public class GamePlay : MonoBehaviour
     List<GameObject> activeShips = new List<GameObject>();
     private InputClick clickScript;
     [SerializeField] private ShotFeedbackManager shotFeedback;
+    [SerializeField] private TurnIndicatorUI turnIndicatorUI;
 
     List<GameObject> placedShips = new List<GameObject>();
 
@@ -43,6 +44,11 @@ public class GamePlay : MonoBehaviour
         if (tileHighlight != null)
         {
             tileHighlight.ShowHighlight(gridPos);
+        }
+        //anim:
+        if (turnIndicatorUI != null)
+        {
+            turnIndicatorUI.ShowPlayerTurn();
         }
 
         // Handle reclick
@@ -81,8 +87,13 @@ public class GamePlay : MonoBehaviour
             return;
         }
         SpawnMissSprite(gridPos);
+        //aanimation:
         if (shotFeedback != null) shotFeedback.PlayMiss(gridPos);
         clickScript.canClick = false;
+        if (turnIndicatorUI != null)
+        {
+            turnIndicatorUI.ShowEnemyTurn();
+        }
 
         Invoke("MakeAIMove", 0.5f);
 
@@ -95,7 +106,12 @@ public class GamePlay : MonoBehaviour
     }
 
     private void MakeAIMove()
+
     {
+        if (turnIndicatorUI != null)
+        {
+            turnIndicatorUI.ShowEnemyTurn();
+        }
         Vector2 hitPos = AI.MakeMove();
 
         if (shotFeedback != null) shotFeedback.PlayFire(hitPos);
@@ -146,8 +162,14 @@ public class GamePlay : MonoBehaviour
     }
 
     private void MakePlayerMove()
+
     {
+        if (turnIndicatorUI != null)
+        {
+            turnIndicatorUI.ShowPlayerTurn();
+        }
         clickScript.canClick = true;
+        
     }
 
     private void PlaceShips()
