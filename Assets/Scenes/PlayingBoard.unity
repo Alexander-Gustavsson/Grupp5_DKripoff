@@ -939,8 +939,6 @@ MonoBehaviour:
   startButton: {fileID: 1989277272}
   menuButton: {fileID: 0}
   tileHighlight: {fileID: 2146644454}
-  shotFeedback: {fileID: 0}
-  turnIndicatorUI: {fileID: 0}
 --- !u!4 &713795677
 Transform:
   m_ObjectHideFlags: 0
@@ -1786,11 +1784,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4162302205747103401, guid: 7a02c7ad08f75714299e92e31c3bb04d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.09
+      value: 3.1
       objectReference: {fileID: 0}
     - target: {fileID: 4162302205747103401, guid: 7a02c7ad08f75714299e92e31c3bb04d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.46
+      value: 0.04884
       objectReference: {fileID: 0}
     - target: {fileID: 4162302205747103401, guid: 7a02c7ad08f75714299e92e31c3bb04d, type: 3}
       propertyPath: m_LocalPosition.z
