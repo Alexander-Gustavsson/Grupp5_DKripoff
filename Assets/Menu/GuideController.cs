@@ -11,7 +11,8 @@ public class GuideController : MonoBehaviour
     public enum GuideName
     {
         PLACE_SHIPS,
-        DRAG_SHIPS
+        SHOOT_SHIPS,
+        ROTATE_SHIPS
     }
     public static List<GuideName> activeGuides = new List<GuideName>();
     // The dictionary allows for retrieving data about each specific guide.
@@ -27,10 +28,15 @@ public class GuideController : MonoBehaviour
         }
     }
 
-    public void TriggerGuide(GuideName guide)
+    public static void TriggerGuide(GuideName guide)
     {
+        foreach (var item in activeGuides)
+        {
+            print(item);
+        }
         if (activeGuides.Contains(guide))
         {
+
             OnGuideActive.Invoke(guide);
         }
     }

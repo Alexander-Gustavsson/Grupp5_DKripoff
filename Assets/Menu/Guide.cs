@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Guide : MonoBehaviour
 {
@@ -11,9 +12,21 @@ public class Guide : MonoBehaviour
 
     private void ActivateGuide(GuideController.GuideName obj)
     {
-        if (name == obj) 
+        if (name == obj)
+        {
+            GetComponent<Image>().enabled = true;
+            transform.GetChild(0).gameObject.SetActive(true);
+        } else if(GetComponent<Image>().enabled == true)
+        {
+            Disable();
+        }
+    }
 
+    public void Disable()
+    {
+        GuideController.activeGuides.Remove(name);
 
-        throw new System.NotImplementedException();
+        GetComponent<Image>().enabled = false;
+        transform.GetChild(0).gameObject.SetActive(false);
     }
 }

@@ -123,6 +123,8 @@ public class DragDrop : MonoBehaviour
 
     public void RotateShip()
     {
+        GuideController.TriggerGuide(GuideController.GuideName.SHOOT_SHIPS);
+
         Vector3 pos = transform.position;
         transform.Rotate(0, 0, 90);
         Physics2D.SyncTransforms(); // Utan denna rad använder isValid nedan den tidigare rotationen.
@@ -181,6 +183,8 @@ public class DragDrop : MonoBehaviour
     //snapping
     private Vector3 Snap(Vector3 pos)
     {
+        GuideController.TriggerGuide(GuideController.GuideName.ROTATE_SHIPS);
+
         float x = Mathf.Round(pos.x);
         float y = Mathf.Round(pos.y);
 

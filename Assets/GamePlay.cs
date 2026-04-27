@@ -31,6 +31,12 @@ public class GamePlay : MonoBehaviour
         activeShips.AddRange(ships);
         placedShips.AddRange(activeShips);
         PlaceShips();
+        Invoke("PlaceGuide", 0f);
+    }
+
+    private void PlaceGuide()
+    {
+        GuideController.TriggerGuide(GuideController.GuideName.PLACE_SHIPS);
     }
 
     public void AIGridPressed(Vector2 pressPos)
