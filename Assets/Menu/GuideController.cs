@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GuideController : MonoBehaviour
 {
-    public static bool firstRun = true;
+    public static bool guidesOn = false;
 
     public static event Action<GuideName> OnGuideActive;
 
@@ -21,10 +21,9 @@ public class GuideController : MonoBehaviour
 
     private void Start()
     {
-        if (firstRun)
+        if (guidesOn)
         {
             AddGuides();
-            firstRun = false;
         }
     }
 
@@ -50,10 +49,12 @@ public class GuideController : MonoBehaviour
 
     public void ToggleGuides()
     {
-        if (activeGuides.Count > 0) activeGuides.Clear();
+        if (activeGuides.Count > 0)
+        {
+            activeGuides.Clear();
+            guidesOn = false;
+        }
 
         else AddGuides();
-
-        print(activeGuides.Count);
     }
 }
