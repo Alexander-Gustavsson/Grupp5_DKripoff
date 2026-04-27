@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 // using UnityEditor;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 // using static UnityEditor.PlayerSettings;
 
 
@@ -14,6 +15,8 @@ public class AI : MonoBehaviour
     //lista för ai:n att fortsätta jaga skepp
     List<Vector2> nextAIMove = new List<Vector2>();
     private Vector2 continueDir;
+
+    private Vector2 lastPos;
 
     private void Awake()
     {
@@ -93,6 +96,82 @@ public class AI : MonoBehaviour
         return pos;
     }
 
+    public Vector2 HardAIMakeMove()
+    {
+        Vector2 tryPos = DiagonalPos();
+
+
+        //ta första i listan sen fortsätt
+        Vector2 pos;
+        if (nextAIMove.Count > 0)
+        {
+            pos = nextAIMove[0];
+            nextAIMove.RemoveAt(0); //removeat tar bort från listan
+        }
+
+
+        //ny ai
+        //ny logik för svår ai, först lägger ut random sen fortsätter diagonalt tills utanför grid, ny random
+        
+
+        else if (lastPos.x < 0.5f || lastPos.y < 0.5f)
+        {
+            pos = RandomPositionPlayer();
+        }
+        else if (tryPos != Vector2.zero)
+        {
+            pos = tryPos;
+        }
+        else
+        {
+            pos = RandomPositionPlayer();
+        }
+
+
+        lastPos = pos;
+        //ny ai
+
+        if (guessed.Contains(pos))
+        {
+            return HardAIMakeMove();
+        }
+
+        guessed.Add(pos);
+        return pos;
+    }
+
+    private Vector2 DiagonalPos()
+    {
+        List<Vector2> positions = new List<Vector2>();
+        positions.Add(lastPos + new Vector2(1, 1));
+        positions.Add(lastPos + new Vector2(-1, 1));
+        positions.Add(lastPos + new Vector2(1, -1));
+        positions.Add(lastPos + new Vector2(-1, -1));
+
+        for (int i = 0; i < positions.Count; i++)
+        {
+            Vector2 temp = positions[i];
+            int randomIndex = Random.Range(i, positions.Count);
+            positions[i] = positions[randomIndex];
+            positions[randomIndex] = temp;
+        }
+
+
+        foreach (Vector2 tryPos in positions)
+        {
+            if (guessed.Contains(tryPos))
+            {
+                continue;
+            }
+            if (tryPos.x <= 8.5f && tryPos.y <= 8.5f && tryPos.x >= 0.5f && tryPos.y >= 0.5f)
+            {
+                return tryPos;
+            }
+        }
+        return Vector2.zero;
+    }
+
+
 
     //metod för att samla på nya attacker
     public void AddNextTargets(Vector2 hitPos)
@@ -105,7 +184,7 @@ public class AI : MonoBehaviour
         for (int i = 0; i < nextDirection.Length; i++)
         {
                
-            Vector2 dir = nextDirection[Random.Range(0, nextDirection.Length - 1)];
+            Vector2 dir = nextDirection[Random.Range(0, nextDirection.Length)];
             Vector2 nextTarget = hitPos + dir;
 
             if (nextTarget.x >= 1 && nextTarget.x <= 8 && nextTarget.y >= 1 && nextTarget.y <= 8)

@@ -148,21 +148,12 @@ public class DragDrop : MonoBehaviour
     public bool isValid() //ny metod för att true false om ship är i grid
     {
 
+        Vector3 pos = transform.position;
 
-        if (collider.Overlap(shipFilter, new Collider2D[1]) == 0)
+        if (collider.Overlap(shipFilter, new Collider2D[1]) == 0 && pos.x > 0.5f && pos.x < 8.5f && pos.y > 0.5f && pos.y < 8.5f)
         {
             return true;
         }
-        
-
-        //for (int i = 0; i < ship.shapePoints; i++)
-        //{
-        //    Vector3 pos = transform.GetChild(i).position;
-        //    if (pos.x < 0.5f || pos.x > 8.5f || pos.y < 0.5f || pos.y > 8.5f)
-        //    { 
-        //        return false;
-        //    }
-        //}
 
         return false;
     }

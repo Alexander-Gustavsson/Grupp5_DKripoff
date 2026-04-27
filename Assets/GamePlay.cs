@@ -112,7 +112,7 @@ public class GamePlay : MonoBehaviour
         {
             turnIndicatorUI.ShowEnemyTurn();
         }
-        Vector2 hitPos = AI.MakeMove();
+        Vector2 hitPos = AI.HardAIMakeMove();
 
         if (shotFeedback != null) shotFeedback.PlayFire(hitPos);
         foreach (GameObject ship in activeShips)
@@ -168,6 +168,7 @@ public class GamePlay : MonoBehaviour
         {
             turnIndicatorUI.ShowPlayerTurn();
         }
+
         clickScript.canClick = true;
         
     }
