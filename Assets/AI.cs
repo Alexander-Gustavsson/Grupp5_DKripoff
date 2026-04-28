@@ -18,6 +18,7 @@ public class AI : MonoBehaviour
     private Vector2 continueDir;
     public bool isAttacking;
     public bool foundDir;
+    public int counter = 0;
     public Vector2 firstHit, secondHit;
     public bool switchDir;
 
