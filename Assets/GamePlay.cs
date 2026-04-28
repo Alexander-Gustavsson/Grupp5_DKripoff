@@ -120,12 +120,30 @@ public class GamePlay : MonoBehaviour
             if (ship.GetComponent<ShipShape>().IsShipHit(hitPos))
             {
                 //ain lägger till rutorna nära skeppet om det finns (första prioritet)
-                AI.AddNextTargets(hitPos);
+                AI.isAttacking = true;
+                AI.counter += 1;
+                if (AI.counter == 1)
+                {
+                    AI.AddNextTargets(hitPos);
+                }
+
+                if (AI.counter == 1)
+                {
+                    AI.firstHit = hitPos;
+                }
+                else if (AI.counter == 2)
+                {
+                    AI.ClearTargets();
+                    AI.secondHit = hitPos;
+                }
 
                 if (ship.GetComponent<ShipShape>().IsShipGone())
                 {
-                    //code here if entire ship is hit
+                    //code here if entire ship is gone
                     activeShips.Remove(ship);
+                    AI.isAttacking = false;
+                    AI.counter = 0;
+                    AI.foundDir = false;
                     AI.ClearTargets();
 
                     //anim:
@@ -142,6 +160,11 @@ public class GamePlay : MonoBehaviour
                 {
                     SpawnHitShipSprite(hitPos);
                     if (shotFeedback != null) shotFeedback.PlayHit(hitPos);
+
+                    if (AI.counter >= 2)
+                    {
+                        AI.switchDir = true;
+                    }
                 }
 
                 if (AllPlayerShipFound())

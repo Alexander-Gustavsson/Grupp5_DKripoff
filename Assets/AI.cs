@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 // using UnityEditor;
 using UnityEngine;
+using UnityEngine.UIElements;
 using static UnityEditor.PlayerSettings;
 // using static UnityEditor.PlayerSettings;
 
@@ -15,6 +16,10 @@ public class AI : MonoBehaviour
     //lista för ai:n att fortsätta jaga skepp
     List<Vector2> nextAIMove = new List<Vector2>();
     private Vector2 continueDir;
+    public bool isAttacking;
+    public bool foundDir;
+    public Vector2 firstHit, secondHit;
+    public bool switchDir;
 
     private Vector2 lastPos;
 
@@ -74,6 +79,7 @@ public class AI : MonoBehaviour
 
     public Vector2 MakeMove()
     {
+        Vector2 tryPos = DiagonalPos();
 
         //ta första i listan sen fortsätt
         Vector2 pos;
@@ -99,20 +105,43 @@ public class AI : MonoBehaviour
     public Vector2 HardAIMakeMove()
     {
         Vector2 tryPos = DiagonalPos();
-
+        Vector2 pos = Vector2.zero;
 
         //ta första i listan sen fortsätt
-        Vector2 pos;
         if (nextAIMove.Count > 0)
         {
             pos = nextAIMove[0];
             nextAIMove.RemoveAt(0); //removeat tar bort från listan
         }
+        else if (counter == 2 && !foundDir)
+        {
+            FindDirection(firstHit, secondHit);
+            foundDir = true;
+            pos = secondHit + continueDir;
+        }
+        else if (foundDir && isAttacking)
+        {
+            if (switchDir == true || pos.x < 1 || pos.x > 8 || pos.y < 1 || pos.y > 8)
+            {
+                continueDir *= -1;
+                switchDir = false;
+                nextAIMove.Add(firstHit + continueDir);
+            }
+            else
+            {
+                nextAIMove.Add(lastPos + continueDir);
+            }
+
+            if (nextAIMove.Count > 0)
+            {
+                pos = nextAIMove[0];
+                nextAIMove.RemoveAt(0);
+            }
+        }
 
 
         //ny ai
         //ny logik för svår ai, först lägger ut random sen fortsätter diagonalt tills utanför grid, ny random
-        
 
         else if (lastPos.x < 0.5f || lastPos.y < 0.5f)
         {
@@ -131,9 +160,9 @@ public class AI : MonoBehaviour
         lastPos = pos;
         //ny ai
 
-        if (guessed.Contains(pos))
+        while (guessed.Contains(pos))
         {
-            return HardAIMakeMove();
+            pos = RandomPositionPlayer();
         }
 
         guessed.Add(pos);
@@ -148,14 +177,7 @@ public class AI : MonoBehaviour
         positions.Add(lastPos + new Vector2(1, -1));
         positions.Add(lastPos + new Vector2(-1, -1));
 
-        for (int i = 0; i < positions.Count; i++)
-        {
-            Vector2 temp = positions[i];
-            int randomIndex = Random.Range(i, positions.Count);
-            positions[i] = positions[randomIndex];
-            positions[randomIndex] = temp;
-        }
-
+        positions = RandomizeList(positions);
 
         foreach (Vector2 tryPos in positions)
         {
@@ -171,21 +193,34 @@ public class AI : MonoBehaviour
         return Vector2.zero;
     }
 
+    private List<Vector2> RandomizeList(List<Vector2> list)
+    {
+        for (int i = 0; i < list.Count; i++)
+        {
+            Vector2 temp = list[i];
+            int randomIndex = Random.Range(i, list.Count);
+            list[i] = list[randomIndex];
+            list[randomIndex] = temp;
+        }
+        return list;
+    }
 
 
     //metod för att samla på nya attacker
     public void AddNextTargets(Vector2 hitPos)
     {
-        Vector2[] nextDirection =
-        {
-            Vector2.up, Vector2.down, Vector2.left, Vector2.right //kordinaterna nära skeppet
-        };
 
-        for (int i = 0; i < nextDirection.Length; i++)
+        List<Vector2> nextDirection = new List<Vector2>(); //kordinater nära skeppet
+        nextDirection.Add(Vector2.up);
+        nextDirection.Add(Vector2.down);
+        nextDirection.Add(Vector2.right);
+        nextDirection.Add(Vector2.left);
+
+        nextDirection = RandomizeList(nextDirection);
+
+        for (int i = 0; i < nextDirection.Count; i++)
         {
-               
-            Vector2 dir = nextDirection[Random.Range(0, nextDirection.Length)];
-            Vector2 nextTarget = hitPos + dir;
+            Vector2 nextTarget = hitPos + nextDirection[i];
 
             if (nextTarget.x >= 1 && nextTarget.x <= 8 && nextTarget.y >= 1 && nextTarget.y <= 8)
             {
@@ -194,9 +229,17 @@ public class AI : MonoBehaviour
                     nextAIMove.Add(nextTarget);
                 }
             }
-
         }
-       
+    }
+
+
+
+    public void FindDirection(Vector2 firstHit, Vector2 secondHit)
+    {
+        continueDir = firstHit + Vector2.down == secondHit ? Vector2.down
+            : firstHit + Vector2.up == secondHit ? Vector2.up
+            : firstHit + Vector2.right == secondHit ? Vector2.right
+            : Vector2.left;
     }
 
     public void ClearTargets()
