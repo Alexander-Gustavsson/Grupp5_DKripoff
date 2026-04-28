@@ -226,7 +226,13 @@ public class AI : MonoBehaviour
 
             foreach (Vector2 pos in ship.GetComponent<ShipShape>().GetShipPositions())
             {
-                if (checkShip.GetComponent<ShipShape>().GetShipPositions().Contains(pos) || pos.x < -8 || pos.x > -1 || pos.y < 1 || pos.y > 8)
+                List<Vector2> temp = checkShip.GetComponent<ShipShape>().GetShipPositions();
+                if (temp.Contains(pos) 
+                    || pos.x < -8 || pos.x > -1 || pos.y < 1 || pos.y > 8
+                    || temp.Contains(pos + Vector2.down)
+                    || temp.Contains(pos + Vector2.up)
+                    || temp.Contains(pos + Vector2.left)
+                    || temp.Contains(pos + Vector2.right))
                 {
                     return false;
                 }
