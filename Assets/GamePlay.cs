@@ -160,11 +160,6 @@ public class GamePlay : MonoBehaviour
                 {
                     SpawnHitShipSprite(hitPos);
                     if (shotFeedback != null) shotFeedback.PlayHit(hitPos);
-
-                    if (AI.counter >= 2)
-                    {
-                        AI.switchDir = true;
-                    }
                 }
 
                 if (AllPlayerShipFound())
@@ -180,6 +175,11 @@ public class GamePlay : MonoBehaviour
 
         SpawnMissSprite(hitPos);
         if (shotFeedback != null) shotFeedback.PlayMiss(hitPos);
+
+        if (AI.isAttacking && AI.foundDir)
+        {
+            AI.switchDir = true;
+        }
 
         MakePlayerMove();
     }

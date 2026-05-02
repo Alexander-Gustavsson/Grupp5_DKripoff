@@ -122,7 +122,7 @@ public class AI : MonoBehaviour
         }
         else if (foundDir && isAttacking)
         {
-            if (switchDir == true || pos.x < 1 || pos.x > 8 || pos.y < 1 || pos.y > 8)
+            if (switchDir == true || !nextPosValid(lastPos + continueDir))
             {
                 continueDir *= -1;
                 switchDir = false;
@@ -182,11 +182,7 @@ public class AI : MonoBehaviour
 
         foreach (Vector2 tryPos in positions)
         {
-            if (guessed.Contains(tryPos))
-            {
-                continue;
-            }
-            if (tryPos.x <= 8.5f && tryPos.y <= 8.5f && tryPos.x >= 0.5f && tryPos.y >= 0.5f)
+            if (nextPosValid(tryPos))
             {
                 return tryPos;
             }
@@ -223,14 +219,23 @@ public class AI : MonoBehaviour
         {
             Vector2 nextTarget = hitPos + nextDirection[i];
 
-            if (nextTarget.x >= 1 && nextTarget.x <= 8 && nextTarget.y >= 1 && nextTarget.y <= 8)
+            if (nextPosValid(nextTarget))
             {
-                if (!guessed.Contains(nextTarget) && !nextAIMove.Contains(nextTarget))//kollar så inte skjuten eller inte är dubbletter
-                {
-                    nextAIMove.Add(nextTarget);
-                }
+                nextAIMove.Add(nextTarget);
             }
         }
+    }
+
+    private bool nextPosValid(Vector2 pos)
+    {
+        if (pos.x >= 1 && pos.x <= 8 && pos.y >= 1 && pos.y <= 8)
+        {
+            if (!guessed.Contains(pos) && !nextAIMove.Contains(pos))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
 
