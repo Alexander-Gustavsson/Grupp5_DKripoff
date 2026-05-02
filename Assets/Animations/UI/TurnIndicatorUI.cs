@@ -3,12 +3,20 @@ using UnityEngine;
 
 public class TurnIndicatorUI : MonoBehaviour
 {
-    [SerializeField] private Transform triangleTransform;
-    [SerializeField] private SpriteRenderer triangleRenderer;
+    [SerializeField] private GameObject playerTurnObject;
+    [SerializeField] private GameObject enemyTurnObject;
+
+    [Header("Positions")]
+    [SerializeField] private Vector3 playerPosition;
+    [SerializeField] private Vector3 enemyPosition;
 
     [Header("Colors")]
     [SerializeField] private Color playerColor = new Color(0.3f, 0.9f, 0.7f);
     [SerializeField] private Color enemyColor = new Color(1f, 0.5f, 0.2f);
+
+    //[Header("Rotations")]
+    //[SerializeField] private Vector3 playerRotation = new Vector3(0f, 0f, 90f);
+    //[SerializeField] private Vector3 enemyRotation = new Vector3(0f, 0f, -90f);
 
     [Header("Pulse")]
     [SerializeField] private float pulseDuration = 0.15f;
@@ -19,40 +27,32 @@ public class TurnIndicatorUI : MonoBehaviour
 
     private void Awake()
     {
-        if (triangleTransform == null)
-        {
-            triangleTransform = transform;
-        }
+        //if (triangleTransform == null)
+        //{
+        //    triangleTransform = transform;
+        //}
 
-        originalScale = triangleTransform.localScale;
+        originalScale = transform.localScale;
     }
 
     public void ShowPlayerTurn()
-    {
-        if (triangleTransform != null)
-        {
-            triangleTransform.localRotation = Quaternion.Euler(0f, 0f, 90f);
-        }
 
-        if (triangleRenderer != null)
-        {
-            triangleRenderer.color = playerColor;
-        }
+    {
+        transform.position = playerPosition;
+
+        if (playerTurnObject != null) playerTurnObject.SetActive(true);
+        if (enemyTurnObject != null) enemyTurnObject.SetActive(false);
 
         PlayPulse();
+
     }
 
     public void ShowEnemyTurn()
     {
-        if (triangleTransform != null)
-        {
-            triangleTransform.localRotation = Quaternion.Euler(0f, 0f, -90f);
-        }
+        transform.position = enemyPosition;
 
-        if (triangleRenderer != null)
-        {
-            triangleRenderer.color = enemyColor;
-        }
+        if (playerTurnObject != null) playerTurnObject.SetActive(false);
+        if (enemyTurnObject != null) enemyTurnObject.SetActive(true);
 
         PlayPulse();
     }
@@ -75,7 +75,7 @@ public class TurnIndicatorUI : MonoBehaviour
         while (time < pulseDuration)
         {
             float t = time / pulseDuration;
-            triangleTransform.localScale = Vector3.Lerp(originalScale, targetScale, t);
+            transform.localScale = Vector3.Lerp(originalScale, targetScale, t);
             time += Time.deltaTime;
             yield return null;
         }
@@ -84,11 +84,10 @@ public class TurnIndicatorUI : MonoBehaviour
         while (time < pulseDuration)
         {
             float t = time / pulseDuration;
-            triangleTransform.localScale = Vector3.Lerp(targetScale, originalScale, t);
+            transform.localScale = Vector3.Lerp(targetScale, originalScale, t);
             time += Time.deltaTime;
             yield return null;
         }
-
-        triangleTransform.localScale = originalScale;
+        transform.localScale = originalScale;
     }
 }
