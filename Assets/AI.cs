@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 // using UnityEditor;
 using UnityEngine;
+using UnityEngine.LowLevel;
 using UnityEngine.UIElements;
 using static UnityEditor.PlayerSettings;
 // using static UnityEditor.PlayerSettings;
@@ -80,23 +81,79 @@ public class AI : MonoBehaviour
 
     public Vector2 MakeMove()
     {
-        Vector2 tryPos = DiagonalPos();
+        switch (GameObject.Find("GameManager").GetComponent<GameManager>().spawnAI)
+        {
+            case 1:
+                print("Easy");
+                return EasyAIMakeMove();
+
+            case 2:
+                print("Medium");
+                return MediumAIMakeMove();
+
+            case 3:
+                print("Hard");
+                return HardAIMakeMove();
+
+            default:
+                return Vector2.zero;
+        }
+
+    }
+
+    private Vector2 EasyAIMakeMove()
+    {
+        Vector2 pos = RandomPositionPlayer();
+        while (!nextPosValid(pos))
+        {
+            pos = RandomPositionPlayer();
+        }
+        return pos;
+    }
+
+    private Vector2 MediumAIMakeMove()
+    {
+        Vector2 pos = Vector2.zero;
 
         //ta första i listan sen fortsätt
-        Vector2 pos;
         if (nextAIMove.Count > 0)
         {
             pos = nextAIMove[0];
             nextAIMove.RemoveAt(0); //removeat tar bort från listan
         }
+        else if (counter == 2 && !foundDir)
+        {
+            FindDirection(firstHit, secondHit);
+            foundDir = true;
+            pos = secondHit + continueDir;
+        }
+        else if (foundDir && isAttacking)
+        {
+            if (switchDir == true || !nextPosValid(lastPos + continueDir))
+            {
+                continueDir *= -1;
+                switchDir = false;
+                nextAIMove.Add(firstHit + continueDir);
+            }
+            else
+            {
+                nextAIMove.Add(lastPos + continueDir);
+            }
+
+            if (nextAIMove.Count > 0)
+            {
+                pos = nextAIMove[0];
+                nextAIMove.RemoveAt(0);
+            }
+        }
         else
         {
-             pos = RandomPositionPlayer();// ANNARS skjut slump
+            pos = RandomPositionPlayer();
         }
 
-        if (guessed.Contains(pos))
+        while (!nextPosValid(pos))
         {
-            return MakeMove();
+            pos = RandomPositionPlayer();
         }
 
         guessed.Add(pos);
@@ -140,8 +197,6 @@ public class AI : MonoBehaviour
             }
         }
 
-
-        //ny ai
         //ny logik för svår ai, först lägger ut random sen fortsätter diagonalt tills utanför grid, ny random
 
         else if (lastPos.x < 0.5f || lastPos.y < 0.5f)
@@ -161,7 +216,7 @@ public class AI : MonoBehaviour
         lastPos = pos;
         //ny ai
 
-        while (guessed.Contains(pos))
+        while (!nextPosValid(pos))
         {
             pos = RandomPositionPlayer();
         }

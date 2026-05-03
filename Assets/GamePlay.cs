@@ -112,7 +112,7 @@ public class GamePlay : MonoBehaviour
         {
             turnIndicatorUI.ShowEnemyTurn();
         }
-        Vector2 hitPos = AI.HardAIMakeMove();
+        Vector2 hitPos = AI.MakeMove();
 
         if (shotFeedback != null) shotFeedback.PlayFire(hitPos);
         foreach (GameObject ship in activeShips)

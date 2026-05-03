@@ -19,7 +19,7 @@ public class RankManager : MonoBehaviour
 
     private void UpdateRank()
     {
-        gameManager.rank = gameManager.rankPoints < 300 ? 1 : gameManager.rankPoints < 1000 ? 2 : 3;
+        gameManager.rank = gameManager.rankPoints < 200 ? 1 : gameManager.rankPoints < 500 ? 2 : 3;
 
         if (gameManager.rank != prevRank)
         {
@@ -35,7 +35,7 @@ public class RankManager : MonoBehaviour
         {
             case 1:
                 textRank.text = "Silver";
-                textRankPoints.text = gameManager.rankPoints + "/300";
+                textRankPoints.text = gameManager.rankPoints + "/200";
 
                 imagePanelRank1.SetActive(true);
                 imagePanelRank2.SetActive(false);
@@ -45,16 +45,13 @@ public class RankManager : MonoBehaviour
                 sliderRank.maxValue = 300;
                 sliderRank.minValue = 0;
 
-                gameManager.increaseRankPoints = 50;
-                gameManager.decreaseRankPoints = 10;
-
                 prevRank = 1;
 
                 break;
 
             case 2:
                 textRank.text = "Gold";
-                textRankPoints.text = gameManager.rankPoints + "/1000";
+                textRankPoints.text = gameManager.rankPoints + "/500";
 
                 imagePanelRank1.SetActive(false);
                 imagePanelRank2.SetActive(true);
@@ -63,12 +60,9 @@ public class RankManager : MonoBehaviour
                 imageRank2.SetActive(true);
                 imageRank3.SetActive(false);
 
-                sliderRank.maxValue = 1000;
-                sliderRank.minValue = 300;
+                sliderRank.maxValue = 500;
+                sliderRank.minValue = 200;
                 sliderRank.gameObject.SetActive(true);
-
-                gameManager.increaseRankPoints = 75;
-                gameManager.decreaseRankPoints = 20;
 
                 prevRank = gameManager.rank;
 
@@ -84,9 +78,6 @@ public class RankManager : MonoBehaviour
                 imageRank3.SetActive(true);
 
                 sliderRank.gameObject.SetActive(false);
-
-                gameManager.increaseRankPoints = 100;
-                gameManager.decreaseRankPoints = 30;
 
                 prevRank = 3;
 
