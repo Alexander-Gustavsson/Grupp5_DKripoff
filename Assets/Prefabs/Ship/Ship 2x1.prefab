@@ -214,6 +214,22 @@ PrefabInstance:
       propertyPath: shapePoints.Array.data[1].y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 52165813110421139, guid: 2c0b7a04b803673418b38450affcd16e, type: 3}
+      propertyPath: m_Size.x
+      value: 2.09
+      objectReference: {fileID: 0}
+    - target: {fileID: 52165813110421139, guid: 2c0b7a04b803673418b38450affcd16e, type: 3}
+      propertyPath: m_Size.y
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 52165813110421139, guid: 2c0b7a04b803673418b38450affcd16e, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -6075554297309627831, guid: bd0f2f3f33ccfa34f8ad3531199e074c, type: 3}
+    - target: {fileID: 52165813110421139, guid: 2c0b7a04b803673418b38450affcd16e, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1090326819170271570, guid: 2c0b7a04b803673418b38450affcd16e, type: 3}
       propertyPath: m_Name
       value: Ship 2x1
@@ -237,6 +253,22 @@ PrefabInstance:
     - target: {fileID: 6835592125746227892, guid: 2c0b7a04b803673418b38450affcd16e, type: 3}
       propertyPath: m_Offset.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6835592125746227892, guid: 2c0b7a04b803673418b38450affcd16e, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 2.09
+      objectReference: {fileID: 0}
+    - target: {fileID: 6835592125746227892, guid: 2c0b7a04b803673418b38450affcd16e, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6835592125746227892, guid: 2c0b7a04b803673418b38450affcd16e, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 2.09
+      objectReference: {fileID: 0}
+    - target: {fileID: 6835592125746227892, guid: 2c0b7a04b803673418b38450affcd16e, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7011144235120894139, guid: 2c0b7a04b803673418b38450affcd16e, type: 3}
       propertyPath: m_LocalPosition.x

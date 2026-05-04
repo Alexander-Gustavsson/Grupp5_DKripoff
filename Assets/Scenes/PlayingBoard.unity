@@ -977,7 +977,7 @@ MonoBehaviour:
   missSprite: {fileID: 5428745536694032167, guid: 4ccd0aa1c8addbf41993c0b85f7adfb5, type: 3}
   hitShipSprite: {fileID: 5428745536694032167, guid: cf9e5bf8083f4554ab96bba3eca480cf, type: 3}
   startButton: {fileID: 1989277272}
-  menuButton: {fileID: 0}
+  menuButton: {fileID: 873264557}
   tileHighlight: {fileID: 2146644454}
   shotFeedback: {fileID: 0}
   turnIndicatorUI: {fileID: 0}
@@ -3217,6 +3217,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 4121504306347222959, guid: ce3694cc8b4177b46924e7b704144a3e, type: 3}
+      propertyPath: missSprite
+      value: 
+      objectReference: {fileID: 5428745536694032167, guid: 4ccd0aa1c8addbf41993c0b85f7adfb5, type: 3}
     - target: {fileID: 5110648756990115450, guid: ce3694cc8b4177b46924e7b704144a3e, type: 3}
       propertyPath: ships.Array.size
       value: 4
