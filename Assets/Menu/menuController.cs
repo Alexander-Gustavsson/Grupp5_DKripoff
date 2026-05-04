@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -5,10 +6,8 @@ public class menuController : MonoBehaviour
 {
     [SerializeField] private GameObject rankPanel;
 
-    //private void Start()
-    //{
-    //    AudioManager.PlaySound(SoundType.AMBIANCE, 0.6f);
-    //}
+
+
     public void LoadGame()
     {
         GameObject.Find("AudioManager").GetComponent<Music>().SmoothSound(0.3f, 2f);
@@ -25,4 +24,6 @@ public class menuController : MonoBehaviour
     {
         rankPanel.SetActive(false);
     }
+
+
 }
