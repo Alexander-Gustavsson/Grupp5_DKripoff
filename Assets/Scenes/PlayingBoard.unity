@@ -3649,9 +3649,9 @@ MonoBehaviour:
   sinkShakeMagnitude: 0.14
   audioSource: {fileID: 2146644457}
   fireSfx: {fileID: 0}
-  missSfx: {fileID: 0}
-  hitSfx: {fileID: 0}
-  sinkSfx: {fileID: 0}
+  missSfx: {fileID: 8300000, guid: c153ecab368b9054bbac56ff2264cb7f, type: 3}
+  hitSfx: {fileID: 8300000, guid: 8dfcdea7f61943f4d95396629ae0f0cd, type: 3}
+  sinkSfx: {fileID: 8300000, guid: 7c2e01e8db62782469f23fbd6bbb043a, type: 3}
 --- !u!114 &2146644459
 MonoBehaviour:
   m_ObjectHideFlags: 0
