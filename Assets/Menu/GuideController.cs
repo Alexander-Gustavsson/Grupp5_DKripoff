@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GuideController : MonoBehaviour
 {
-    public static bool guidesOn = false;
+    public static bool guidesOn = true;
 
     public static event Action<GuideName> OnGuideActive;
 
@@ -29,10 +29,6 @@ public class GuideController : MonoBehaviour
 
     public static void TriggerGuide(GuideName guide)
     {
-        foreach (var item in activeGuides)
-        {
-            print(item);
-        }
         if (activeGuides.Contains(guide))
         {
 
