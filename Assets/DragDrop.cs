@@ -137,7 +137,7 @@ public class DragDrop : MonoBehaviour
         }
     }
 
-    private bool isValid() //ny metod för att true false om ship är i grid
+    public bool isValid() //ny metod för att true false om ship är i grid
     {
 
 
