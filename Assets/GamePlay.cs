@@ -17,8 +17,10 @@ public class GamePlay : MonoBehaviour
     //[SerializeField] private GameManager gameManager;
 
 
-    //Animations:
+    //Animations: 
     [SerializeField] private TileHighlight tileHighlight;
+
+
     List<Vector2> missedPos = new List<Vector2>();
     List<Vector2> guessedPos = new List<Vector2>();
     List<GameObject> activeShips = new List<GameObject>();
@@ -49,6 +51,12 @@ public class GamePlay : MonoBehaviour
         if (turnIndicatorUI != null)
         {
             turnIndicatorUI.ShowPlayerTurn();
+        }
+
+        //Animations:
+        if (tileHighlight != null)
+        {
+            tileHighlight.ShowHighlight(gridPos);
         }
 
         // Handle reclick
@@ -103,6 +111,8 @@ public class GamePlay : MonoBehaviour
             Win();
             return;
         }
+
+    
     }
 
     private void MakeAIMove()
@@ -119,7 +129,7 @@ public class GamePlay : MonoBehaviour
         {
             if (ship.GetComponent<ShipShape>().IsShipHit(hitPos))
             {
-                //ain lägger till rutorna nära skeppet om det finns (första prioritet)
+                //ain lï¿½gger till rutorna nï¿½ra skeppet om det finns (fï¿½rsta prioritet)
                 AI.isAttacking = true;
                 AI.counter += 1;
                 if (AI.counter == 1)
@@ -214,7 +224,7 @@ public class GamePlay : MonoBehaviour
         startButton.GetComponent<Button>().interactable = true;
     }
 
-    // Körs efter man har placerat ut alla skepp, måste kallas på med ex en knapp
+    // Kï¿½rs efter man har placerat ut alla skepp, mï¿½ste kallas pï¿½ med ex en knapp
     public void StartGamePlay()
     {
         startButton.SetActive(false);
@@ -251,13 +261,13 @@ public class GamePlay : MonoBehaviour
         return activeShips.Count == 0 ? true : false;
     }
 
-    // Kan lägga till saker här om spelaren förlorar
+    // Kan lï¿½gga till saker hï¿½r om spelaren fï¿½rlorar
     public void Lose()
     {
         GameObject.Find("GameManager").GetComponent<GameManager>().PlayerLost();
     }
 
-    // Kan lägga till saker här om spelaren vinner
+    // Kan lï¿½gga till saker hï¿½r om spelaren vinner
     public void Win()
     {
         GameObject.Find("GameManager").GetComponent<GameManager>().PlayerWon();
