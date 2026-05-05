@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class GuideController : MonoBehaviour
@@ -31,7 +32,6 @@ public class GuideController : MonoBehaviour
     {
         if (activeGuides.Contains(guide))
         {
-
             OnGuideActive.Invoke(guide);
         }
     }
@@ -45,12 +45,22 @@ public class GuideController : MonoBehaviour
 
     public void ToggleGuides()
     {
+        Lang_Text text = GameObject.Find("Button Guides").GetComponentInChildren<Lang_Text>();
+
         if (activeGuides.Count > 0)
         {
+            text.textID = "Guides: Off";
             activeGuides.Clear();
             guidesOn = false;
         }
 
-        else AddGuides();
+        else
+        {
+            AddGuides();
+            text.textID = "Guides: On";
+            guidesOn = true;
+        }
+
+        text.ChangeText(Languages.language);
     }
 }

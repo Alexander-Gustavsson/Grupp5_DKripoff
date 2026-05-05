@@ -33,6 +33,7 @@ public class GamePlay : MonoBehaviour
 
     void Start()
     {
+        GuideController.TriggerGuide(GuideController.GuideName.PLACE_SHIPS);
         clickScript = GetComponent<InputClick>();
         activeShips.AddRange(ships);
         placedShips.AddRange(activeShips);
