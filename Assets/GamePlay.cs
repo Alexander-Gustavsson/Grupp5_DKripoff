@@ -1,5 +1,6 @@
 using JetBrains.Annotations;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 //using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
@@ -33,11 +34,16 @@ public class GamePlay : MonoBehaviour
 
     void Start()
     {
-        GuideController.TriggerGuide(GuideController.GuideName.PLACE_SHIPS);
+        Invoke("TriggerPlacementGuide", 0f);
         clickScript = GetComponent<InputClick>();
         activeShips.AddRange(ships);
         placedShips.AddRange(activeShips);
         PlaceShips();
+    }
+
+    private void TriggerPlacementGuide()
+    {
+        GuideController.TriggerGuide(GuideController.GuideName.PLACE_SHIPS);
     }
 
     public void AIGridPressed(Vector2 pressPos)
@@ -104,7 +110,7 @@ public class GamePlay : MonoBehaviour
             turnIndicatorUI.ShowEnemyTurn();
         }
 
-        Invoke("MakeAIMove", 0.5f);
+        Invoke("MakeAIMove", 0.8f);
 
 
         if (AI.AllShipsFound())
@@ -228,6 +234,7 @@ public class GamePlay : MonoBehaviour
     // K�rs efter man har placerat ut alla skepp, m�ste kallas p� med ex en knapp
     public void StartGamePlay()
     {
+        GuideController.TriggerGuide(GuideController.GuideName.SHOOT_SHIPS);
         startButton.SetActive(false);
         clickScript.canDrag = false;
         foreach (GameObject ship in activeShips)
@@ -265,13 +272,27 @@ public class GamePlay : MonoBehaviour
     // Kan l�gga till saker h�r om spelaren f�rlorar
     public void Lose()
     {
-        GameObject.Find("GameManager").GetComponent<GameManager>().PlayerLost();
+        //GameManager GM = GameObject.Find("GameManager").GetComponent<GameManager>();
+        //GM.PlayerLost();
+
+        GameObject ws = GameObject.Find("Panel - Loss");
+        ws.GetComponent<Image>().enabled = true;
+        ws.transform.Find("Victory Text").gameObject.SetActive(true);
+
+        ws.transform.Find("Loss Text").GetComponent<TextMeshProUGUI>().text += "\r\nYou lost " + 30 + " rank points.";
     }
 
     // Kan l�gga till saker h�r om spelaren vinner
     public void Win()
     {
-        GameObject.Find("GameManager").GetComponent<GameManager>().PlayerWon();
+        //GameManager GM = GameObject.Find("GameManager").GetComponent<GameManager>();
+        //GM.PlayerWon();
+
+        GameObject ws = GameObject.Find("Panel - Win");
+        ws.GetComponent<Image>().enabled = true;
+        ws.transform.Find("Victory Text").gameObject.SetActive(true);
+
+        ws.transform.Find("Victory Text").GetComponent<TextMeshProUGUI>().text += "\r\nYou earned " + 30 + " rank points.";
     }
 
     public void ReturnToMainMenu()

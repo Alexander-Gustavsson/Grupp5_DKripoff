@@ -13,7 +13,8 @@ public class GuideController : MonoBehaviour
     {
         PLACE_SHIPS,
         SHOOT_SHIPS,
-        ROTATE_SHIPS
+        ROTATE_SHIPS,
+        DONE
     }
     public static List<GuideName> activeGuides = new List<GuideName>();
     // The dictionary allows for retrieving data about each specific guide.

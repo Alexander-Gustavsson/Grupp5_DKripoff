@@ -10,6 +10,7 @@ public class Lang_Text : MonoBehaviour
     {
         text = GetComponent<TextMeshProUGUI>();
         Languages.NewLanguage += ChangeText;
+        ChangeText(Languages.language);
     }
 
     public void ChangeText(string lang)
