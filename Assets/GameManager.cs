@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     private static GameManager instance;
-    [SerializeField] private int rankPoints = 0;
+    [SerializeField] public int rankPoints = 0;
     [SerializeField] private TMP_Text textRank, textRankPoints;
     [SerializeField] private GameObject imagePanelRank1, imagePanelRank2, imagePanelRank3, imageRank1, imageRank2, imageRank3;
     [SerializeField] private Slider sliderRank;
