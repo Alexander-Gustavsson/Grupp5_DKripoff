@@ -26,28 +26,19 @@ public class menuController : MonoBehaviour
     }
     public void StartEasyAI()
     {
-        GameManager gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        gameManager.spawnAI = 1;
-        gameManager.increaseRankPoints = 70;
-        gameManager.decreaseRankPoints = 5;
+        GameObject.Find("GameManager").GetComponent<GameManager>().StartEasyAI();
         LoadGame();
     }
 
     public void StartMediumAI()
     {
-        GameManager gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        gameManager.spawnAI = 2;
-        gameManager.increaseRankPoints = 75;
-        gameManager.decreaseRankPoints = 50;
+        GameObject.Find("GameManager").GetComponent<GameManager>().StartMediumAI();
         LoadGame();
     }
 
     public void StartHardAI()
     {
-        GameManager gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        gameManager.spawnAI = 3;
-        gameManager.increaseRankPoints = 100;
-        gameManager.decreaseRankPoints = 100;
+        GameObject.Find("GameManager").GetComponent<GameManager>().StartHardAI();
         LoadGame();
     }
 

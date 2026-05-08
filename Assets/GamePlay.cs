@@ -275,6 +275,8 @@ public class GamePlay : MonoBehaviour
         //GameManager GM = GameObject.Find("GameManager").GetComponent<GameManager>();
         //GM.PlayerLost();
 
+        GameObject.Find("GameManager").GetComponent<GameManager>().PlayerLost();
+
         GameObject ws = GameObject.Find("Panel - Loss");
         ws.GetComponent<Image>().enabled = true;
         ws.transform.Find("Victory Text").gameObject.SetActive(true);
@@ -290,6 +292,8 @@ public class GamePlay : MonoBehaviour
     {
         //GameManager GM = GameObject.Find("GameManager").GetComponent<GameManager>();
         //GM.PlayerWon();
+
+        GameObject.Find("GameManager").GetComponent<GameManager>().PlayerWon();
 
         GameObject ws = GameObject.Find("Panel - Win");
         ws.GetComponent<Image>().enabled = true;

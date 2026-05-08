@@ -2,6 +2,7 @@ using System.Collections;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEditor.PlayerSettings;
 
 public class DragDrop : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class DragDrop : MonoBehaviour
     private float begin;
     private BoxCollider2D collider;
     private ContactFilter2D shipFilter = new ContactFilter2D();
+    private int rotateDir = 1;
 
     //Animation additions:
     [SerializeField] private int shipLength = 1;
@@ -129,34 +131,37 @@ public class DragDrop : MonoBehaviour
     {
 
         Vector3 pos = transform.position;
-        transform.Rotate(0, 0, 90);
+        transform.Rotate(0, 0, 90 * rotateDir);
         Physics2D.SyncTransforms(); // Utan denna rad använder isValid nedan den tidigare rotationen.
 
         if (!isValid())
         {
             transform.Rotate(0, 0, -90);
             transform.position = pos;
+
+            // Testar att rotera till vänster eftersom höger inte fungerade
+            transform.Rotate(0, 0, -180);
+            Physics2D.SyncTransforms();
+            if (!isValid())
+            {
+                transform.Rotate(0, 0, 90);
+                transform.position = pos;
+            }
+            else
+            {
+                rotateDir = -rotateDir;
+            }
         }
     }
 
     public bool isValid() //ny metod för att true false om ship är i grid
     {
+        Vector3 pos = transform.position;
 
-
-        if (collider.Overlap(shipFilter, new Collider2D[1]) == 0)
+        if (collider.Overlap(shipFilter, new Collider2D[1]) == 0 && pos.x > 0.5f && pos.x < 8.5f && pos.y > 0.5f && pos.y < 8.5f)
         {
             return true;
         }
-            
-
-        //for (int i = 0; i < ship.shapePoints; i++)
-        //{
-        //    Vector3 pos = transform.GetChild(i).position;
-        //    if (pos.x < 0.5f || pos.x > 8.5f || pos.y < 0.5f || pos.y > 8.5f)
-        //    { 
-        //        return false;
-        //    }
-        //}
 
         return false;
     }
@@ -171,6 +176,8 @@ public class DragDrop : MonoBehaviour
 
             if (movementCount < 4) movementCount++;
             else GuideController.TriggerGuide(GuideController.GuideName.DONE);
+
+            GameObject.Find("GameplaySystem").GetComponent<GamePlay>().CheckAllShipsPlaced();
         }
 
         else
