@@ -1432,7 +1432,7 @@ GameObject:
   - component: {fileID: 713795676}
   - component: {fileID: 713795678}
   m_Layer: 0
-  m_Name: GamePlaySystem
+  m_Name: GameplaySystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1453,7 +1453,7 @@ MonoBehaviour:
   AI: {fileID: 1994102720}
   ships:
   - {fileID: 629200448}
-  - {fileID: 235283097}
+  - {fileID: 693665861}
   - {fileID: 575830003}
   - {fileID: 1680750646}
   missSprite: {fileID: 5428745536694032167, guid: 4ccd0aa1c8addbf41993c0b85f7adfb5, type: 3}
@@ -3607,6 +3607,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 455716331384638630, guid: 7a02c7ad08f75714299e92e31c3bb04d, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 769952238167827370, guid: 7a02c7ad08f75714299e92e31c3bb04d, type: 3}
       propertyPath: shipLength
       value: 4
@@ -4003,7 +4007,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.1254902}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -4017,7 +4021,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1989277274}
   m_OnClick:
     m_PersistentCalls:
@@ -4768,13 +4772,13 @@ SceneRoots:
   - {fileID: 31028387}
   - {fileID: 2052404882}
   - {fileID: 1202827041}
+  - {fileID: 1515770219}
   - {fileID: 454071108}
   - {fileID: 713795677}
   - {fileID: 1809960544}
   - {fileID: 1960386573}
   - {fileID: 1203599405}
+  - {fileID: 693665860}
   - {fileID: 560180343}
   - {fileID: 2146644455}
-  - {fileID: 693665860}
-  - {fileID: 1515770219}
   - {fileID: 1689263929}

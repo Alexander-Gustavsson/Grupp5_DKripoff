@@ -38,6 +38,10 @@ public class GameManager : MonoBehaviour
     public void PlayerLost()
     {
         rankPoints -= decreaseRankPoints;
+        if (rankPoints < 0)
+        {
+            rankPoints = 0;
+        }
     }
 
     public void StartEasyAI()
