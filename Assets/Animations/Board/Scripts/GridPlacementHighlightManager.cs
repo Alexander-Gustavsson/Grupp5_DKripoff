@@ -37,23 +37,12 @@ public class GridPlacementHighlightManager : MonoBehaviour
 
     private void ShowShipHighlights(DragDrop draggingShip)
     {
-        Vector3 rootPos = draggingShip.transform.position;
-        float snappedX = Mathf.Round(rootPos.x);
-        float snappedY = Mathf.Round(rootPos.y);
-
-        bool insideGrid = snappedX >= 0.5f && snappedX <= 8.5f &&
-                          snappedY >= 0.5f && snappedY <= 8.5f;
-
-        if (!insideGrid)
-        {
-            HideAll();
-            return;
-        }
         HideAll();
 
         int length = Mathf.Clamp(draggingShip.ShipLength, 1, highlightSquares.Length);
 
-       
+        float rootX = Mathf.Round(draggingShip.transform.position.x);
+        float rootY = Mathf.Round(draggingShip.transform.position.y);
 
         float z = Mathf.Round(draggingShip.transform.eulerAngles.z) % 360;
         bool vertical = z == 0 || z == 180;
@@ -62,10 +51,10 @@ public class GridPlacementHighlightManager : MonoBehaviour
         {
             if (highlightSquares[i] == null) continue;
 
-            float offset = i - (length -1) / 2f;
+            float offset = i - (length -1) ;
 
-            float x = rootPos.x;
-            float y = rootPos.y;
+            float x = rootX;
+            float y = rootY;
 
             if (vertical)
                 y -= offset;
