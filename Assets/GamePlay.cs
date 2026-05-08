@@ -1,5 +1,6 @@
 using JetBrains.Annotations;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 //using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
@@ -17,8 +18,10 @@ public class GamePlay : MonoBehaviour
     //[SerializeField] private GameManager gameManager;
 
 
-    //Animations:
+    //Animations: 
     [SerializeField] private TileHighlight tileHighlight;
+
+
     List<Vector2> missedPos = new List<Vector2>();
     List<Vector2> guessedPos = new List<Vector2>();
     List<GameObject> activeShips = new List<GameObject>();
@@ -31,10 +34,16 @@ public class GamePlay : MonoBehaviour
 
     void Start()
     {
+        Invoke("TriggerPlacementGuide", 0f);
         clickScript = GetComponent<InputClick>();
         activeShips.AddRange(ships);
         placedShips.AddRange(activeShips);
         PlaceShips();
+    }
+
+    private void TriggerPlacementGuide()
+    {
+        GuideController.TriggerGuide(GuideController.GuideName.PLACE_SHIPS);
     }
 
     public void AIGridPressed(Vector2 pressPos)
@@ -49,6 +58,12 @@ public class GamePlay : MonoBehaviour
         if (turnIndicatorUI != null)
         {
             turnIndicatorUI.ShowPlayerTurn();
+        }
+
+        //Animations:
+        if (tileHighlight != null)
+        {
+            tileHighlight.ShowHighlight(gridPos);
         }
 
         // Handle reclick
@@ -95,7 +110,7 @@ public class GamePlay : MonoBehaviour
             turnIndicatorUI.ShowEnemyTurn();
         }
 
-        Invoke("MakeAIMove", 0.5f);
+        Invoke("MakeAIMove", 0.8f);
 
 
         if (AI.AllShipsFound())
@@ -103,6 +118,8 @@ public class GamePlay : MonoBehaviour
             Win();
             return;
         }
+
+    
     }
 
     private void MakeAIMove()
@@ -119,7 +136,7 @@ public class GamePlay : MonoBehaviour
         {
             if (ship.GetComponent<ShipShape>().IsShipHit(hitPos))
             {
-                //ain lägger till rutorna nära skeppet om det finns (första prioritet)
+                //ain lï¿½gger till rutorna nï¿½ra skeppet om det finns (fï¿½rsta prioritet)
                 AI.isAttacking = true;
                 AI.counter += 1;
                 if (AI.counter == 1)
@@ -214,9 +231,10 @@ public class GamePlay : MonoBehaviour
         startButton.GetComponent<Button>().interactable = true;
     }
 
-    // Körs efter man har placerat ut alla skepp, måste kallas på med ex en knapp
+    // Kï¿½rs efter man har placerat ut alla skepp, mï¿½ste kallas pï¿½ med ex en knapp
     public void StartGamePlay()
     {
+        GuideController.TriggerGuide(GuideController.GuideName.SHOOT_SHIPS);
         startButton.SetActive(false);
         clickScript.canDrag = false;
         foreach (GameObject ship in activeShips)
@@ -251,16 +269,34 @@ public class GamePlay : MonoBehaviour
         return activeShips.Count == 0 ? true : false;
     }
 
-    // Kan lägga till saker här om spelaren förlorar
+    // Kan lï¿½gga till saker hï¿½r om spelaren fï¿½rlorar
     public void Lose()
     {
-        GameObject.Find("GameManager").GetComponent<GameManager>().PlayerLost();
+        //GameManager GM = GameObject.Find("GameManager").GetComponent<GameManager>();
+        //GM.PlayerLost();
+
+        GameObject ws = GameObject.Find("Panel - Loss");
+        ws.GetComponent<Image>().enabled = true;
+        ws.transform.Find("Victory Text").gameObject.SetActive(true);
+
+        TextMeshProUGUI text = ws.transform.Find("Loss Text").GetComponent<TextMeshProUGUI>();
+        text.enabled = true;
+        text.text += "\r\nYou lost " + 30 + " rank points.";
+
     }
 
-    // Kan lägga till saker här om spelaren vinner
+    // Kan lï¿½gga till saker hï¿½r om spelaren vinner
     public void Win()
     {
-        GameObject.Find("GameManager").GetComponent<GameManager>().PlayerWon();
+        //GameManager GM = GameObject.Find("GameManager").GetComponent<GameManager>();
+        //GM.PlayerWon();
+
+        GameObject ws = GameObject.Find("Panel - Win");
+        ws.GetComponent<Image>().enabled = true;
+        ws.transform.Find("Victory Text").gameObject.SetActive(true);
+        TextMeshProUGUI text = ws.transform.Find("Victory Text").GetComponent<TextMeshProUGUI>();
+        text.enabled = true;
+        text.text += "\r\nYou earned " + 30 + " rank points.";
     }
 
     public void ReturnToMainMenu()

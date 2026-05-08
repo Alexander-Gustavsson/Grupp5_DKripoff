@@ -1,23 +1,15 @@
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class RankManager : MonoBehaviour
 {
-    [SerializeField] private TMP_Text textRank, textRankPoints;
-    [SerializeField] private GameObject imagePanelRank1, imagePanelRank2, imagePanelRank3, imageRank1, imageRank2, imageRank3;
-    [SerializeField] private Slider sliderRank;
-
-    private GameManager gameManager;
-    private int prevRank = 0;
-
-    private void Start()
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
     {
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        UpdateRank();
+        
     }
 
-    private void UpdateRank()
+    // Update is called once per frame
+    void Update()
     {
         gameManager.rank = gameManager.rankPoints < 200 ? 1 : gameManager.rankPoints < 500 ? 2 : 3;
 
@@ -83,5 +75,6 @@ public class RankManager : MonoBehaviour
 
                 break;
         }
+
     }
 }

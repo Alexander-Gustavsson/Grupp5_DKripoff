@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[RequireComponent(typeof(SpriteRenderer))]
+//[RequireComponent(typeof(SpriteRenderer))]
 public class ShipPlacementFeedback : MonoBehaviour
 {
     [SerializeField] private Color validColor = Color.green;
@@ -12,7 +12,7 @@ public class ShipPlacementFeedback : MonoBehaviour
 
     private void Awake()
     {
-        sr = GetComponent<SpriteRenderer>();
+        sr = GetComponentInChildren<SpriteRenderer>();
         originalColor = sr.color;
     }
 
