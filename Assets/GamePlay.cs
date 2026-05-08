@@ -279,7 +279,10 @@ public class GamePlay : MonoBehaviour
         ws.GetComponent<Image>().enabled = true;
         ws.transform.Find("Victory Text").gameObject.SetActive(true);
 
-        ws.transform.Find("Loss Text").GetComponent<TextMeshProUGUI>().text += "\r\nYou lost " + 30 + " rank points.";
+        TextMeshProUGUI text = ws.transform.Find("Loss Text").GetComponent<TextMeshProUGUI>();
+        text.enabled = true;
+        text.text += "\r\nYou lost " + 30 + " rank points.";
+
     }
 
     // Kan l�gga till saker h�r om spelaren vinner
@@ -291,8 +294,9 @@ public class GamePlay : MonoBehaviour
         GameObject ws = GameObject.Find("Panel - Win");
         ws.GetComponent<Image>().enabled = true;
         ws.transform.Find("Victory Text").gameObject.SetActive(true);
-
-        ws.transform.Find("Victory Text").GetComponent<TextMeshProUGUI>().text += "\r\nYou earned " + 30 + " rank points.";
+        TextMeshProUGUI text = ws.transform.Find("Victory Text").GetComponent<TextMeshProUGUI>();
+        text.enabled = true;
+        text.text += "\r\nYou earned " + 30 + " rank points.";
     }
 
     public void ReturnToMainMenu()
