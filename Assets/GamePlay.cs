@@ -1,8 +1,10 @@
 using JetBrains.Annotations;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
-using UnityEngine.UIElements;
+//using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GamePlay : MonoBehaviour
 {
@@ -13,28 +15,33 @@ public class GamePlay : MonoBehaviour
     [SerializeField] private GameObject hitShipSprite;
     [SerializeField] private GameObject startButton;
     [SerializeField] private GameObject menuButton;
+    //[SerializeField] private GameManager gameManager;
 
 
-    //Animations:
+    //Animations: 
     [SerializeField] private TileHighlight tileHighlight;
+
+
     List<Vector2> missedPos = new List<Vector2>();
     List<Vector2> guessedPos = new List<Vector2>();
     List<GameObject> activeShips = new List<GameObject>();
     private InputClick clickScript;
+    [SerializeField] private ShotFeedbackManager shotFeedback;
+    [SerializeField] private TurnIndicatorUI turnIndicatorUI;
 
     List<GameObject> placedShips = new List<GameObject>();
 
 
     void Start()
     {
+        Invoke("TriggerPlacementGuide", 0f);
         clickScript = GetComponent<InputClick>();
         activeShips.AddRange(ships);
         placedShips.AddRange(activeShips);
         PlaceShips();
-        Invoke("PlaceGuide", 0f);
     }
 
-    private void PlaceGuide()
+    private void TriggerPlacementGuide()
     {
         GuideController.TriggerGuide(GuideController.GuideName.PLACE_SHIPS);
     }
@@ -47,30 +54,63 @@ public class GamePlay : MonoBehaviour
         {
             tileHighlight.ShowHighlight(gridPos);
         }
+        //anim:
+        if (turnIndicatorUI != null)
+        {
+            turnIndicatorUI.ShowPlayerTurn();
+        }
+
+        //Animations:
+        if (tileHighlight != null)
+        {
+            tileHighlight.ShowHighlight(gridPos);
+        }
 
         // Handle reclick
         if (guessedPos.Contains(gridPos))
         {
             return;
         }
+        //anim:
+        if (shotFeedback != null) shotFeedback.PlayFire(gridPos);
         GameObject ship = AI.TakeHit(gridPos);
-
+       
         if (ship != null)
         {
             SpawnHitShipSprite(gridPos);
             if (AI.IsShipGone(ship, gridPos))
             {
+                //anim:
+                ShipSunkVisual sunkVisual = ship.GetComponent<ShipSunkVisual>();
+                if (sunkVisual != null)
+                {
+                    sunkVisual.MarkAsSunk();
+                }
+
+                if (shotFeedback != null) shotFeedback.PlaySink(gridPos);
+
                 if (AI.AllShipsFound())
                 {
                     Win();
                 }
             }
+            else
+            {
+                if (shotFeedback != null) shotFeedback.PlayHit(gridPos);
+            }
+
             return;
         }
         SpawnMissSprite(gridPos);
+        //aanimation:
+        if (shotFeedback != null) shotFeedback.PlayMiss(gridPos);
         clickScript.canClick = false;
+        if (turnIndicatorUI != null)
+        {
+            turnIndicatorUI.ShowEnemyTurn();
+        }
 
-        Invoke("MakeAIMove", 0.5f);
+        Invoke("MakeAIMove", 0.8f);
 
 
         if (AI.AllShipsFound())
@@ -78,26 +118,64 @@ public class GamePlay : MonoBehaviour
             Win();
             return;
         }
+
+    
     }
 
     private void MakeAIMove()
-    {
-        Vector2 hitPos = AI.MakeMove();
 
+    {
+        if (turnIndicatorUI != null)
+        {
+            turnIndicatorUI.ShowEnemyTurn();
+        }
+        Vector2 hitPos = AI.HardAIMakeMove();
+
+        if (shotFeedback != null) shotFeedback.PlayFire(hitPos);
         foreach (GameObject ship in activeShips)
         {
             if (ship.GetComponent<ShipShape>().IsShipHit(hitPos))
             {
-                //ain lägger till rutorna nära skeppet om det finns (första prioritet)
-                AI.AddNextTargets(hitPos);
+
+                AI.isAttacking = true;
+                AI.counter += 1;
+                if (AI.counter == 1)
+                {
+                    AI.AddNextTargets(hitPos);
+                }
+
+                if (AI.counter == 1)
+                {
+                    AI.firstHit = hitPos;
+                }
+                else if (AI.counter == 2)
+                {
+                    AI.ClearTargets();
+                    AI.secondHit = hitPos;
+                }
+
 
                 if (ship.GetComponent<ShipShape>().IsShipGone())
                 {
                     //code here if entire ship is hit
                     activeShips.Remove(ship);
                     AI.ClearTargets();
+
+                    //anim:
+                    ShipSunkVisual sunkVisual = ship.GetComponent<ShipSunkVisual>();
+                    if (sunkVisual != null)
+                    {
+                        sunkVisual.MarkAsSunk();
+                    }
+
+                    SpawnHitShipSprite(hitPos);
+                    if (shotFeedback != null) shotFeedback.PlaySink(hitPos);
                 }
-                SpawnHitShipSprite(hitPos);
+                else
+                {
+                    SpawnHitShipSprite(hitPos);
+                    if (shotFeedback != null) shotFeedback.PlayHit(hitPos);
+                }
 
                 if (AllPlayerShipFound())
                 {
@@ -111,12 +189,27 @@ public class GamePlay : MonoBehaviour
         }
 
         SpawnMissSprite(hitPos);
+
+        if (shotFeedback != null) shotFeedback.PlayMiss(hitPos);
+
+        if (AI.isAttacking && AI.foundDir)
+        {
+            AI.switchDir = true;
+        }
+
         MakePlayerMove();
     }
 
     private void MakePlayerMove()
+
     {
+        if (turnIndicatorUI != null)
+        {
+            turnIndicatorUI.ShowPlayerTurn();
+        }
+
         clickScript.canClick = true;
+        
     }
 
     private void PlaceShips()
@@ -125,10 +218,22 @@ public class GamePlay : MonoBehaviour
         AI.PlaceShips();
     }
 
+    public void CheckAllShipsPlaced()
+    {
+        foreach (GameObject ship in activeShips)
+        {
+            if (!ship.GetComponent<DragDrop>().isValid())
+            {
+                return;
+            }
+        }
+        startButton.GetComponent<Button>().interactable = true;
+    }
 
-    // Körs efter man har placerat ut alla skepp, måste kallas på med ex en knapp
+    // Kï¿½rs efter man har placerat ut alla skepp, mï¿½ste kallas pï¿½ med ex en knapp
     public void StartGamePlay()
     {
+        GuideController.TriggerGuide(GuideController.GuideName.SHOOT_SHIPS);
         startButton.SetActive(false);
         clickScript.canDrag = false;
         foreach (GameObject ship in activeShips)
@@ -163,16 +268,34 @@ public class GamePlay : MonoBehaviour
         return activeShips.Count == 0 ? true : false;
     }
 
-    // Kan lägga till saker här om spelaren förlorar
+    // Kan lï¿½gga till saker hï¿½r om spelaren fï¿½rlorar
     public void Lose()
     {
-        //Tillbaka till meny
+        //GameManager GM = GameObject.Find("GameManager").GetComponent<GameManager>();
+        //GM.PlayerLost();
+
+        GameObject ws = GameObject.Find("Panel - Loss");
+        ws.GetComponent<Image>().enabled = true;
+        ws.transform.Find("Victory Text").gameObject.SetActive(true);
+
+        TextMeshProUGUI text = ws.transform.Find("Loss Text").GetComponent<TextMeshProUGUI>();
+        text.enabled = true;
+        text.text += "\r\nYou lost " + 30 + " rank points.";
+
     }
 
-    // Kan lägga till saker här om spelaren vinner
+    // Kan lï¿½gga till saker hï¿½r om spelaren vinner
     public void Win()
     {
-        //Tillbaka till meny
+        //GameManager GM = GameObject.Find("GameManager").GetComponent<GameManager>();
+        //GM.PlayerWon();
+
+        GameObject ws = GameObject.Find("Panel - Win");
+        ws.GetComponent<Image>().enabled = true;
+        ws.transform.Find("Victory Text").gameObject.SetActive(true);
+        TextMeshProUGUI text = ws.transform.Find("Victory Text").GetComponent<TextMeshProUGUI>();
+        text.enabled = true;
+        text.text += "\r\nYou earned " + 30 + " rank points.";
     }
 
     public void ReturnToMainMenu()

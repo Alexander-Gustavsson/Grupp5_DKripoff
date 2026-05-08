@@ -11,6 +11,12 @@ public class ButtonHighlight : MonoBehaviour
     {
         image = GetComponent<Image>();
         baseColor = image.color;
+
+        if (!GuideController.guidesOn)
+        {
+            Highlight();
+            GetComponentInChildren<Lang_Text>().textID = "Guides: Off";
+        }
     }
 
     public void Highlight()

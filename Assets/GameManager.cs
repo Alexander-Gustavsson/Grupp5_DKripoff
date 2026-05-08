@@ -14,8 +14,8 @@ public class GameManager : MonoBehaviour
 
     public int rank; 
     private int prevRank; 
-    private int increaseRankPoints; 
-    private int decreaseRankPoints;
+    public int increaseRankPoints; 
+    public int decreaseRankPoints;
 
     private void Awake()
     {

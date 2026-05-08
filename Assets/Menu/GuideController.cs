@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class GuideController : MonoBehaviour
 {
-    public static bool guidesOn = false;
+    public static bool guidesOn = true;
 
     public static event Action<GuideName> OnGuideActive;
 
@@ -12,7 +13,8 @@ public class GuideController : MonoBehaviour
     {
         PLACE_SHIPS,
         SHOOT_SHIPS,
-        ROTATE_SHIPS
+        ROTATE_SHIPS,
+        DONE
     }
     public static List<GuideName> activeGuides = new List<GuideName>();
     // The dictionary allows for retrieving data about each specific guide.
@@ -29,13 +31,8 @@ public class GuideController : MonoBehaviour
 
     public static void TriggerGuide(GuideName guide)
     {
-        foreach (var item in activeGuides)
-        {
-            print(item);
-        }
         if (activeGuides.Contains(guide))
         {
-
             OnGuideActive.Invoke(guide);
         }
     }
@@ -49,12 +46,22 @@ public class GuideController : MonoBehaviour
 
     public void ToggleGuides()
     {
+        Lang_Text text = GameObject.Find("Button Guides").GetComponentInChildren<Lang_Text>();
+
         if (activeGuides.Count > 0)
         {
+            text.textID = "Guides: Off";
             activeGuides.Clear();
             guidesOn = false;
         }
 
-        else AddGuides();
+        else
+        {
+            AddGuides();
+            text.textID = "Guides: On";
+            guidesOn = true;
+        }
+
+        text.ChangeText(Languages.language);
     }
 }
