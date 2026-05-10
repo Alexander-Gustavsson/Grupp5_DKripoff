@@ -26,12 +26,13 @@ public class TurnIndicatorUI : MonoBehaviour
     [SerializeField] private SpriteRenderer enemyBoardGlow;
     [SerializeField] private float glowAlpha = 0.5f;
 
+
     [Header("Tween")]
 
     [SerializeField] private float moveDuratation = 0.25f;
     [SerializeField] private float pulseDuration = 0.15f;
     [SerializeField] private float pulseScale = 1.2f;
-    [SerializeField] private float textShowTime = 0.25f;
+   // [SerializeField] private float textShowTime = 0.25f;
 
     private Vector3 originalScale;
     private Tween moveTween;
@@ -120,6 +121,7 @@ public class TurnIndicatorUI : MonoBehaviour
     private void ShowTurnText(string text, Color color)
     {
         if (turnTextGroup == null || turnText == null) return;
+        
         turnTextGroup.DOKill();
         turnText.transform.DOKill();
 
@@ -131,8 +133,8 @@ public class TurnIndicatorUI : MonoBehaviour
         Sequence seq = DOTween.Sequence();
         seq.Append(turnTextGroup.DOFade(1f, 0.15f));
         seq.Join(turnText.transform.DOScale(1f, 0.15f));
-        seq.AppendInterval(textShowTime);
-        seq.Append(turnTextGroup.DOFade(0f, 0.25f));
+        //seq.AppendInterval(textShowTime);
+        //seq.Append(turnTextGroup.DOFade(0f, 0.25f));
     }
 
     private void ShowBoardGlow(SpriteRenderer activeGlow, SpriteRenderer inactiveGlow)
@@ -144,7 +146,10 @@ public class TurnIndicatorUI : MonoBehaviour
             c.a = 0f;
             activeGlow.color = c;
 
-            activeGlow.DOFade(glowAlpha, 0.18f).SetLoops(2, LoopType.Yoyo);
+           // activeGlow.DOFade(glowAlpha, 0.18f).SetLoops(2, LoopType.Yoyo);
+            Sequence glowSeq = DOTween.Sequence();
+            glowSeq.Append(activeGlow.DOFade(glowAlpha + 0.08f, 0.12f));
+            glowSeq.Append(activeGlow.DOFade(glowAlpha, 0.18f));
         }
         if (inactiveGlow != null)
         {

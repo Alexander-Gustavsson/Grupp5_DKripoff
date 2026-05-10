@@ -1455,7 +1455,7 @@ Transform:
   m_GameObject: {fileID: 651766140}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.48, y: 0, z: 0}
+  m_LocalPosition: {x: -4.5, y: 0, z: 0}
   m_LocalScale: {x: 10, y: 10, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1511,7 +1511,7 @@ SpriteRenderer:
   m_SortingOrder: -3
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.25490198, g: 0.21960786, b: 0.7843138, a: 1}
+  m_Color: {r: 0.96862745, g: 0.9137255, b: 0.79607844, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -3780,7 +3780,7 @@ SpriteRenderer:
   m_SortingOrder: -3
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.9686275, g: 0.91372555, b: 0.7960785, a: 1}
+  m_Color: {r: 0.25490198, g: 0.21960784, b: 0.95686275, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -3879,17 +3879,16 @@ MonoBehaviour:
   enemyTurnObject: {fileID: 289740724}
   playerPosition: {x: 0, y: 4.5, z: 0}
   enemyPosition: {x: 0, y: 4.5, z: 0}
-  playerColor: {r: 0.3, g: 0.9, b: 0.7, a: 1}
-  enemyColor: {r: 1, g: 0.5, b: 0.2, a: 1}
+  playerColor: {r: 0.15762952, g: 0.12655748, b: 0.33962262, a: 1}
+  enemyColor: {r: 0.990566, g: 0.7258608, b: 0.5653702, a: 1}
   turnTextGroup: {fileID: 2122063320}
   turnText: {fileID: 2122063318}
-  playerBoardGlow: {fileID: 1598616838}
-  enemyBoardGlow: {fileID: 651766142}
-  glowAlpha: 0.5
-  moveDuratation: 0.25
+  playerBoardGlow: {fileID: 651766142}
+  enemyBoardGlow: {fileID: 1598616838}
+  glowAlpha: 0.8
+  moveDuratation: 1
   pulseDuration: 0.15
   pulseScale: 1.2
-  textShowTime: 0.25
 --- !u!1001 &1809960544
 PrefabInstance:
   m_ObjectHideFlags: 0
