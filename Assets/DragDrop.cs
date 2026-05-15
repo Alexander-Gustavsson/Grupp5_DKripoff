@@ -136,9 +136,6 @@ public class DragDrop : MonoBehaviour
 
         if (!isValid())
         {
-            transform.Rotate(0, 0, -90);
-            transform.position = pos;
-
             // Testar att rotera till vänster eftersom höger inte fungerade
             transform.Rotate(0, 0, -180);
             Physics2D.SyncTransforms();
