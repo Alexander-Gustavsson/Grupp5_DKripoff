@@ -1467,7 +1467,7 @@ SpriteRenderer:
   m_SortingOrder: -2
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.1792453, g: 0.12259702, b: 0.12259702, a: 1}
+  m_Color: {r: 0.25490198, g: 0.21960784, b: 0.95686275, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -2006,7 +2006,7 @@ SpriteRenderer:
   m_SortingOrder: -2
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.6132076, g: 0.39627093, b: 0.39627093, a: 1}
+  m_Color: {r: 0.96862745, g: 0.9137255, b: 0.79607844, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -4021,8 +4021,8 @@ MonoBehaviour:
   enemyTurnObject: {fileID: 289740724}
   playerPosition: {x: 0, y: 4.5, z: 0}
   enemyPosition: {x: 0, y: 4.5, z: 0}
-  playerColor: {r: 0.3, g: 0.9, b: 0.7, a: 1}
-  enemyColor: {r: 1, g: 0.5, b: 0.2, a: 1}
+  playerColor: {r: 1, g: 0.5019608, b: 0.2, a: 1}
+  enemyColor: {r: 0.15686275, g: 0.1254902, b: 0.34117648, a: 1}
   turnTextGroup: {fileID: 69889085}
   turnText: {fileID: 69889083}
   playerBoardGlow: {fileID: 611124361}
