@@ -12,7 +12,6 @@ public class Guide : MonoBehaviour
 
     private void ActivateGuide(GuideController.GuideName obj)
     {
-        print(obj);
         if (rName == obj)
         {
             GetComponent<Image>().enabled = true;

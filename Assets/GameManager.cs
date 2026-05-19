@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     private static GameManager instance;
 
     public int spawnAI;
-    public int rankPoints = 700;
+    public int rankPoints = 300;
     public int rank;
     public int increaseRankPoints;
     public int decreaseRankPoints;

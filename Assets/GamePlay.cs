@@ -49,22 +49,13 @@ public class GamePlay : MonoBehaviour
     public void AIGridPressed(Vector2 pressPos)
     {
         Vector2 gridPos = new Vector2(Mathf.Round(pressPos.x), Mathf.Round(pressPos.y));
-        //Animations:
-        if (tileHighlight != null)
-        {
-            tileHighlight.ShowHighlight(gridPos);
-        }
-        //anim:
-        if (turnIndicatorUI != null)
-        {
-            turnIndicatorUI.ShowPlayerTurn();
-        }
 
-        //Animations:
-        if (tileHighlight != null)
-        {
-            tileHighlight.ShowHighlight(gridPos);
-        }
+        tileHighlight?.ShowHighlight(gridPos);
+        
+        turnIndicatorUI?.ShowPlayerTurn();
+
+        tileHighlight?.ShowHighlight(gridPos);
+        
 
         // Handle reclick
         if (guessedPos.Contains(gridPos))
@@ -235,6 +226,7 @@ public class GamePlay : MonoBehaviour
     public void StartGamePlay()
     {
         GuideController.TriggerGuide(GuideController.GuideName.SHOOT_SHIPS);
+        GameObject.Find("Main Camera").GetComponent<CamControl>().EnterCombat();
         startButton.SetActive(false);
         clickScript.canDrag = false;
         foreach (GameObject ship in activeShips)
@@ -272,35 +264,31 @@ public class GamePlay : MonoBehaviour
     // Kan l�gga till saker h�r om spelaren f�rlorar
     public void Lose()
     {
-        //GameManager GM = GameObject.Find("GameManager").GetComponent<GameManager>();
-        //GM.PlayerLost();
+        GameManager GM = GameObject.Find("GameManager").GetComponent<GameManager>();
+        GM.PlayerLost();
 
-        GameObject.Find("GameManager").GetComponent<GameManager>().PlayerLost();
+        GameObject ls = GameObject.Find("Panel - Loss");
+        ls.GetComponent<Image>().enabled = true;
+        ls.transform.Find("Loss Text").gameObject.SetActive(true);
 
-        GameObject ws = GameObject.Find("Panel - Loss");
-        ws.GetComponent<Image>().enabled = true;
-        ws.transform.Find("Victory Text").gameObject.SetActive(true);
-
-        TextMeshProUGUI text = ws.transform.Find("Loss Text").GetComponent<TextMeshProUGUI>();
+        TextMeshProUGUI text = ls.transform.Find("Loss Text").GetComponent<TextMeshProUGUI>();
         text.enabled = true;
-        text.text += "\r\nYou lost " + 30 + " rank points.";
+        text.text += "\r\nYou lost " + GM.decreaseRankPoints + " rank points.";
 
     }
 
     // Kan l�gga till saker h�r om spelaren vinner
     public void Win()
     {
-        //GameManager GM = GameObject.Find("GameManager").GetComponent<GameManager>();
-        //GM.PlayerWon();
-
-        GameObject.Find("GameManager").GetComponent<GameManager>().PlayerWon();
+        GameManager GM = GameObject.Find("GameManager").GetComponent<GameManager>();
+        GM.PlayerWon();
 
         GameObject ws = GameObject.Find("Panel - Win");
         ws.GetComponent<Image>().enabled = true;
         ws.transform.Find("Victory Text").gameObject.SetActive(true);
         TextMeshProUGUI text = ws.transform.Find("Victory Text").GetComponent<TextMeshProUGUI>();
         text.enabled = true;
-        text.text += "\r\nYou earned " + 30 + " rank points.";
+        text.text += "\r\nYou earned " + GM.increaseRankPoints + " rank points.";
     }
 
     public void ReturnToMainMenu()

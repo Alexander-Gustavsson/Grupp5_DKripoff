@@ -2,7 +2,6 @@ using System.Collections;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static UnityEditor.PlayerSettings;
 
 public class DragDrop : MonoBehaviour
 {
@@ -19,7 +18,8 @@ public class DragDrop : MonoBehaviour
     public bool dragging;
     private float timer;
     private float begin;
-    private BoxCollider2D collider;
+
+    private BoxCollider2D collider2D;
     private ContactFilter2D shipFilter = new ContactFilter2D();
     private int rotateDir = 1;
 
@@ -52,7 +52,7 @@ public class DragDrop : MonoBehaviour
     }*/
     private void Awake()
     {
-        collider = GetComponent<BoxCollider2D>();
+        collider2D = GetComponent<BoxCollider2D>();
         shipFilter.SetLayerMask(LayerMask.GetMask("Ship", "GridBorder"));
         mainCamera = Camera.main;
         screenPos.Enable();
@@ -155,7 +155,7 @@ public class DragDrop : MonoBehaviour
     {
         Vector3 pos = transform.position;
 
-        if (collider.Overlap(shipFilter, new Collider2D[1]) == 0 && pos.x > 0.5f && pos.x < 8.5f && pos.y > 0.5f && pos.y < 8.5f)
+        if (collider2D.Overlap(shipFilter, new Collider2D[1]) == 0 && pos.x > 0.5f && pos.x < 8.5f && pos.y > 0.5f && pos.y < 8.5f)
         {
             return true;
         }

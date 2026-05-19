@@ -16,8 +16,6 @@ public class BoardShake : MonoBehaviour
         {
             shakeTarget = transform;
         }
-
-        originalLocalPosition = shakeTarget.localPosition;
     }
 
     public void Shake()
@@ -38,6 +36,8 @@ public class BoardShake : MonoBehaviour
     private IEnumerator ShakeRoutine(float duration, float magnitude)
     {
         float elapsed = 0f;
+        originalLocalPosition = shakeTarget.localPosition;
+
 
         while (elapsed < duration)
         {
