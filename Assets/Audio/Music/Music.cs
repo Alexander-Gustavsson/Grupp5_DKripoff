@@ -12,8 +12,10 @@ public class Music : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-
-        gameObject.GetComponent<AudioSource>().Play();
+        AudioSource audioSource = gameObject.GetComponent<AudioSource>();
+        audioSource.volume = GameSettings.MusicVolume;
+        audioSource.Play();
+        //gameObject.GetComponent<AudioSource>().Play();
         instance = this;
         DontDestroyOnLoad(gameObject);
     }
