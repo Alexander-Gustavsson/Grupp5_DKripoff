@@ -1,8 +1,7 @@
-using DG.Tweening;
 using System.Collections;
-using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
+using DG.Tweening;
+using TMPro;
 
 public class TurnIndicatorUI : MonoBehaviour
 {
@@ -17,7 +16,7 @@ public class TurnIndicatorUI : MonoBehaviour
     [SerializeField] private Color playerColor = new Color(0.3f, 0.9f, 0.7f);
     [SerializeField] private Color enemyColor = new Color(1f, 0.5f, 0.2f);
 
-
+  
     [Header("Turn Text")]
     [SerializeField] private CanvasGroup turnTextGroup;
     [SerializeField] private TMP_Text turnText;
@@ -33,7 +32,7 @@ public class TurnIndicatorUI : MonoBehaviour
     [SerializeField] private float moveDuratation = 0.25f;
     [SerializeField] private float pulseDuration = 0.15f;
     [SerializeField] private float pulseScale = 1.2f;
-    // [SerializeField] private float textShowTime = 0.25f;
+   // [SerializeField] private float textShowTime = 0.25f;
 
     private Vector3 originalScale;
     private Tween moveTween;
@@ -44,10 +43,9 @@ public class TurnIndicatorUI : MonoBehaviour
 
     private void Awake()
     {
-        originalScale = transform.localScale;
+         originalScale = transform.localScale;
 
-        if (turnTextGroup != null)
-        {
+        if (turnTextGroup != null){
             turnTextGroup.alpha = 0f;
 
         }
@@ -58,7 +56,7 @@ public class TurnIndicatorUI : MonoBehaviour
             playerBoardGlow.color = c;
         }
 
-        if (enemyBoardGlow != null)
+        if(enemyBoardGlow != null)
         {
             Color c = enemyBoardGlow.color;
             c.a = 0f;
@@ -68,7 +66,7 @@ public class TurnIndicatorUI : MonoBehaviour
 
     public void ShowPlayerTurn()
 
-    {
+    {    
         if (!firstShow && isPlayerTurn)
         {
             return;
@@ -89,7 +87,7 @@ public class TurnIndicatorUI : MonoBehaviour
         transform.DOPunchScale(Vector3.one * (pulseScale - 1f), pulseDuration, 4, 0.5f);
 
         ShowTurnText("PLAYER TURN", playerColor);
-        ShowBoardGlow(playerBoardGlow, enemyBoardGlow);
+        ShowBoardGlow(playerBoardGlow,enemyBoardGlow);
 
 
         PlayPulse();
@@ -123,7 +121,7 @@ public class TurnIndicatorUI : MonoBehaviour
     private void ShowTurnText(string text, Color color)
     {
         if (turnTextGroup == null || turnText == null) return;
-
+        
         turnTextGroup.DOKill();
         turnText.transform.DOKill();
 
@@ -132,12 +130,13 @@ public class TurnIndicatorUI : MonoBehaviour
         turnTextGroup.alpha = 0f;
         turnText.transform.localScale = Vector3.one * 0.8f;
 
-        DG.Tweening.Sequence seq = DOTween.Sequence();
+        Sequence seq = DOTween.Sequence();
         seq.Append(turnTextGroup.DOFade(1f, 0.15f));
         seq.Join(turnText.transform.DOScale(1f, 0.15f));
         //seq.AppendInterval(textShowTime);
         //seq.Append(turnTextGroup.DOFade(0f, 0.25f));
     }
+
     private void ShowBoardGlow(SpriteRenderer activeGlow, SpriteRenderer inactiveGlow)
     {
         if (activeGlow != null)
@@ -147,8 +146,8 @@ public class TurnIndicatorUI : MonoBehaviour
             c.a = 0f;
             activeGlow.color = c;
 
-            // activeGlow.DOFade(glowAlpha, 0.18f).SetLoops(2, LoopType.Yoyo);
-            DG.Tweening.Sequence glowSeq = DOTween.Sequence();
+           // activeGlow.DOFade(glowAlpha, 0.18f).SetLoops(2, LoopType.Yoyo);
+            Sequence glowSeq = DOTween.Sequence();
             glowSeq.Append(activeGlow.DOFade(glowAlpha + 0.08f, 0.12f));
             glowSeq.Append(activeGlow.DOFade(glowAlpha, 0.18f));
         }
@@ -167,7 +166,7 @@ public class TurnIndicatorUI : MonoBehaviour
 
     private void PlayPulse()
     {
-
+     
         pulseTween?.Kill();
         transform.localScale = originalScale;
 
