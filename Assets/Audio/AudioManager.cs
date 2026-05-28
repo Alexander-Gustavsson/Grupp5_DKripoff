@@ -9,7 +9,8 @@ public enum SoundType
 {
     // Lägg till ljud här:
     AMBIANCE,
-    EXPLOSION
+    EXPLOSION,
+    UI_PAPER
 }
 
 [RequireComponent(typeof(AudioSource)), ExecuteInEditMode]

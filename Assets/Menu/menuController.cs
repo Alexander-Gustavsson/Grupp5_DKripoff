@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class menuController : MonoBehaviour
+public class MenuController : MonoBehaviour
 {
     [SerializeField] private GameObject rankPanel;
 
@@ -10,7 +10,7 @@ public class menuController : MonoBehaviour
 
     public void LoadGame()
     {
-        GameObject.Find("AudioManager").GetComponent<Music>().SmoothSound(0.3f, 2f);
+        GameObject.Find("AudioManager").GetComponent<MusicPlayer>().PlayPreparation();
 
         SceneManager.LoadScene(1);
     }

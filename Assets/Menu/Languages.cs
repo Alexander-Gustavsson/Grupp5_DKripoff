@@ -33,6 +33,8 @@ public class Languages : MonoBehaviour
         { ("sv", "DoneG"), "Klicka på färdig när du är redo för striden!" },
         { ("sv", "Win"), "Du vann!" },
         { ("sv", "Loss"), "Du förlorade!" },
+        { ("sv", "Player's Turn"), "Din Tur" },
+        { ("sv", "Enemy Turn"), "Fiendens Tur" },
 
 
         { ("en", "To Battle!"), "To Battle!" },
@@ -49,7 +51,9 @@ public class Languages : MonoBehaviour
         { ("en", "ShootingG"), "Press the opponent's board to fire your cannons!\r\n\r\nTry to find all their ships - they have the same shape as yours!" },
         { ("en", "DoneG"), "One you're finished setting up, hit done!" },
         { ("en", "Win"), "You won! Wow!" },
-        { ("en", "Loss"), "You lost! Wow!" }
+        { ("en", "Loss"), "You lost! Darn!" },
+        { ("en", "Player's Turn"), "Player's Turn" },
+        { ("en", "Enemy Turn"), "Enemy Turn" }
     };
 
     public void CycleLanguages()
