@@ -264,6 +264,8 @@ public class GamePlay : MonoBehaviour
     // Kan l�gga till saker h�r om spelaren f�rlorar
     public void Lose()
     {
+        clickScript.canClick = false;
+
         GameManager GM = GameObject.Find("GameManager").GetComponent<GameManager>();
         GM.PlayerLost();
 
@@ -280,6 +282,8 @@ public class GamePlay : MonoBehaviour
     // Kan l�gga till saker h�r om spelaren vinner
     public void Win()
     {
+        clickScript.canClick = false;
+
         GameManager GM = GameObject.Find("GameManager").GetComponent<GameManager>();
         GM.PlayerWon();
 
