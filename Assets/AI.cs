@@ -82,15 +82,12 @@ public class AI : MonoBehaviour
         switch (GameObject.Find("GameplaySystem").GetComponent<GameManager>().spawnAI)
         {
             case 1:
-                print("Easy");
                 return EasyAIMakeMove();
 
             case 2:
-                print("Medium");
                 return MediumAIMakeMove();
 
             case 3:
-                print("Hard");
                 return HardAIMakeMove();
 
             default:
