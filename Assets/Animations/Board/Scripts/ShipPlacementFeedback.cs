@@ -7,7 +7,6 @@ public class ShipPlacementFeedback : MonoBehaviour
     [SerializeField] private Color invalidColor = Color.red;
     //[SerializeField] private Color selectedColor = Color.yellow;
 
-
     private SpriteRenderer sr;
     private Color originalColor;
 

@@ -29,7 +29,7 @@ public class ShotFeedbackManager : MonoBehaviour
 
         if (audioSource != null && fireSfx != null)
         {
-            audioSource.PlayOneShot(fireSfx, GameSettings.SfxVolume);
+            audioSource.PlayOneShot(fireSfx);
         }
     }
 
@@ -41,7 +41,7 @@ public class ShotFeedbackManager : MonoBehaviour
         }
         if (audioSource != null && missSfx != null)
         {
-            audioSource.PlayOneShot(missSfx, GameSettings.SfxVolume);
+            audioSource.PlayOneShot(missSfx);
         }
     }
 
@@ -53,14 +53,11 @@ public class ShotFeedbackManager : MonoBehaviour
         }
         if (audioSource != null && hitSfx != null)
         {
-            audioSource.PlayOneShot(hitSfx, GameSettings.SfxVolume);
+            audioSource.PlayOneShot(hitSfx);
         }
 
 #if UNITY_ANDROID || UNITY_IOS
-        if (GameSettings.VibrationEnabled)
-        {
-            Handheld.Vibrate();
-        }
+        Handheld.Vibrate();
 #endif
 
         if (boardShake != null)
@@ -78,14 +75,11 @@ public class ShotFeedbackManager : MonoBehaviour
 
         if (audioSource != null && sinkSfx != null)
         {
-            audioSource.PlayOneShot(sinkSfx, GameSettings.SfxVolume);
+            audioSource.PlayOneShot(sinkSfx);
         }
 
 #if UNITY_ANDROID || UNITY_IOS
-        if (GameSettings.VibrationEnabled)
-        {
-            Handheld.Vibrate();
-        }
+        Handheld.Vibrate();
 #endif
 
         if (boardShake != null)
