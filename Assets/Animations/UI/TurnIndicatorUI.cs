@@ -21,6 +21,9 @@ public class TurnIndicatorUI : MonoBehaviour
     [Header("Turn Text")]
     [SerializeField] private CanvasGroup turnTextGroup;
     [SerializeField] private TMP_Text turnText;
+    [SerializeField] private RectTransform turnTextRect;
+    [SerializeField] private Vector2 playerTextPosition;
+    [SerializeField] private Vector2 enemyTextPosition;
 
     [Header("Board Glow")]
     [SerializeField] private SpriteRenderer playerBoardGlow;
@@ -88,7 +91,7 @@ public class TurnIndicatorUI : MonoBehaviour
         transform.localScale = originalScale;
         transform.DOPunchScale(Vector3.one * (pulseScale - 1f), pulseDuration, 4, 0.5f);
 
-        ShowTurnText("PLAYER TURN", playerColor);
+        ShowTurnText("PLAYER TURN", playerColor, playerTextPosition);
         ShowBoardGlow(playerBoardGlow, enemyBoardGlow);
 
 
@@ -111,21 +114,22 @@ public class TurnIndicatorUI : MonoBehaviour
 
         transform.DOKill();
         transform.position = transform.position;
-        transform.DOMove(playerPosition, moveDuratation).SetEase(Ease.InOutSine);
+        transform.DOMove(enemyPosition, moveDuratation).SetEase(Ease.InOutSine);
         transform.localScale = originalScale;
         transform.DOPunchScale(Vector3.one * (pulseScale - 1f), pulseDuration, 4, 0.5f);
 
-        ShowTurnText("ENEMY TURN", enemyColor);
+        ShowTurnText("ENEMY TURN", enemyColor, enemyTextPosition);
         ShowBoardGlow(enemyBoardGlow, playerBoardGlow);
         PlayPulse();
     }
 
-    private void ShowTurnText(string text, Color color)
+    private void ShowTurnText(string text, Color color, Vector2 targetPosition)
     {
         if (turnTextGroup == null || turnText == null) return;
 
         turnTextGroup.DOKill();
         turnText.transform.DOKill();
+        turnTextRect.DOKill();
 
         turnText.text = text;
         turnText.color = color;
@@ -135,8 +139,8 @@ public class TurnIndicatorUI : MonoBehaviour
         DG.Tweening.Sequence seq = DOTween.Sequence();
         seq.Append(turnTextGroup.DOFade(1f, 0.15f));
         seq.Join(turnText.transform.DOScale(1f, 0.15f));
-        //seq.AppendInterval(textShowTime);
-        //seq.Append(turnTextGroup.DOFade(0f, 0.25f));
+        seq.Join(turnTextRect.DOAnchorPos(targetPosition, 0.2f).SetEase(Ease.OutCubic));
+
     }
     private void ShowBoardGlow(SpriteRenderer activeGlow, SpriteRenderer inactiveGlow)
     {
