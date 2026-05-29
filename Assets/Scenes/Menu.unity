@@ -360,7 +360,7 @@ RectTransform:
   m_Father: {fileID: 1027634302}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -919,6 +919,59 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a52def6a151d4a4896fc6d3dee43446, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CamControl
+--- !u!1 &214512971
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 214512973}
+  - component: {fileID: 214512972}
+  m_Layer: 0
+  m_Name: RankManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &214512972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 214512971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1c13fac5150c4a4e9dfe5b774d0a4e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RankManager
+  textRank: {fileID: 1821418447}
+  textRankPoints: {fileID: 1808914555}
+  imagePanelRank1: {fileID: 299377992}
+  imagePanelRank2: {fileID: 760935840}
+  imagePanelRank3: {fileID: 302911236}
+  imageRank1: {fileID: 612912356}
+  imageRank2: {fileID: 967722713}
+  imageRank3: {fileID: 747134878}
+  sliderRank: {fileID: 979931420}
+--- !u!4 &214512973
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 214512971}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 174.30469, y: 144.06406, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &225713574
 GameObject:
   m_ObjectHideFlags: 0
@@ -1227,6 +1280,7 @@ GameObject:
   - component: {fileID: 304367788}
   - component: {fileID: 304367787}
   - component: {fileID: 304367786}
+  - component: {fileID: 304367789}
   m_Layer: 5
   m_Name: Button Difficulty
   m_TagString: Untagged
@@ -1277,9 +1331,9 @@ MonoBehaviour:
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 1, g: 0.3820755, b: 0.3820755, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 0.67058825, g: 0.23137255, b: 0.12941177, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -1297,7 +1351,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 304367787}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 304367789}
+        m_TargetAssemblyTypeName: ButtonDifficulty, Assembly-CSharp
+        m_MethodName: ChangeDifficulty
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &304367787
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1311,7 +1377,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.4716981, g: 0.36257496, b: 0.051174805, a: 1}
+  m_Color: {r: 1, g: 0.8392157, b: 0.38039216, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1336,6 +1402,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 304367784}
   m_CullTransparentMesh: 1
+--- !u!114 &304367789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 304367784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b0f88bb9e74f834d9b6a78d6111ea0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ButtonDifficulty
+  highlightColor: {r: 0.67058825, g: 0.23137255, b: 0.12941177, a: 1}
+  playButton: {fileID: 1905285238}
 --- !u!1 &361934327
 GameObject:
   m_ObjectHideFlags: 0
@@ -1354,7 +1434,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &361934328
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1441,7 +1521,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &443204193
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1793,7 +1873,7 @@ RectTransform:
   m_Father: {fileID: 1513120087}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2731,7 +2811,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   spawnAI: 0
-  rankPoints: 800
+  rankPoints: 300
   rank: 0
   increaseRankPoints: 0
   decreaseRankPoints: 0
@@ -3008,7 +3088,7 @@ RectTransform:
   m_Father: {fileID: 1985149267}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -3313,7 +3393,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 0}
   m_FillRect: {fileID: 668231945}
   m_HandleRect: {fileID: 0}
@@ -4070,8 +4150,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4282598211
-  m_fontColor: {r: 0.26415092, g: 0.26415092, b: 0.26415092, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -4455,15 +4535,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e8d26d6ae081347ba2519fe9d6b4db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SettingsMenuTween
-  overlayGroup: {fileID: 361934329}
-  panel: {fileID: 443204193}
-  openButton: {fileID: 1011642775}
-  closeButton: {fileID: 452943679}
-  hiddenPosition: {x: 0, y: -1200}
-  shownPosition: {x: 0, y: 0}
-  overlayFadeDuration: 0.2
-  panelMoveDuration: 0.3
-  panelScaleDuration: 0.25
 --- !u!4 &1485699708
 Transform:
   m_ObjectHideFlags: 0
@@ -4491,9 +4562,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97fb2239fab98174990f8c95757e6e46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SettingsAudioController
-  musicSource: {fileID: 1864834065}
-  musicSlider: {fileID: 1807081739}
-  sfxSlider: {fileID: 523982816}
 --- !u!114 &1485699710
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4506,7 +4574,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a47fcaa8860140408f056c8502c676b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SettingsVibrationController
-  vibrationToggle: {fileID: 498423508}
 --- !u!1 &1513120086
 GameObject:
   m_ObjectHideFlags: 0
@@ -4576,7 +4643,7 @@ RectTransform:
   m_Father: {fileID: 599958789}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -5039,7 +5106,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Silver
+  m_text: '
 
 '
   m_isRightToLeft: 0
@@ -6402,3 +6469,4 @@ SceneRoots:
   - {fileID: 685922098}
   - {fileID: 1864834067}
   - {fileID: 719838840}
+  - {fileID: 214512973}

@@ -79,7 +79,7 @@ public class AI : MonoBehaviour
 
     public Vector2 MakeMove()
     {
-        switch (GameObject.Find("GameplaySystem").GetComponent<GameManager>().spawnAI)
+        switch (GameObject.Find("GameManager").GetComponent<GameManager>().spawnAI)
         {
             case 1:
                 return EasyAIMakeMove();
