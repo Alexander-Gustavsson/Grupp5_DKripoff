@@ -59,8 +59,7 @@ public class Languages : MonoBehaviour
         { ("en", "Win"), "You won! Wow!" },
         { ("en", "Loss"), "You lost! Darn!" },
         { ("en", "Player's Turn"), "Player's Turn" },
-        { ("en", "Enemy Turn"), "Enemy Turn" }
-        { ("en", "Loss"), "You lost! Darn!!" },
+        { ("en", "Enemy Turn"), "Enemy Turn" },
         { ("en", "Leave"), "Leave" },
         { ("en", "Stay"), "Stay" },
         { ("en", "Rank"), "Your Army Rank:" },
