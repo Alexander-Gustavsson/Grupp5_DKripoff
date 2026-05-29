@@ -34,7 +34,7 @@ public class RankManager : MonoBehaviour
         switch (gameManager.rank)
         {
             case 1:
-                textRank.text = "Silver";
+                textRank.GetComponent<Lang_Text>().textID = "Sergeant-Major";
                 textRankPoints.text = gameManager.rankPoints + "/200";
 
                 imagePanelRank1.SetActive(true);
@@ -50,7 +50,7 @@ public class RankManager : MonoBehaviour
                 break;
 
             case 2:
-                textRank.text = "Gold";
+                textRank.GetComponent<Lang_Text>().textID = "Lieutenant";
                 textRankPoints.text = gameManager.rankPoints + "/500";
 
                 imagePanelRank1.SetActive(false);
@@ -69,7 +69,7 @@ public class RankManager : MonoBehaviour
                 break;
 
             case 3:
-                textRank.text = "Platinum";
+                textRank.GetComponent<Lang_Text>().textID = "Navy Colonel";
                 textRankPoints.text = "" + gameManager.rankPoints;
 
                 imagePanelRank2.SetActive(false);

@@ -35,6 +35,12 @@ public class Languages : MonoBehaviour
         { ("sv", "Loss"), "Du förlorade!" },
         { ("sv", "Player's Turn"), "Din Tur" },
         { ("sv", "Enemy Turn"), "Fiendens Tur" },
+        { ("sv", "Leave"), "Fortsätt" },
+        { ("sv", "Stay"), "Ge Upp" },
+        { ("sv", "Rank"), "Din Rangordning:" },
+        { ("sv", "Lieutenant"), "Löjtnant" },
+        { ("sv", "Sergeant-Major"), "Sergeantmajor" },
+        { ("sv", "Navy Colonel"), "Marinens Överste" },
 
 
         { ("en", "To Battle!"), "To Battle!" },
@@ -54,6 +60,13 @@ public class Languages : MonoBehaviour
         { ("en", "Loss"), "You lost! Darn!" },
         { ("en", "Player's Turn"), "Player's Turn" },
         { ("en", "Enemy Turn"), "Enemy Turn" }
+        { ("en", "Loss"), "You lost! Darn!!" },
+        { ("en", "Leave"), "Leave" },
+        { ("en", "Stay"), "Stay" },
+        { ("en", "Rank"), "Your Army Rank:" },
+        { ("en", "Lieutenant"), "Lieutenant" },
+        { ("en", "Sergeant-Major"), "Sergeant-Major" },
+        { ("en", "Navy Colonel"), "Navy Colonel" },
     };
 
     public void CycleLanguages()

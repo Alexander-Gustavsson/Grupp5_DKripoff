@@ -15,6 +15,7 @@ public class GamePlay : MonoBehaviour
     [SerializeField] private GameObject hitShipSprite;
     [SerializeField] private GameObject startButton;
     [SerializeField] private GameObject menuButton;
+    [SerializeField] private GameObject returnToMenuPanel;
     //[SerializeField] private GameManager gameManager;
 
 
@@ -292,6 +293,19 @@ public class GamePlay : MonoBehaviour
         TextMeshProUGUI text = ws.transform.Find("Victory Text").GetComponent<TextMeshProUGUI>();
         text.enabled = true;
         text.text += "\r\nYou earned " + GM.increaseRankPoints + " rank points.";
+    }
+
+    public void UpenReturnDialogue()
+    {
+        returnToMenuPanel.SetActive(true);
+
+        GameObject.Find("AudioManager").GetComponent<Music>().SmoothSound(0.25f, 2f);
+    }
+    public void CloseReturnDialogue()
+    {
+        returnToMenuPanel.SetActive(false);
+
+        GameObject.Find("AudioManager").GetComponent<Music>().SmoothSound(0.35f, 2f);
     }
 
     public void ReturnToMainMenu()
