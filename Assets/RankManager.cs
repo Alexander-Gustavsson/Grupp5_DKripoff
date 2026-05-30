@@ -7,13 +7,17 @@ public class RankManager : MonoBehaviour
     [SerializeField] private TMP_Text textRank, textRankPoints;
     [SerializeField] private GameObject imagePanelRank1, imagePanelRank2, imagePanelRank3, imageRank1, imageRank2, imageRank3;
     [SerializeField] private Slider sliderRank;
+    [SerializeField] private AudioClip rankUpSound;
 
     private GameManager gameManager;
+    private AudioSource audioSource;
     private int prevRank = 0;
+    private bool playRankUp = false;
 
     private void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        audioSource = GetComponent<AudioSource>();
         UpdateRank();
     }
 
@@ -24,9 +28,19 @@ public class RankManager : MonoBehaviour
         if (gameManager.rank != prevRank)
         {
             SetRankSettings();
+            playRankUp = true;
         }
 
         sliderRank.value = gameManager.rankPoints;
+    }
+
+    public void PlayRankUp()
+    {
+        if (playRankUp)
+        {
+            audioSource.PlayOneShot(rankUpSound, 4f);
+            playRankUp = false;
+        }
     }
 
     private void SetRankSettings()
@@ -34,7 +48,7 @@ public class RankManager : MonoBehaviour
         switch (gameManager.rank)
         {
             case 1:
-                textRank.GetComponent<Lang_Text>().textID = "Sergeant-Major";
+                textRank.GetComponent<Lang_Text>().textID = "Deck Scrubber";
                 textRankPoints.text = gameManager.rankPoints + "/200";
 
                 imagePanelRank1.SetActive(true);
@@ -50,7 +64,7 @@ public class RankManager : MonoBehaviour
                 break;
 
             case 2:
-                textRank.GetComponent<Lang_Text>().textID = "Lieutenant";
+                textRank.GetComponent<Lang_Text>().textID = "Drunken Pirate";
                 textRankPoints.text = gameManager.rankPoints + "/500";
 
                 imagePanelRank1.SetActive(false);
@@ -69,7 +83,7 @@ public class RankManager : MonoBehaviour
                 break;
 
             case 3:
-                textRank.GetComponent<Lang_Text>().textID = "Navy Colonel";
+                textRank.GetComponent<Lang_Text>().textID = "Self Proclaimed Captain";
                 textRankPoints.text = "" + gameManager.rankPoints;
 
                 imagePanelRank2.SetActive(false);
