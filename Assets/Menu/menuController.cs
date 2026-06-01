@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class menuController : MonoBehaviour
 {
     [SerializeField] private GameObject rankPanel;
+    [SerializeField] private GameObject settingsPanel;
 
 
 
@@ -13,6 +14,15 @@ public class menuController : MonoBehaviour
         GameObject.Find("AudioManager").GetComponent<Music>().SmoothSound(0.35f, 2f);
 
         SceneManager.LoadScene(1);
+    }
+
+    public void OpenSettingsPanel()
+    {
+        settingsPanel.SetActive(true);
+    }
+    public void CloseSettingsPanel()
+    {
+        settingsPanel.SetActive(false);
     }
 
     public void OpenRankPanel()

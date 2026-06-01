@@ -11,7 +11,8 @@ public class GamePlay : MonoBehaviour
     [SerializeField] private AI AI;
 
     [SerializeField] private GameObject[] ships;
-    [SerializeField] private GameObject missSprite;
+    [SerializeField] private GameObject missSprite1;
+    [SerializeField] private GameObject missSprite2;
     [SerializeField] private GameObject hitShipSprite;
     [SerializeField] private GameObject startButton;
     [SerializeField] private GameObject menuButton;
@@ -244,6 +245,16 @@ public class GamePlay : MonoBehaviour
             return;
         }
         guessedPos.Add(pos);
+        GameObject missSprite;
+
+        if ((pos.x + pos.y) % 2 == 0)
+        {
+            missSprite = missSprite1;
+        } else
+        {
+            missSprite = missSprite2;
+        }
+
         Instantiate(missSprite, pos, Quaternion.identity);
     }
 
