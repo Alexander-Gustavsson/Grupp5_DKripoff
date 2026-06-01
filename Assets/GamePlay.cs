@@ -249,10 +249,11 @@ public class GamePlay : MonoBehaviour
 
         if ((pos.x + pos.y) % 2 == 0)
         {
-            missSprite = missSprite1;
+            missSprite = missSprite2;
         } else
         {
-            missSprite = missSprite2;
+            print((pos.x + pos.y) % 2);
+            missSprite = missSprite1;
         }
 
         Instantiate(missSprite, pos, Quaternion.identity);

@@ -1635,6 +1635,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ship 3x1 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 427064935715513441, guid: 0cc63977f4aa99646b759784df7ff838, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6407541464060616843, guid: 0cc63977f4aa99646b759784df7ff838, type: 3}
       propertyPath: shipLength
       value: 3
@@ -1739,7 +1743,7 @@ MonoBehaviour:
   AI: {fileID: 1994102720}
   ships:
   - {fileID: 629200448}
-  - {fileID: 235283097}
+  - {fileID: 693665861}
   - {fileID: 575830003}
   - {fileID: 1680750646}
   missSprite1: {fileID: 5428745536694032167, guid: 4ccd0aa1c8addbf41993c0b85f7adfb5, type: 3}
@@ -3037,6 +3041,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ship 3x1
       objectReference: {fileID: 0}
+    - target: {fileID: 427064935715513441, guid: 0cc63977f4aa99646b759784df7ff838, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 753780895508157344, guid: 0cc63977f4aa99646b759784df7ff838, type: 3}
       propertyPath: m_SortingOrder
       value: 1
@@ -3846,6 +3854,14 @@ PrefabInstance:
     - target: {fileID: 427064935715513441, guid: 0cc63977f4aa99646b759784df7ff838, type: 3}
       propertyPath: m_Name
       value: Ship 3x1 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 427064935715513441, guid: 0cc63977f4aa99646b759784df7ff838, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6407541464060616843, guid: 0cc63977f4aa99646b759784df7ff838, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6407541464060616843, guid: 0cc63977f4aa99646b759784df7ff838, type: 3}
       propertyPath: shipLength
@@ -4913,7 +4929,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 0.18238991, g: 0.18238991, b: 0.18238991, a: 0.9019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -4927,7 +4943,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1989277274}
   m_OnClick:
     m_PersistentCalls:
@@ -5536,6 +5552,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Grid
       objectReference: {fileID: 0}
+    - target: {fileID: 5955310042074669683, guid: 7c3c81b3ed4db694c9c038c531b1a81a, type: 3}
+      propertyPath: m_FlipX
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7619507638695807988, guid: 7c3c81b3ed4db694c9c038c531b1a81a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.5
@@ -5678,14 +5698,14 @@ SceneRoots:
   - {fileID: 8347123088404901109}
   - {fileID: 31028387}
   - {fileID: 2052404882}
+  - {fileID: 1515770219}
   - {fileID: 1202827041}
   - {fileID: 454071108}
   - {fileID: 713795677}
+  - {fileID: 693665860}
   - {fileID: 1809960544}
   - {fileID: 1960386573}
   - {fileID: 1203599405}
   - {fileID: 560180343}
   - {fileID: 2146644455}
-  - {fileID: 693665860}
-  - {fileID: 1515770219}
   - {fileID: 1689263929}

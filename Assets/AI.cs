@@ -146,6 +146,8 @@ public class AI : MonoBehaviour
             pos = RandomPositionPlayer();
         }
 
+        lastPos = pos;
+
         while (!nextPosValid(pos))
         {
             pos = RandomPositionPlayer();
