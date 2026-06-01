@@ -310,20 +310,14 @@ public class GamePlay : MonoBehaviour
     public void UpenReturnDialogue()
     {
         returnToMenuPanel.SetActive(true);
-
-        GameObject.Find("AudioManager").GetComponent<Music>().SmoothSound(0.25f, 2f);
     }
     public void CloseReturnDialogue()
     {
         returnToMenuPanel.SetActive(false);
-
-        GameObject.Find("AudioManager").GetComponent<Music>().SmoothSound(0.35f, 2f);
     }
 
     public void ReturnToMainMenu()
     {
-        GameObject.Find("AudioManager").GetComponent<MusicPlayer>().SmoothSound(0.6f, 2f);
-
         SceneManager.LoadScene(0);
     }
 }

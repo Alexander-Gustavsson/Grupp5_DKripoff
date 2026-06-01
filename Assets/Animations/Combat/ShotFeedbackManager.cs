@@ -56,9 +56,7 @@ public class ShotFeedbackManager : MonoBehaviour
             audioSource.PlayOneShot(hitSfx);
         }
 
-#if UNITY_ANDROID || UNITY_IOS
-        Handheld.Vibrate();
-#endif
+
 
         if (boardShake != null)
         {
@@ -78,9 +76,7 @@ public class ShotFeedbackManager : MonoBehaviour
             audioSource.PlayOneShot(sinkSfx);
         }
 
-#if UNITY_ANDROID || UNITY_IOS
-        Handheld.Vibrate();
-#endif
+
 
         if (boardShake != null)
         {

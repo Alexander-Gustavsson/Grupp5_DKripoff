@@ -7,8 +7,11 @@ public class BoardShake : MonoBehaviour
     [SerializeField] private float defaultDuration = 0.12f;
     [SerializeField] private float defaultMagnitude = 0.08f;
 
+    public static bool shakeOn = true;
     private Vector3 originalLocalPosition;
     private Coroutine shakeRoutine;
+
+    public static void ToggleShake () { shakeOn = !shakeOn; }
 
     private void Awake()
     {
@@ -30,7 +33,14 @@ public class BoardShake : MonoBehaviour
             StopCoroutine(shakeRoutine);
         }
 
-        shakeRoutine = StartCoroutine(ShakeRoutine(duration, magnitude));
+        if (shakeOn)
+        {
+
+#if UNITY_ANDROID || UNITY_IOS
+            Handheld.Vibrate();
+#endif
+            shakeRoutine = StartCoroutine(ShakeRoutine(duration, magnitude));
+        }
     }
 
     private IEnumerator ShakeRoutine(float duration, float magnitude)

@@ -17,32 +17,31 @@ public class VolumeControllerUI : MonoBehaviour
     void Start()
     {
         slider = GetComponent<Slider>();
-        Action funct;
+        Action onChangeValue;
+
 
         switch (gameObject.name)
         {
-            case ("SFX Volume"):
-                funct = ChangeSFXVolume;
+            case ("SFX Slider"):
+                onChangeValue = ChangeSFXVolume;
+                slider.value = AudioManager.SFXvolume;
                 break;
-            case ("Menu Volume"):
-                funct = ChangeMenuVolume;
+            case ("Music Slider"):
+                onChangeValue = ChangeMusicVolume;
+                slider.value = MusicPlayer.instance.volume;
                 break;
             default:
-                funct = ChangeMusicVolume;
+                slider.value = MusicPlayer.instance.volume;
+                onChangeValue = ChangeMusicVolume;
                 break;
         }
-        slider.onValueChanged.AddListener(delegate { funct(); });
-    }
-
-    private void ChangeMenuVolume()
-    {
-        print("menu");
+        slider.onValueChanged.AddListener(delegate { onChangeValue(); });
     }
 
     private void ChangeSFXVolume()
     {
-        print("SFX");
-
+        print("Go");
+        AudioManager.SFXvolume = slider.value;
     }
 
     private void ChangeMusicVolume()

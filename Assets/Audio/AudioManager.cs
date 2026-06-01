@@ -17,6 +17,7 @@ public enum SoundType
 public class AudioManager : MonoBehaviour
 {
     [SerializeField] private SoundList[] soundList;
+    public static float SFXvolume = 1f;
     private static AudioManager instance;
     private AudioSource audioSource;
 
@@ -32,9 +33,10 @@ public class AudioManager : MonoBehaviour
 
     public static void PlaySound(SoundType sound, float volume = 1)
     {
+        print(SFXvolume + " SFX");
         AudioClip[] clips = instance.soundList[(int)sound].Sounds;
         AudioClip randomClip = clips[UnityEngine.Random.Range(0, clips.Length)];
-        instance.audioSource.PlayOneShot(randomClip, volume);
+        instance.audioSource.PlayOneShot(randomClip, volume * SFXvolume);
         /*Tillåter att spela upp ett slumpat ljud från en lista av olika ljud. 
         Exemeplvis flera olika explosionsljud. Om listan bara har ett ljud funkar det likadandt som koden nedan.*/
 

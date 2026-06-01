@@ -91,7 +91,7 @@ public class AI : MonoBehaviour
                 return HardAIMakeMove();
 
             default:
-                return Vector2.zero;
+                return MediumAIMakeMove();
         }
 
     }

@@ -45,6 +45,7 @@ public class MusicPlayer : MonoBehaviour
 
     private IEnumerator SmoothVolumeRoutine(float target, float time)
     {
+        this.volume = target;
         float currentTime = 0f;
         AudioSource audioSource = gameObject.GetComponent<AudioSource>();
         float startVolume = audioSource.volume;
@@ -95,7 +96,7 @@ public class MusicPlayer : MonoBehaviour
     {
         float timePassed = 0f;
 
-        // increase volume
+        // Cross-fade volume
         while (timePassed < transitionDuration)
         {
             timePassed += Time.deltaTime;

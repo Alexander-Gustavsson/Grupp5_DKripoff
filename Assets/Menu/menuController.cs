@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class menuController : MonoBehaviour
+public class menuController : MonoBehaviour //Can't change this to abide by naming conventions as it causes my computer to lose the file.
 {
     [SerializeField] private GameObject rankPanel;
     [SerializeField] private GameObject settingsPanel;
