@@ -1,0 +1,67 @@
+using System;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
+
+public class GuideController : MonoBehaviour
+{
+    public static bool guidesOn = true;
+
+    public static event Action<GuideName> OnGuideActive;
+
+    public enum GuideName
+    {
+        PLACE_SHIPS,
+        SHOOT_SHIPS,
+        ROTATE_SHIPS,
+        DONE
+    }
+    public static List<GuideName> activeGuides = new List<GuideName>();
+    // The dictionary allows for retrieving data about each specific guide.
+    // Currently, only a bool is stored (denoting whether the guide is active or not).
+    // Since it is a static variable, we can track whether players have interacted with a guide before in the session.
+
+    private void Start()
+    {
+        if (guidesOn)
+        {
+            AddGuides();
+        }
+    }
+
+    public static void TriggerGuide(GuideName guide)
+    {
+        if (activeGuides.Contains(guide))
+        {
+            OnGuideActive.Invoke(guide);
+        }
+    }
+
+    public void AddGuides()
+    {   // Add a guide to the array of each type. Uses Enum instead of String to add new values easier.
+        foreach (GuideName guide in Enum.GetValues(typeof(GuideName))) {
+            activeGuides.Add(guide);
+        }
+    }
+
+    public void ToggleGuides()
+    {
+        Lang_Text text = GameObject.Find("Button Guides").GetComponentInChildren<Lang_Text>();
+
+        if (activeGuides.Count > 0)
+        {
+            text.textID = "Guides: Off";
+            activeGuides.Clear();
+            guidesOn = false;
+        }
+
+        else
+        {
+            AddGuides();
+            text.textID = "Guides: On";
+            guidesOn = true;
+        }
+
+        text.ChangeText(Languages.language);
+    }
+}

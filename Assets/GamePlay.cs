@@ -1,98 +1,209 @@
 using JetBrains.Annotations;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
-using UnityEngine.UIElements;
+//using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GamePlay : MonoBehaviour
 {
     [SerializeField] private AI AI;
 
     [SerializeField] private GameObject[] ships;
-    [SerializeField] private GameObject missSprite;
+    [SerializeField] private GameObject missSprite1;
+    [SerializeField] private GameObject missSprite2;
     [SerializeField] private GameObject hitShipSprite;
     [SerializeField] private GameObject startButton;
     [SerializeField] private GameObject menuButton;
+    [SerializeField] private GameObject returnToMenuPanel;
+    //[SerializeField] private GameManager gameManager;
 
 
-    //Animations:
+    //Animations: 
     [SerializeField] private TileHighlight tileHighlight;
-    List<Vector2> missedPos = new List<Vector2>();
 
+
+    List<Vector2> missedPos = new List<Vector2>();
     List<Vector2> guessedPos = new List<Vector2>();
     List<GameObject> activeShips = new List<GameObject>();
-
     private InputClick clickScript;
+    [SerializeField] private ShotFeedbackManager shotFeedback;
+    [SerializeField] private TurnIndicatorUI turnIndicatorUI;
+
+    List<GameObject> placedShips = new List<GameObject>();
 
 
     void Start()
     {
+        Invoke("TriggerPlacementGuide", 0f);
         clickScript = GetComponent<InputClick>();
+        activeShips.AddRange(ships);
+        placedShips.AddRange(activeShips);
         PlaceShips();
+    }
+
+    private void TriggerPlacementGuide()
+    {
+        GuideController.TriggerGuide(GuideController.GuideName.PLACE_SHIPS);
     }
 
     public void AIGridPressed(Vector2 pressPos)
     {
         Vector2 gridPos = new Vector2(Mathf.Round(pressPos.x), Mathf.Round(pressPos.y));
-        //Animations:
-        if (tileHighlight != null)
-        {
-            tileHighlight.ShowHighlight(gridPos);
-        }
+
+        tileHighlight?.ShowHighlight(gridPos);
+        
+        turnIndicatorUI?.ShowPlayerTurn();
+
+        tileHighlight?.ShowHighlight(gridPos);
+        
 
         // Handle reclick
-
-        if (!AI.TakeHit(gridPos))
+        if (guessedPos.Contains(gridPos))
         {
-            SpawnMissSprite(gridPos);
-            clickScript.canClick = false;
-
-            Invoke("MakeAIMove", 0.5f);
+            return;
         }
+        //anim:
+        if (shotFeedback != null) shotFeedback.PlayFire(gridPos);
+        GameObject ship = AI.TakeHit(gridPos);
+       
+        if (ship != null)
+        {
+            SpawnHitShipSprite(gridPos);
+            if (AI.IsShipGone(ship, gridPos))
+            {
+                //anim:
+                ShipSunkVisual sunkVisual = ship.GetComponent<ShipSunkVisual>();
+                if (sunkVisual != null)
+                {
+                    sunkVisual.MarkAsSunk();
+                }
+
+                if (shotFeedback != null) shotFeedback.PlaySink(gridPos);
+
+                if (AI.AllShipsFound())
+                {
+                    Win();
+                }
+            }
+            else
+            {
+                if (shotFeedback != null) shotFeedback.PlayHit(gridPos);
+            }
+
+            return;
+        }
+        SpawnMissSprite(gridPos);
+        //aanimation:
+        if (shotFeedback != null) shotFeedback.PlayMiss(gridPos);
+        clickScript.canClick = false;
+        if (turnIndicatorUI != null)
+        {
+            turnIndicatorUI.ShowEnemyTurn();
+        }
+
+        Invoke("MakeAIMove", 0.8f);
+
 
         if (AI.AllShipsFound())
         {
             Win();
             return;
         }
+
+    
     }
 
     private void MakeAIMove()
+
     {
+        if (turnIndicatorUI != null)
+        {
+            turnIndicatorUI.ShowEnemyTurn();
+        }
         Vector2 hitPos = AI.MakeMove();
 
-        foreach (GameObject ship in ships)
+        if (shotFeedback != null) shotFeedback.PlayFire(hitPos);
+        foreach (GameObject ship in activeShips)
         {
-            if (ship.transform.position == (Vector3)hitPos)
+            if (ship.GetComponent<ShipShape>().IsShipHit(hitPos))
             {
-
                 //ain l�gger till rutorna n�ra skeppet om det finns (f�rsta prioritet)
-                AI.AddNextTargets(hitPos);
+                AI.isAttacking = true;
+                AI.counter += 1;
+                if (AI.counter == 1)
+                {
+                    AI.AddNextTargets(hitPos);
+                }
+
+                if (AI.counter == 1)
+                {
+                    AI.firstHit = hitPos;
+                }
+                else if (AI.counter == 2)
+                {
+                    AI.ClearTargets();
+                    AI.secondHit = hitPos;
+                }
 
                 if (ship.GetComponent<ShipShape>().IsShipGone())
                 {
-                    //code here if entire ship is hit
+                    //code here if entire ship is gone
                     activeShips.Remove(ship);
+                    AI.isAttacking = false;
+                    AI.counter = 0;
+                    AI.foundDir = false;
+                    AI.ClearTargets();
+
+                    //anim:
+                    ShipSunkVisual sunkVisual = ship.GetComponent<ShipSunkVisual>();
+                    if (sunkVisual != null)
+                    {
+                        sunkVisual.MarkAsSunk();
+                    }
+
+                    SpawnHitShipSprite(hitPos);
+                    if (shotFeedback != null) shotFeedback.PlaySink(hitPos);
                 }
-                SpawnHitShipSprite(hitPos);
+                else
+                {
+                    SpawnHitShipSprite(hitPos);
+                    if (shotFeedback != null) shotFeedback.PlayHit(hitPos);
+                }
 
                 if (AllPlayerShipFound())
                 {
                     Lose();
                     return;
                 }
-                MakeAIMove();
+
+                Invoke("MakeAIMove", 0.5f);
                 return;
             }
         }
 
         SpawnMissSprite(hitPos);
+        if (shotFeedback != null) shotFeedback.PlayMiss(hitPos);
+
+        if (AI.isAttacking && AI.foundDir)
+        {
+            AI.switchDir = true;
+        }
+
         MakePlayerMove();
     }
 
     private void MakePlayerMove()
+
     {
+        if (turnIndicatorUI != null)
+        {
+            turnIndicatorUI.ShowPlayerTurn();
+        }
+
         clickScript.canClick = true;
+        
     }
 
     private void PlaceShips()
@@ -101,21 +212,50 @@ public class GamePlay : MonoBehaviour
         AI.PlaceShips();
     }
 
+    public void CheckAllShipsPlaced()
+    {
+        foreach (GameObject ship in activeShips)
+        {
+            if (!ship.GetComponent<DragDrop>().isValid())
+            {
+                return;
+            }
+        }
+        startButton.GetComponent<Button>().interactable = true;
+    }
+
     // K�rs efter man har placerat ut alla skepp, m�ste kallas p� med ex en knapp
     public void StartGamePlay()
     {
+        GuideController.TriggerGuide(GuideController.GuideName.SHOOT_SHIPS);
+        GameObject.Find("Main Camera").GetComponent<CamControl>().EnterCombat();
         startButton.SetActive(false);
         clickScript.canDrag = false;
+        foreach (GameObject ship in activeShips)
+        {
+            ship.GetComponent<ShipShape>().ShipPlaced();
+        }
         MakePlayerMove();
     }
 
     private void SpawnMissSprite(Vector2 pos)
     {
-        if (missedPos.Contains(pos))
+        if (guessedPos.Contains(pos))
         {
             return;
         }
-        missedPos.Add(pos);
+        guessedPos.Add(pos);
+        GameObject missSprite;
+
+        if ((pos.x + pos.y) % 2 == 0)
+        {
+            missSprite = missSprite2;
+        } else
+        {
+            print((pos.x + pos.y) % 2);
+            missSprite = missSprite1;
+        }
+
         Instantiate(missSprite, pos, Quaternion.identity);
     }
 
@@ -131,31 +271,58 @@ public class GamePlay : MonoBehaviour
 
     private bool AllPlayerShipFound()
     {
-        foreach (GameObject ship in ships)
-        {
-            if (ship.activeSelf)
-            {
-                return false;
-            }
-        }
-        return true;
+        return activeShips.Count == 0 ? true : false;
     }
 
-    // Kan l�gga till saker h�r om spelaren f�rlorar
     public void Lose()
     {
-        //Tillbaka till meny
+        clickScript.canClick = false;
+
+        GameManager GM = GameObject.Find("GameManager").GetComponent<GameManager>();
+        GM.PlayerLost();
+
+        GameObject ls = GameObject.Find("Panel - Loss");
+        ls.GetComponent<Image>().enabled = true;
+        ls.transform.Find("Loss Text").gameObject.SetActive(true);
+
+        TextMeshProUGUI text = ls.transform.Find("Loss Text").GetComponent<TextMeshProUGUI>();
+        text.enabled = true;
+        text.text += "\r\nYou lost " + GM.decreaseRankPoints + " rank points.";
+
     }
 
     // Kan l�gga till saker h�r om spelaren vinner
     public void Win()
     {
-        //Tillbaka till meny
+        clickScript.canClick = false;
+
+        GameManager GM = GameObject.Find("GameManager").GetComponent<GameManager>();
+        GM.PlayerWon();
+
+        GameObject ws = GameObject.Find("Panel - Win");
+        ws.GetComponent<Image>().enabled = true;
+        ws.transform.Find("Victory Text").gameObject.SetActive(true);
+        TextMeshProUGUI text = ws.transform.Find("Victory Text").GetComponent<TextMeshProUGUI>();
+        text.enabled = true;
+        text.text += "\r\nYou earned " + GM.increaseRankPoints + " rank points.";
+    }
+
+    public void UpenReturnDialogue()
+    {
+        returnToMenuPanel.SetActive(true);
+
+        GameObject.Find("AudioManager").GetComponent<Music>().SmoothSound(0.25f, 2f);
+    }
+    public void CloseReturnDialogue()
+    {
+        returnToMenuPanel.SetActive(false);
+
+        GameObject.Find("AudioManager").GetComponent<Music>().SmoothSound(0.35f, 2f);
     }
 
     public void ReturnToMainMenu()
     {
-        GameObject.Find("AudioManager").GetComponent<Music>().SmoothSound(0.6f, 2f);
+        GameObject.Find("AudioManager").GetComponent<MusicPlayer>().SmoothSound(0.6f, 2f);
 
         SceneManager.LoadScene(0);
     }
