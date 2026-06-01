@@ -4073,6 +4073,7 @@ GameObject:
   m_Component:
   - component: {fileID: 826444503}
   - component: {fileID: 826444504}
+  - component: {fileID: 826444505}
   m_Layer: 5
   m_Name: SFXslider
   m_TagString: Untagged
@@ -4153,6 +4154,18 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &826444505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 826444502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 848d5d31f25fc00468a0181ac65b60c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::VolumeController
 --- !u!1 &846277539
 GameObject:
   m_ObjectHideFlags: 0
@@ -5762,9 +5775,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1485699708}
-  - component: {fileID: 1485699707}
-  - component: {fileID: 1485699709}
-  - component: {fileID: 1485699710}
   m_Layer: 0
   m_Name: SettingsManager
   m_TagString: Untagged
@@ -5772,18 +5782,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1485699707
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1485699706}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30e8d26d6ae081347ba2519fe9d6b4db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SettingsMenuTween
 --- !u!4 &1485699708
 Transform:
   m_ObjectHideFlags: 0
@@ -5799,30 +5797,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1485699709
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1485699706}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97fb2239fab98174990f8c95757e6e46, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SettingsAudioController
---- !u!114 &1485699710
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1485699706}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a47fcaa8860140408f056c8502c676b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SettingsVibrationController
 --- !u!1 &1543272005
 GameObject:
   m_ObjectHideFlags: 0
@@ -6284,6 +6258,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1807081738}
   - component: {fileID: 1807081739}
+  - component: {fileID: 1807081740}
   m_Layer: 5
   m_Name: MusicSlider
   m_TagString: Untagged
@@ -6364,6 +6339,18 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1807081740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1807081737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 848d5d31f25fc00468a0181ac65b60c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::VolumeController
 --- !u!1 &1808914552
 GameObject:
   m_ObjectHideFlags: 0

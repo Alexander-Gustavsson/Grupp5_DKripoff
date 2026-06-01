@@ -11,8 +11,6 @@ public class menuController : MonoBehaviour
 
     public void LoadGame()
     {
-        GameObject.Find("AudioManager").GetComponent<Music>().SmoothSound(0.35f, 2f);
-
         SceneManager.LoadScene(1);
     }
 

@@ -20,7 +20,7 @@ public class ButtonDifficulty : MonoBehaviour
         langText = GetComponentInChildren<Lang_Text>();
         current = gameManager.rank;
 
-        image = GetComponent<Image>();
+        image = transform.Find("Image").GetComponent<Image>();
         baseColor = image.color;
 
         switch (gameManager.spawnAI)

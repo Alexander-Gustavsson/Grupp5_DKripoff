@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class MusicPlayer : MonoBehaviour
 {
-    private static MusicPlayer instance;
+    public static MusicPlayer instance;
 
-    [SerializeField] private float volume;
+    [SerializeField] public float volume;
 
     [SerializeField] private AudioClip menuClip;
     [SerializeField] private AudioClip prepClip;
@@ -17,6 +17,7 @@ public class MusicPlayer : MonoBehaviour
 
     [SerializeField] private float transitionDuration;
 
+    private Coroutine smoothing;
 
 
     void Start()
@@ -34,10 +35,15 @@ public class MusicPlayer : MonoBehaviour
 
     public void SmoothSound(float target, float time)
     {
-        StartCoroutine(SmoothSoundRoutine(target, time));
+        if (smoothing != null) // This seems extremely inefficient.
+        {
+            StopCoroutine(smoothing);
+        }
+
+        smoothing = StartCoroutine(SmoothVolumeRoutine(target, time));
     }
 
-    private IEnumerator SmoothSoundRoutine(float target, float time)
+    private IEnumerator SmoothVolumeRoutine(float target, float time)
     {
         float currentTime = 0f;
         AudioSource audioSource = gameObject.GetComponent<AudioSource>();
@@ -57,6 +63,8 @@ public class MusicPlayer : MonoBehaviour
         audioSource.volume = target;
     }
 
+
+
     public void PlayCombat()
     {
         playClip(combatClip);
@@ -70,6 +78,8 @@ public class MusicPlayer : MonoBehaviour
         playClip(prepClip);
     }
 
+
+
     public void playClip(AudioClip clip)
     {
         playerNext.clip = clip;
@@ -77,6 +87,9 @@ public class MusicPlayer : MonoBehaviour
 
         StartCoroutine(SmoothTransition());
     }
+
+
+
 
     private IEnumerator SmoothTransition()
     {
@@ -97,7 +110,10 @@ public class MusicPlayer : MonoBehaviour
         this.playerCurrent.Stop();
         this.playerNext.volume = volume;
 
+
+        AudioSource temp = playerCurrent;
         this.playerCurrent = this.playerNext;
+        this.playerNext = temp;
 
         // swap references
     }

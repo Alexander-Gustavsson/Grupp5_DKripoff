@@ -1,18 +1,22 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class VolumeController : MonoBehaviour
+public class VolumeControllerUI : MonoBehaviour
 {
     public static float menuVol;
     public static float SFXvol;
     public static float musicVol;
 
+    public static Coroutine musicSmoother;
+
+    private Slider slider;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        Slider slider = GetComponent<Slider>();
+        slider = GetComponent<Slider>();
         Action funct;
 
         switch (gameObject.name)
@@ -32,22 +36,22 @@ public class VolumeController : MonoBehaviour
 
     private void ChangeMenuVolume()
     {
-
+        print("menu");
     }
 
     private void ChangeSFXVolume()
     {
+        print("SFX");
 
     }
 
     private void ChangeMusicVolume()
     {
+        if(musicSmoother != null)
+        {
+            StopCoroutine(musicSmoother);
+        }
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        MusicPlayer.instance.SmoothSound(slider.value, 1f);
     }
 }
