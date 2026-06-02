@@ -131,7 +131,10 @@ public class TurnIndicatorUI : MonoBehaviour
         turnText.transform.DOKill();
         turnTextRect.DOKill();
 
-        turnText.text = text;
+        Lang_Text textController = turnText.GetComponent<Lang_Text>();
+        textController.textID = text;
+        textController.ChangeText(Languages.language);
+
         turnText.color = color;
         turnTextGroup.alpha = 0f;
         turnText.transform.localScale = Vector3.one * 0.8f;

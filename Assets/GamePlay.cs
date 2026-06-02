@@ -290,10 +290,11 @@ public class GamePlay : MonoBehaviour
         GameObject ls = GameObject.Find("Panel - Loss");
         ls.GetComponent<Image>().enabled = true;
         ls.transform.Find("Loss Text").gameObject.SetActive(true);
+        ls.transform.Find("Score Text").gameObject.SetActive(true);
 
-        TextMeshProUGUI text = ls.transform.Find("Loss Text").GetComponent<TextMeshProUGUI>();
+        TextMeshProUGUI text = ls.transform.Find("Score Text").GetComponent<TextMeshProUGUI>();
         text.enabled = true;
-        text.text += "\r\nYou lost " + GM.decreaseRankPoints + " rank points.";
+        text.text += "~~ " + GM.decreaseRankPoints + " ~~";
 
     }
 
@@ -308,9 +309,11 @@ public class GamePlay : MonoBehaviour
         GameObject ws = GameObject.Find("Panel - Win");
         ws.GetComponent<Image>().enabled = true;
         ws.transform.Find("Victory Text").gameObject.SetActive(true);
-        TextMeshProUGUI text = ws.transform.Find("Victory Text").GetComponent<TextMeshProUGUI>();
+        ws.transform.Find("Score Text").gameObject.SetActive(true);
+
+        TextMeshProUGUI text = ws.transform.Find("Victory Score").GetComponent<TextMeshProUGUI>();
         text.enabled = true;
-        text.text += "\r\nYou earned " + GM.increaseRankPoints + " rank points.";
+        text.text += "~~ " + GM.increaseRankPoints + " ~~";
     }
 
     public void UpenReturnDialogue()

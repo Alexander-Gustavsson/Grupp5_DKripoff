@@ -15,6 +15,7 @@ public class Lang_Text : MonoBehaviour
 
     public void ChangeText(string lang)
     {
+        print(textID);
         Languages.Texts.TryGetValue((lang, textID), out string value);
         text.text = value;
     }
