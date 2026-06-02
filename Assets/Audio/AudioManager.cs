@@ -8,12 +8,14 @@ using System;
 public enum SoundType
 {
     // Lägg till ljud här:
-    AMBIANCE,
-    EXPLOSION,
-    UI_PAPER
+    FIRE,
+    MISS,
+    HIT,
+    SINK,
+    CLICK
 }
 
-[RequireComponent(typeof(AudioSource)), ExecuteInEditMode]
+[RequireComponent(typeof(AudioSource))]
 public class AudioManager : MonoBehaviour
 {
     [SerializeField] private SoundList[] soundList;
@@ -23,17 +25,20 @@ public class AudioManager : MonoBehaviour
 
     private void Awake()
     {
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         instance = this;
+        audioSource = GetComponent<AudioSource>();
+        DontDestroyOnLoad(gameObject);
     }
 
-    private void Start()
-    {
-        audioSource = GetComponent<AudioSource>();
-    }
 
     public static void PlaySound(SoundType sound, float volume = 1)
     {
-        print(SFXvolume + " SFX");
         AudioClip[] clips = instance.soundList[(int)sound].Sounds;
         AudioClip randomClip = clips[UnityEngine.Random.Range(0, clips.Length)];
         instance.audioSource.PlayOneShot(randomClip, volume * SFXvolume);

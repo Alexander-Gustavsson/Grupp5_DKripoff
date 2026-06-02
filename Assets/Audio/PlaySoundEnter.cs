@@ -12,6 +12,7 @@ public class PlaySoundEnter : StateMachineBehaviour
 
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        Debug.Log("wow");
         AudioManager.PlaySound(sound, volume);
     }
 }

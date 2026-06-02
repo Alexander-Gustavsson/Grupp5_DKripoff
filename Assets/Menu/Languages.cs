@@ -41,6 +41,9 @@ public class Languages : MonoBehaviour
         { ("sv", "Lieutenant"), "Löjtnant" },
         { ("sv", "Sergeant-Major"), "Sergeantmajor" },
         { ("sv", "Navy Colonel"), "Marinens Överste" },
+        { ("sv", "Music Volume"), "Musikens Volym" },
+        { ("sv", "Sound Effects Volume"), "Ljudeffekter" },
+        { ("sv", "Vibrations"), "Vibrationer" },
 
 
         { ("en", "To Battle!"), "To Battle!" },
@@ -66,6 +69,10 @@ public class Languages : MonoBehaviour
         { ("en", "Lieutenant"), "Lieutenant" },
         { ("en", "Sergeant-Major"), "Sergeant-Major" },
         { ("en", "Navy Colonel"), "Navy Colonel" },
+        { ("en", "Music Volume"), "Music Volume" },
+        { ("en", "Sound Effects Volume"), "Sound Effects Volume" },
+        { ("en", "Vibrations"), "Haptic Feedback" },
+
     };
 
     public void CycleLanguages()

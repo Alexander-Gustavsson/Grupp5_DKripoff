@@ -5,6 +5,7 @@ using UnityEngine;
 //using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using static UnityEditor.PlayerSettings;
 
 public class GamePlay : MonoBehaviour
 {
@@ -183,7 +184,13 @@ public class GamePlay : MonoBehaviour
             }
         }
 
-        SpawnMissSprite(hitPos);
+        GameObject missSprite = missSprite1;
+        if ((hitPos.x + hitPos.y) % 2 == 0)
+        {
+            missSprite = missSprite2;
+        }
+
+        Instantiate(missSprite, hitPos, Quaternion.identity);
         if (shotFeedback != null) shotFeedback.PlayMiss(hitPos);
 
         if (AI.isAttacking && AI.foundDir)
@@ -252,7 +259,6 @@ public class GamePlay : MonoBehaviour
             missSprite = missSprite2;
         } else
         {
-            print((pos.x + pos.y) % 2);
             missSprite = missSprite1;
         }
 

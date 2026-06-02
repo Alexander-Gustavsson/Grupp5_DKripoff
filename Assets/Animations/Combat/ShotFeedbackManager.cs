@@ -13,7 +13,7 @@ public class ShotFeedbackManager : MonoBehaviour
     [SerializeField] private float sinkShakeDuration = 0.2f;
     [SerializeField] private float sinkShakeMagnitude = 0.14f;
 
-    [SerializeField] private AudioSource audioSource;
+    //[SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip fireSfx;
     [SerializeField] private AudioClip missSfx;
     [SerializeField] private AudioClip hitSfx;
@@ -27,10 +27,7 @@ public class ShotFeedbackManager : MonoBehaviour
             Instantiate(fireEffectPrefab, position, Quaternion.identity);
         }
 
-        if (audioSource != null && fireSfx != null)
-        {
-            audioSource.PlayOneShot(fireSfx);
-        }
+        AudioManager.PlaySound(SoundType.FIRE);
     }
 
     public void PlayMiss(Vector2 position)
@@ -39,10 +36,7 @@ public class ShotFeedbackManager : MonoBehaviour
         {
             Instantiate(missEffectPrefab, position, Quaternion.identity);
         }
-        if (audioSource != null && missSfx != null)
-        {
-            audioSource.PlayOneShot(missSfx);
-        }
+        AudioManager.PlaySound(SoundType.MISS, 0.85f);
     }
 
     public void PlayHit(Vector2 position)
@@ -51,10 +45,7 @@ public class ShotFeedbackManager : MonoBehaviour
         {
             Instantiate(hitEffectPrefab, position, Quaternion.identity);
         }
-        if (audioSource != null && hitSfx != null)
-        {
-            audioSource.PlayOneShot(hitSfx);
-        }
+        AudioManager.PlaySound(SoundType.HIT);
 
 
 
@@ -71,10 +62,7 @@ public class ShotFeedbackManager : MonoBehaviour
             Instantiate(sinkEffectPrefab, position, Quaternion.identity);
         }
 
-        if (audioSource != null && sinkSfx != null)
-        {
-            audioSource.PlayOneShot(sinkSfx);
-        }
+        AudioManager.PlaySound (SoundType.SINK, 0.75f);
 
 
 
