@@ -5,7 +5,7 @@ using UnityEngine;
 //using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using static UnityEditor.PlayerSettings;
+//using static UnityEditor.PlayerSettings;
 
 public class GamePlay : MonoBehaviour
 {
