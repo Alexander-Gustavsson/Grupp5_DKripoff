@@ -6,6 +6,7 @@ public class Lang_Text : MonoBehaviour
 {
     [SerializeField] public string textID;
     private TextMeshProUGUI text;
+
     private void OnEnable()
     {
         text = GetComponent<TextMeshProUGUI>();

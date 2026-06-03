@@ -134,7 +134,6 @@ public class TurnIndicatorUI : MonoBehaviour
         Lang_Text textController = turnText.GetComponent<Lang_Text>();
         textController.textID = text;
         textController.ChangeText(Languages.language);
-        print(text);
 
         turnText.color = color;
         turnTextGroup.alpha = 0f;

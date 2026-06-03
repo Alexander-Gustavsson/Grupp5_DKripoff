@@ -11,7 +11,8 @@ public class Languages : MonoBehaviour
     private static string[] languages =
     {
         "sv",
-        "en"
+        "en",
+        "ja"
     };
 
     public static string language = "en";
@@ -30,7 +31,7 @@ public class Languages : MonoBehaviour
         { ("sv", "PlacementG"), "Dra dina skepp från nedre högra sidan till dina vatten.\r\n\r\nDe får inte placeras bredvid varandra!\r\n\r\nArrr!" },
         { ("sv", "RotationG"), "Klicka på skeppen för att rotera dem.\r\n\r\nKom ihåg – skepp får aldrig ligga intill varandra.\r\n\r\nKors i taket!" },
         { ("sv", "ShootingG"), "Tryck på motståndarens bräde för att avfyra dina kanoner!\r\n\r\nFörsök hitta alla deras skepp – de har samma form som dina!" },
-        { ("sv", "DoneG"), "Klicka på färdig när du är redo för striden!" },
+        { ("sv", "DoneG"), "Klicka på Redo när du är förberedd för striden!" },
         { ("sv", "Win"), "Du vann! \r\nDina rangordningspoäng steg:" },
         { ("sv", "Loss"), "Du förlorade! \r\nDina rangordningspoäng sjönk:" },
         { ("sv", "Player's Turn"), "DIN TUR" },
@@ -78,7 +79,6 @@ public class Languages : MonoBehaviour
         { ("en", "Settings"), "Settings" },
         { ("en", "Close"), "Close" },
         { ("en", "Toggle"), "Toggle" },
-
     };
 
     public void CycleLanguages()

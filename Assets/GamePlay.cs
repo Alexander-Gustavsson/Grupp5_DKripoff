@@ -252,6 +252,7 @@ public class GamePlay : MonoBehaviour
             return;
         }
         guessedPos.Add(pos);
+
         GameObject missSprite;
 
         if ((pos.x + pos.y) % 2 == 0)
@@ -289,8 +290,8 @@ public class GamePlay : MonoBehaviour
 
         GameObject ls = GameObject.Find("Panel - Loss");
         ls.GetComponent<Image>().enabled = true;
-        ls.transform.Find("Loss Text").gameObject.SetActive(true);
-        ls.transform.Find("Score Text").gameObject.SetActive(true);
+        ls.transform.Find("Loss Text").GetComponent<TextMeshProUGUI>().enabled = true;
+        ls.transform.Find("Score Text").GetComponent<TextMeshProUGUI>().enabled = true;
 
         TextMeshProUGUI text = ls.transform.Find("Score Text").GetComponent<TextMeshProUGUI>();
         text.enabled = true;
@@ -308,10 +309,10 @@ public class GamePlay : MonoBehaviour
 
         GameObject ws = GameObject.Find("Panel - Win");
         ws.GetComponent<Image>().enabled = true;
-        ws.transform.Find("Victory Text").gameObject.SetActive(true);
-        ws.transform.Find("Score Text").gameObject.SetActive(true);
+        ws.transform.Find("Victory Text").GetComponent<TextMeshProUGUI>().enabled = true;
+        ws.transform.Find("Score Text").GetComponent<TextMeshProUGUI>().enabled = true;
 
-        TextMeshProUGUI text = ws.transform.Find("Victory Score").GetComponent<TextMeshProUGUI>();
+        TextMeshProUGUI text = ws.transform.Find("Score Text").GetComponent<TextMeshProUGUI>();
         text.enabled = true;
         text.text += "~~ " + GM.increaseRankPoints + " ~~";
     }

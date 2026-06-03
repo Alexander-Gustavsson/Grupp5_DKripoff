@@ -19,7 +19,7 @@ public class CamControl : MonoBehaviour
         cam.orthographicSize = Mathf.Max(height, width / cam.aspect);
     }
 
-    public void EnterCombat ()
+    public void EnterCombat()
     {
         StartCoroutine("MoveToCombatPosition", transform.position);
     }
